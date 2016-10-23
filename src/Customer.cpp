@@ -11,7 +11,6 @@ historic()
 	this->nif = nif;
 }
 
-
 Customer::~Customer()
 {
 
@@ -38,8 +37,10 @@ return historic;
 
 void Customer::setName(string name)
 {
-	}
+	this->name = name;
+}
 
 void Customer::setAddress(string address)
 {
+	this->address = address;
 }
