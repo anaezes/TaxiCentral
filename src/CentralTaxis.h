@@ -25,10 +25,12 @@ private:
 	string name;
 	string customersFile;
 	string servicesFile;
+	string routesFile;
 	vector<Customer*> customers;
 	vector<Service*> services;
+	vector<Routes*> routes;
 public:
-	CentralTaxis(string name, string customersFile, string servicesFile);
+	CentralTaxis(string name, string customersFile, string servicesFile, string routesFile);
 	~CentralTaxis();
 	vector<Customer*> getCustomers() const;
 	vector<Service*> getServices() const;
