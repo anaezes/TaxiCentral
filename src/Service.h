@@ -17,8 +17,7 @@ class Service
 private:
 
 public:
-Service();
-
+	Service();
 };
 
 
