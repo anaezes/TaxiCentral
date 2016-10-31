@@ -12,8 +12,8 @@ int main()
 
   CentralTaxis central;
 
-  vector <Customer> customers;
-  vector<Service> &services;
+  vector<Customer*> customers;
+  vector<Service*> services;
 
   string fileCustomers;
   string fileServices;

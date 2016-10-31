@@ -6,8 +6,14 @@
 #ifndef CENTRALTAXIS_H_
 #define CENTRALTAXIS_H_
 
+#include "Customer.h"
+#include "Service.h"
+
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
+
 using namespace std;
 
 class Customer;

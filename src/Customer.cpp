@@ -3,12 +3,13 @@
 
 // define class Customer
 
-Customer::Customer(string name, string address, unsigned int nif) :
-  historic()
+Customer::Customer(unsigned int nif, string name, string address, int phoneNumber, int points)
 {
-  this->name = name;
-  this->address = address;
-  this->nif = nif;
+	this->nif = nif;
+	this->name = name;
+	this->address = address;
+	this->phoneNumber = phoneNumber;
+	this->points = points;
 }
 
 Customer::~Customer()
@@ -17,12 +18,12 @@ Customer::~Customer()
 }
 string Customer::getName()
 {
-  return name;
+	return name;
 }
 
 string Customer::getAddress()
 {
-  return address;
+	return address;
 }
 
 
@@ -39,12 +40,7 @@ float Customer::getPoints()
 
 unsigned int Customer::getNif() const
 {
-  return nif;
-}
-
-vector<Service*> Customer::getHistoric()
-{
-  return historic;
+	return nif;
 }
 
 void Customer::setName(string name)
@@ -57,10 +53,10 @@ void Customer::setAddress(string address)
 	this->address= address;
 }
 
-void Customer::setPoints(float points)
-{
-	this->points=points;
-}
+//void Customer::setPoints(float points)
+//{
+//	this->points=points;
+//}
 
 void Customer::setPhoneNumber(int phoneNumber)
 {
