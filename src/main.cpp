@@ -9,18 +9,27 @@ using namespace std;
 
 int main()
 {
+	string nameCentralTaxis = "Taxis XPTO";
+	string customersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/customers.txt";
+	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
+	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
 
-  CentralTaxis central;
+	CentralTaxis central(nameCentralTaxis, customersFile, servicesFile, routesFile);
 
-  vector<Customer*> customers;
-  vector<Service*> services;
+	bool customersSuccess = central.readCustomersFile();
+	bool servicesSuccess = central.readServicesFile();
+	bool routesSuccess = central.readRoutesFile();
 
-  string fileCustomers;
-  string fileServices;
+	if(!(customersSuccess && servicesSuccess && routesSuccess))
+	{
+		cout << "Error while reading a file" << endl;
+		return -1;
+	}
+	else
+	{
 
-  central.requestFiles(fileCustomers, fileServices);
 
-  mainMenu(customers,services,fileCustomers,fileServices);
+	}
 
-  return 0;
+	return 0;
 }
