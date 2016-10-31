@@ -21,14 +21,14 @@ using namespace std;
 #include "utilities.h"
 
 
-unsigned short int customersMenu();
+unsigned short int customersMenu(CentralTaxis &central);
 
-unsigned short int oneCustomerMenu();
+unsigned short int oneCustomerMenu(CentralTaxis &central);
 
-unsigned short int editCustomerMenu();
+unsigned short int editCustomerMenu(CentralTaxis &central);
 
-unsigned short int serviceMenu();
+unsigned short int serviceMenu(CentralTaxis &central);
 
-unsigned short int discountsMenu();
+unsigned short int discountsMenu(CentralTaxis &central);
 
-unsigned short int mainMenu(vector<Customer>customers,vector<Service>services,string fileCustomers,string fileServices);
+unsigned short int mainMenu(CentralTaxis &central);

@@ -11,7 +11,7 @@ using namespace std;
 Customer management
 ******************************************/
 
-unsigned short int customersMenu()
+unsigned short int customersMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 	int id = 0;
@@ -61,7 +61,7 @@ unsigned short int customersMenu()
 	return 0;
 }
 
-unsigned short int oneCustomerMenu()
+unsigned short int oneCustomerMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
@@ -90,7 +90,7 @@ unsigned short int oneCustomerMenu()
 	return 0;
 }
 
-unsigned short int editCustomerMenu()
+unsigned short int editCustomerMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 	do
@@ -134,7 +134,7 @@ unsigned short int editCustomerMenu()
 /******************************************
 Service management
 ******************************************/
-unsigned short int serviceMenu()
+unsigned short int serviceMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
@@ -192,7 +192,7 @@ unsigned short int serviceMenu()
 Discounts Menu
 ******************************************/
 
-unsigned short int discountsMenu()
+unsigned short int discountsMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 	unsigned int id;
@@ -223,14 +223,12 @@ unsigned short int discountsMenu()
 Main Menu
 ******************************************/
 
-unsigned short int mainMenu(vector<Customer>customers,vector<Service>services,string fileCustomers,string fileServices)
+unsigned short int mainMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 	ifstream fin;
 	string line;
 
-	if (readFileCustomers(customers, fileCustomers) && readFileProducts(products, fileProducts) && vendevar.readFileTransactions(transactions, fileTransactions))
-	{
 		do
 		{
 			cout << TAB_BIG << "Main Menu" << endl;
@@ -266,15 +264,7 @@ unsigned short int mainMenu(vector<Customer>customers,vector<Service>services,st
 			}
 
 		} while (chosenOption != 0);
-	}
 
-	else
-	{
-		cout << "File not found!\n";
-		requestFiles(fileCustomers, fileProducts, fileTransactions);
-	}
-
-
-	return 0;
+return 0;
 
 }
