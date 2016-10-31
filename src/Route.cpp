@@ -11,6 +11,13 @@ Route::Route(string source, string arrival, double distance, double expectedTime
 	this->expectedTime = expectedTime;
 }
 
+Route::Route(string source, string arrival)
+{
+	this->source = source;
+	this->arrival = arrival;
+}
+
+
 Route::~Route() {}
 
 string Route::getSource()

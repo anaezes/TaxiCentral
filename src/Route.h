@@ -21,6 +21,7 @@ private:
 
 public:
 	Route(string source, string arrival, double distance, double expectedTime);
+	Route(string source, string arrival, double distance);
 	~Route();
 	string getSource();
 	string getArrival();
