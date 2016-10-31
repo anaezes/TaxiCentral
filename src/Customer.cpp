@@ -20,10 +20,21 @@ string Customer::getName()
 {
 return name;
 }
-d
+
 string Customer::getAddress()
 {
 	return address;
+}
+
+int Customer::getPhoneNumber()
+{
+
+	return phoneNumber;
+}
+
+float Customer::getPoints()
+{
+	return points;
 }
 
 unsigned int Customer::getNif() const;
@@ -38,8 +49,20 @@ return historic;
 
 void Customer::setName(string name)
 {
-	}
+	this->name= name;
+}
 
 void Customer::setAddress(string address)
 {
+	this->address= address;
+}
+
+void Customer::setPoints(float points)
+{
+	this->points=points;
+}
+
+void Customer::setPhoneNumber(int phoneNumber)
+{
+	this->phoneNumber=phoneNumber;
 }

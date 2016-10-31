@@ -26,11 +26,14 @@ public:
 	~Customer();
 	string getName();
 	string getAddress();
-	unsigned int getNif(unsigned int n) const;
+	int getPhoneNumber();
+	float getPoints();
+	unsigned int getNif() const;
 	vector<Service*> getHistoric();
 	void setName(string name);
 	void setAddress(string address);
-
+	void setPoints(float points);
+	void setPhoneNumber(int phoneNumber);
 	virtual float getDiscount() = 0;
 
 };
