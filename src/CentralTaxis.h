@@ -28,19 +28,11 @@ public:
 	vector<Service*> getServices() const;
 	string getCustomersFileName() const;
 	string getServicesFileName() const;
-//	Customer* addCustomer(string name, string address, unsigned int nif);
-//	Service* addService();
-//	bool editCustomer();
-//	bool removeCustomer();
-
-
-public:
-CentralTaxis();
-void CentralTaxis::partitionCustomer(string line, vector<Customer> &customers);
-bool CentralTaxis::readFileCustomers(vector<Customer> &customers, string &fileCustomers);
-void CentralTaxis::partitionService(string line, vector<Service> &services);
-bool CentralTaxis::readFileServices(vector<Service> &services, string &fileServices);
-void CentralTaxis::partitionRoute(string line, vector<Route> &routes);
-bool CentralTaxis::readFileRoute(vector<Route> &customers, string &fileRoutes);
+	void partitionCustomer(string line, vector<Customer> &customers);
+	bool readFileCustomers(vector<Customer> &customers, string &fileCustomers);
+	void partitionService(string line, vector<Service> &services);
+	bool readFileServices(vector<Service> &services, string &fileServices);
+//	void partitionRoute(string line, vector<Route> &routes);
+//	bool readFileRoute(vector<Route> &customers, string &fileRoutes);
 };
 #endif /* CentralTaxis_H_ */
