@@ -1,0 +1,6 @@
+5
+Braga ; Porto ; 57.1 ; 0h37
+Porto ; Lisboa ; 313 ; 2h55
+Faro ; Santarem ; 306 ; 2h40
+Faro ; Lisboa ; 278 ; 2h37
+Viana do Castelo ; Guimaraes ; 81.1 ; 0h59
