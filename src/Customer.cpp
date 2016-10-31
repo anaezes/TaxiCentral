@@ -4,11 +4,11 @@
 // define class Customer
 
 Customer::Customer(string name, string address, unsigned int nif) :
-historic()
+  historic()
 {
-	this->name = name;
-	this->address = address;
-	this->nif = nif;
+  this->name = name;
+  this->address = address;
+  this->nif = nif;
 }
 
 Customer::~Customer()
@@ -17,30 +17,30 @@ Customer::~Customer()
 }
 string Customer::getName()
 {
-return name;
+  return name;
 }
 
 string Customer::getAddress()
 {
-	return address;
+  return address;
 }
 
 unsigned int Customer::getNif() const
 {
-	return nif;
+  return nif;
 }
 
 vector<Service*> Customer::getHistoric()
 {
-return historic;
+  return historic;
 }
 
 void Customer::setName(string name)
 {
-	this->name = name;
+  this->name = name;
 }
 
 void Customer::setAddress(string address)
 {
-	this->address = address;
+  this->address = address;
 }

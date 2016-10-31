@@ -18,6 +18,8 @@ private:
 	string name;
 	string address;
 	unsigned int nif;
+	int phoneNumber;
+	float points;
 	vector<Service *> historic;
 public:
 	Customer(string name, string address, unsigned int nif);
