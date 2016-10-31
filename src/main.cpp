@@ -27,7 +27,8 @@ int main()
 	}
 	else
 	{
-
+		cout << endl << endl << setw(10) << "Computer says welcome to program!" << endl;
+		mainMenu(central);
 
 	}
 
