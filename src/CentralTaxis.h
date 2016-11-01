@@ -34,7 +34,6 @@ private:
 
 public:
 	CentralTaxis(string name, string customersFile, string servicesFile, string routesFile);
-	~CentralTaxis();
 
 	vector<Customer*> getCustomers() const;
 	vector<Service*> getServices() const;

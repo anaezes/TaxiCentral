@@ -1,12 +1,16 @@
 #include "PrivateCustomer.h"
 
-PrivateCustomer::PrivateCustomer(unsigned int nif, string name, string address, int phoneNumber, int points):
+PrivateCustomer::PrivateCustomer(unsigned int nif, string name, string address, int phoneNumber, int points) :
 Customer(nif, name, address, phoneNumber)
 {
 	this->points = points;
 }
 
-PrivateCustomer::~PrivateCustomer(){}
+PrivateCustomer::~PrivateCustomer()
+{
+
+}
+
 
 int PrivateCustomer::getPoints()
 {
@@ -21,6 +25,6 @@ float PrivateCustomer::getDiscount()
 	return b;
 }
 
-void PrivateCustomer::acummulateService(double cost)
+void PrivateCustomer::accumulateService(Service* service)
 {
 }

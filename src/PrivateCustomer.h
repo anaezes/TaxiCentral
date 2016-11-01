@@ -2,6 +2,7 @@
 #define PRIVATECUSTOMER_H_
 
 #include "Customer.h"
+#include "Service.h"
 
 #include <vector>
 #include <string>
@@ -18,7 +19,7 @@ public:
 	~PrivateCustomer();
 	int getPoints();
 	float getDiscount();
-	void acummulateService(double cost);
+	void accumulateService(Service* service);
 };
 
 #endif /* PRIVATECUSTOMER_H_ */

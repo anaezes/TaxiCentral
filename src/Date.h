@@ -25,7 +25,6 @@ public:
 	Date(unsigned int day, unsigned int month, unsigned int year, string startTime, string endTime);
 	Date(unsigned int year, unsigned int month, unsigned int day);
 	Date(string yearMonthDay);
-	~Date();
 	unsigned int getDay() const;
 	unsigned int getMonth() const;
 	unsigned int getYear() const;

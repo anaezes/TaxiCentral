@@ -10,9 +10,6 @@
 #include <string>
 using namespace std;
 
-#include <vector>
-#include <string>
-
 #include "Customer.h"
 #include "Service.h"
 #include "Route.h"
@@ -32,3 +29,5 @@ unsigned short int serviceMenu(CentralTaxis &central);
 unsigned short int discountsMenu(CentralTaxis &central);
 
 unsigned short int mainMenu(CentralTaxis &central);
+
+void cleanDisplay();

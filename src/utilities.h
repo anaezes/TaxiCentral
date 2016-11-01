@@ -7,10 +7,3 @@
 #define TAB_BIG "          "
 #define TAB "   "
 
-
-void clearScreen()
-{
-
-	if (system("CLS"))
-		system("clear");
-}

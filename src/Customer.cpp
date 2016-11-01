@@ -10,7 +10,11 @@ Customer::Customer(unsigned int nif, string name, string address, int phoneNumbe
 	this->phoneNumber = phoneNumber;
 }
 
-Customer::~Customer() {}
+Customer::~Customer()
+{
+
+}
+
 
 string Customer::getName()
 {

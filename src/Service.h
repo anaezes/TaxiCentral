@@ -7,11 +7,12 @@
 #define SERVICE_H_
 
 #include "Route.h"
-#include "Customer.h"
 #include "Date.h"
 
 #include <vector>
 #include <string>
+
+class Customer;
 
 using namespace std;
 
@@ -31,7 +32,7 @@ public:
 	~Service();
 	Customer* getCustomer();
 	double getCost();
-	Route getRoute();
+	Route* getRoute();
 	Date getDate();
 	string getPayment();
 };

@@ -26,7 +26,7 @@ double Service::getCost()
 	return cost;
 }
 
-Route Service::getRoute()
+Route* Service::getRoute()
 {
 	return route;
 }

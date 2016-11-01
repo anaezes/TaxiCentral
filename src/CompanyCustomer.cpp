@@ -6,7 +6,11 @@ Customer(nif, name, address, phoneNumber)
 	this->cost = cost;
 }
 
-CompanyCustomer::~CompanyCustomer(){}
+CompanyCustomer::~CompanyCustomer()
+{
+
+}
+
 
 int CompanyCustomer::getCost()
 {
@@ -21,6 +25,6 @@ float CompanyCustomer::getDiscount()
 	return a;
 }
 
-void CompanyCustomer::acummulateService(double cost)
+void CompanyCustomer::accumulateService(Service* service)
 {
 }

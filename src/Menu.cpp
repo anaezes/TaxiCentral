@@ -1,15 +1,18 @@
 #include "Menu.h"
-#include "Customer.h"
-#include "Service.h"
-#include "Route.h"
-#include "Date.h"
 
 
 using namespace std;
 
 /******************************************
 Customer management
-******************************************/
+ ******************************************/
+
+
+void cleanDisplay()
+{
+
+	std::system("clear");
+}
 
 unsigned short int customersMenu(CentralTaxis &central)
 {
@@ -17,7 +20,7 @@ unsigned short int customersMenu(CentralTaxis &central)
 	int id = 0;
 
 	/*Menu of customers, where the user can choose what the option that wants*/
-	clearScreen();
+	cleanDisplay();
 
 	cout << TAB_BIG << "CUSTOMER MENU MANAGEMENT" << endl;
 	cout << endl;
@@ -133,13 +136,13 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 
 /******************************************
 Service management
-******************************************/
+ ******************************************/
 unsigned short int serviceMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
 	/*Menu of services, where the user can choose what the option that wants*/
-	clearScreen();
+	cleanDisplay();
 
 	cout << TAB_BIG << "SERVICE MENU MANAGEMENT" << endl;
 	cout << endl;
@@ -190,14 +193,14 @@ unsigned short int serviceMenu(CentralTaxis &central)
 
 /******************************************
 Discounts Menu
-******************************************/
+ ******************************************/
 
 unsigned short int discountsMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 	unsigned int id;
 
-	clearScreen();
+	cleanDisplay();
 
 	cout << TAB_BIG << "DISCOUNTS MENU" << endl;
 	cout << endl;
@@ -221,7 +224,7 @@ unsigned short int discountsMenu(CentralTaxis &central)
 
 /******************************************
 Main Menu
-******************************************/
+ ******************************************/
 
 unsigned short int mainMenu(CentralTaxis &central)
 {
@@ -229,42 +232,42 @@ unsigned short int mainMenu(CentralTaxis &central)
 	ifstream fin;
 	string line;
 
-		do
+	do
+	{
+		cout << TAB_BIG << "Main Menu" << endl;
+		cout << endl;
+		cout << TAB << "1- Customers management" << endl;
+		cout << TAB << "2- Services management" << endl;
+		cout << TAB << "3- Discounts" << endl;
+		cout << TAB << "0- Exit program" << endl << endl;
+
+		cout << TAB << "What is the option that you want? ";
+		cin >> chosenOption;
+		cout << endl;
+
+		switch (chosenOption)
 		{
-			cout << TAB_BIG << "Main Menu" << endl;
-			cout << endl;
-			cout << TAB << "1- Customers management" << endl;
-			cout << TAB << "2- Services management" << endl;
-			cout << TAB << "3- Discounts" << endl;
-			cout << TAB << "0- Exit program" << endl << endl;
+		case 1:
+			customersMenu(central);
+			break;
 
-			cout << TAB << "What is the option that you want? ";
-			cin >> chosenOption;
-			cout << endl;
+		case 2:
+			serviceMenu(central);
+			break;
 
-			switch (chosenOption)
-			{
-			case 1:
-				customersMenu(central);
-				break;
+		case 3:
+			discountsMenu(central);
+			break;
+		case 0:
+			return 0;
 
-			case 2:
-				serviceMenu(central);
-				break;
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
 
-			case 3:
-				discountsMenu(central);
-				break;
-			case 0:
-				return 0;
+	} while (chosenOption != 0);
 
-			default:
-				cout << "Invalid option. Try again." << endl;
-				break;
-			}
-
-		} while (chosenOption != 0);
-
-return 0;
+	return 0;
 
 }

@@ -6,6 +6,8 @@
 #ifndef CUSTOMER_H_
 #define CUSTOMER_H_
 
+#include "Service.h"
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -22,7 +24,7 @@ private:
 
 public:
 	Customer(unsigned int nif, string name, string address, int phoneNumber);
-	~Customer();
+	virtual ~Customer();
 	string getName();
 	string getAddress();
 	int getPhoneNumber();
@@ -32,8 +34,7 @@ public:
 	void setAddress(string address);
 	void setPhoneNumber(int phoneNumber);
 	virtual float getDiscount() = 0;
-	virtual void accumulateService() = 0;
-
+	virtual void accumulateService(Service* service) = 0;
 };
 
 

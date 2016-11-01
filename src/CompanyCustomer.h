@@ -2,6 +2,7 @@
 #define COMPANYCUSTOMER_H_
 
 #include "Customer.h"
+#include "Service.h"
 
 #include <vector>
 #include <string>
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-class CompanyCustomer : public Customer
+class CompanyCustomer: public Customer
 {
 private:
 	double cost;
@@ -18,7 +19,7 @@ public:
 	~CompanyCustomer();
 	int getCost();
 	float getDiscount();
-	void acummulateService(double cost);
+	void accumulateService(Service* service);
 };
 
 #endif /* PRIVATECUSTOMER_H_ */
