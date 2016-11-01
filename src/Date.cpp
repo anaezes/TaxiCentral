@@ -56,14 +56,14 @@ string Date::getEndTime()
 {
 	return endTime;
 }
-/*
+
 string Date::getDate()
 {
 	stringstream ss;
 	ss << to_string(year) << "/" << to_string(month) << "/" << to_string(day);
 	return ss.str();
 }
-*/
+
 void Date::setDay(unsigned int day)
 {
 	this->day = day;
@@ -128,9 +128,9 @@ bool Date::isValid()
 }
 
 bool Date::operator==(const Date& date)
-				{
+{
 	return year == date.getYear() && month == date.getMonth() && day == date.getDay();
-				}
+}
 
 bool Date::operator>(const Date &date)
 {
