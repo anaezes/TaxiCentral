@@ -1,6 +1,8 @@
 #ifndef COMPANYCUSTOMER_H_
 #define COMPANYCUSTOMER_H_
 
+#include "Customer.h"
+
 #include <vector>
 #include <string>
 #include <iostream>

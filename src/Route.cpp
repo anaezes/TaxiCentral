@@ -4,6 +4,7 @@
 
 // define class Route
 
+
 Route::Route(string source, string arrival, double distance, string expectedTime)
 {
 	this->source = source;
@@ -35,6 +36,7 @@ double Route::getDistance()
 {
 	return distance;
 }
+
 
 string Route::getExpectedTime()
 {

@@ -177,7 +177,7 @@ bool CentralTaxis::readServicesFile()
 
 			double cost;
 			string paymentType;
-
+			Date date1;
 			int item = 0;
 			string currItem;
 			while(getline(line,currItem, ';'))
@@ -192,7 +192,7 @@ bool CentralTaxis::readServicesFile()
 				else if(item == 2)
 					destination = currItem;
 				else if(item == 3)
-					Date date(currItem);
+					date1 = currItem;
 				else if(item == 4)
 					startTime = currItem;
 				else if(item == 5)
@@ -217,7 +217,7 @@ bool CentralTaxis::readServicesFile()
 
 			Route* routeService = new Route(origin, destination);
 
-			Service* newService = new Service(customers[j], cost, routeService, date, paymentType);
+			Service* newService = new Service(customers[j], cost, routeService, date1, paymentType);
 
 			services.push_back(newService);
 		}

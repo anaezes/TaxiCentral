@@ -16,9 +16,9 @@ int PrivateCustomer::getPoints()
 float PrivateCustomer::getDiscount()
 {
 	//apenas para testes (!!!!)
-	float a = 0.5;
+	float b = 0.7;
 
-	return a;
+	return b;
 }
 
 void PrivateCustomer::acummulateService(double cost)
