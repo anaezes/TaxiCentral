@@ -1,20 +1,19 @@
 18
-123456789 ; Carolina Lopes ; Rua Humberto Delgado ; 928716027 ; 7
-234567891 ; Eduarda Reis ; Rua 25 de Abril ; 928716027 ; 2
-345678911 ; Joana Beires ; Largo do Souto; ; 928716027 ; 8
-456789121 ; Jose Pereira ; Rua Conde Casal ; 928716027  ; 9
-567891231 ; Luis Teixeira ; Travessa ; 928716027  ; 9
-165698751 ; Manuela Moura ; Rua Luis de Camoes ; 928716027  ; 1
-778978979 ; Margarida Gomes ; Esparido ; 928716027 ; 0
-245678978 ; Maria de Lurdes ; Rua Domingos Lopes ; 928716027 ; 27
-456987789 ; Mariana Silva ; Praca da Republica ; 928716027 ; 11
-215639877 ; Marta Marinho ; Sao Mamede Infesta ; 928716027 ; 0
-221231231 ; Martinho Melro ; Rua Oliveira ; 928716027 ; 2
-115471236 ; Mito Teresa ; Rua pincipal ; 928716027 ; 3
-178956985 ; Teresa Fernandes ; Largo do Comercio ; 928716027 ; 7
-144444899 ; Paula Neves ; Praca Gomes ; 928716027 ; 4
-188889852 ; Rita Fonseca ; Rua Teles Morais ; 928716027 ; 4
-185285287 ; Rita Pereira ; Rua Vicente Costa ; 928716027 ; 0
-169874521 ; Rui Pereira ; Praca Sao Joao ; 928716027 ; 26
-277778883 ; Rute Marlene ; Largo Vale Pereira ; 928716027 ; 1
-
+P;123456789;Carolina Lopes;Rua Humberto Delgado nº100, Porto;928716027;7
+P;234567891;Eduarda Reis;Rua 25 de Abril nº10, Braga;928716027;2
+P;345678911;Joana Beires;Largo do Souto nº20, Matosinhos;928716027;8
+P;456789121;Jose Pereira Rua Conde Casal nº123, Senhora da Hora;928716027;9
+P;567891231;Luis Teixeira;Travessa Jose Fagundes nº345, Porto;928716027;9
+P;165698751;Manuela Moura;Rua Luis de Camoes nº10, Rio Tinto;928716027;1
+P;778978979;Margarida Gomes;Travessa Esparido nº2, Gondomar;928716027 ; 0
+P;245678978;Maria de Lurdes;Rua Domingos Lopes nº45, Gaia;928716027;27
+P;456987789;Mariana Silva;Praca da Republica nº5467, Gaia;928716027;11
+P;215639877;Marta Marinho;Av. Luis Avedo Coutinho nº132, Senhora da hora;928716027;0
+P;221231231;Martinho Melro;Rua Mario Oliveira nº345, Valongo;928716027;2
+P;115471236;Mito Teresa;Rua Principal nº234, Matosinhos;928716027;3
+C;178956985;Empresa abc;Largo do Comercio nº12, Porto;928716027;234.6
+C;144444899;Empresa xpto;Praca Jose Gomes nº89, Maia;928716027;462.5
+C;188889852;Empresa umdolita;Rua Teles Morais nº1234, Costoias;928716027;62.5
+C;185285287;Empresa corridinho;Rua Vicente Costa nº100, Coimbroes;928716027;12.5
+C;169874521;Empresa ja esta;Praca Sao Joao nº123, Porto;928716027;3.7
+C;277778883;Empresa Faz Tudo;Largo Vale Pereira nª232, Coimbra;928716027;262.5

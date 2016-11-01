@@ -1,19 +1,19 @@
 18
-123456789 ; Braga ; Porto ; 08/08/2016 ; 15h00 ; 15h37 ; 7 ; numerario
-234567891 ; Porto ; Lisboa ; 14/02/2016 ; 15h00 ; 17h55 ; 2 ; numerario
-345678911 ; Porto ; Lisboa ; 14/02/2016 ; 15h00 ; 17h55 ; 8 ; multibanco
-456789121 ; Faro ; Santarem ; 08/08/2016 ; 11h00 ; 13h40 ; 9 ; numerario
-567891231 ; Braga ; Porto ; 14/02/2016 ; 15h00 ; 15h37 ; 9 ; multibanco
-165698751 ; Braga ; Porto ; 06/03/2016 ; 15h00 ; 15h37 ; 1 ; fim do mes
-778978979 ; Faro ; Lisboa ; 23/05/2016 ; 8h00 ; 10h37 ; 56 ; multibanco
-245678978 ; Viana do Castelo ; Guimaraes ; 23/05/2016 ; 8h00 ; 8h59 ; 27 ; fim do mes
-456987789 ; Viana do Castelo ; Guimaraes ; 08/08/2016 ; 8h00 ; 8h59 ; 11 ; cartao de credito
-215639877 ; Braga ; Porto ; 08/08/2016 ; 15h00 ; 15h37 ; 89 ; fim do mes
-221231231 ; Porto ; Lisboa ; 08/08/2016 ; 15h00 ; 17h55 ; 2 ; cartao de credito
-115471236 ; Faro ; Santarem ; 23/05/2016 ; 11h00 ; 13h40 ; 3 ; numerario
-178956985 ; Braga ; Porto ; 19/05/2016 ; 15h00 ; 15h37 ; 7 ; fim do mes
-144444899 ; Faro ; Santarem ; 19/05/2016 ; 11h00 ; 13h40 ; 4 ; multibanco
-188889852 ; Faro ; Santarem ; 06/03/2016 ; 11h00 ; 13h40 ; 4 ; multibanco
-185285287 ; Porto ; Lisboa ; 06/03/2016 ; 15h00 ; 17h55 ; 74 ; multibanco
-169874521 ; Porto ; Lisboa ; 06/03/2016 ; 15h00 ; 17h55 ; 26 ; numerario
-277778883 ; Viana do Castelo ; Guimaraes ; 19/05/2016 ; 8h00 ; 8h59 ; 1 ; fim do mas
+123456789;Braga;Porto;2016/08/08;15h00;15h37;40;Cash
+234567891;Porto;Lisboa;2016/02/14;15h00;17h55;100;Cash
+345678911;Porto;Lisboa;2016/15/02;15h05;18h05;102;ATM
+456789121;Faro;Santarem;2016/08/08;11h00;13h40;50;Cash
+567891231;Braga;Porto;2016/02/14;15h00;15h37;40;ATM
+165698751;Braga;Porto;2016/06/03;15h05;15h37;36;EndOfMonth
+778978979;Faro;Lisboa;2016/05/03;8h00;10h37;56;ATM
+245678978;Viana do Castelo;Guimaraes;2016/05/03;8h00;8h59;27;EndOfMonth
+456987789;Viana do Castelo;Guimaraes;2016/08/08;8h00;8h59;30;Credit
+215639877;Braga;Porto;2016/08/08;15h00;15h37;89;EndOfMonth
+221231231;Porto;Lisboa;2016/08/08;15h00;17h55;120;Credit
+115471236;Faro;Santarem;2016/05/03;11h00;13h40;40;Cash
+178956985;Braga;Porto;2016/05/19;15h00;15h37;30;EndOfMonth
+144444899;Faro;Santarem;19/05/2016;11h00;13h50;50;ATM
+188889852;Faro;Santarem;2016/06/03;11h00;13h40;45;ATM
+185285287;Porto;Lisboa;2016/06/03;15h00;17h55;150;ATM
+169874521;Porto;Lisboa;2016/06/03;15h00;17h55;26;Cash
+277778883;Viana do Castelo;Guimaraes;19/05/2016;8h00;8h59;1;EndOfMonth
