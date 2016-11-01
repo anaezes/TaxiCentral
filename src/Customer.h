@@ -6,11 +6,11 @@
 #ifndef CUSTOMER_H_
 #define CUSTOMER_H_
 
-#include "Service.h"
 #include <vector>
 #include <string>
-using namespace std;
+#include <iostream>
 
+using namespace std;
 
 class Customer
 {
@@ -19,22 +19,20 @@ private:
 	string address;
 	unsigned int nif;
 	int phoneNumber;
-	float points;
-	vector<Service *> historic;
+
 public:
-	Customer(string name, string address, unsigned int nif);
+	Customer(unsigned int nif, string name, string address, int phoneNumber);
 	~Customer();
 	string getName();
 	string getAddress();
 	int getPhoneNumber();
 	float getPoints();
 	unsigned int getNif() const;
-	vector<Service*> getHistoric();
 	void setName(string name);
 	void setAddress(string address);
-	void setPoints(float points);
 	void setPhoneNumber(int phoneNumber);
 	virtual float getDiscount() = 0;
+	virtual void accumulateService = 0;
 
 };
 
