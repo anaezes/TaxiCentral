@@ -25,6 +25,13 @@ private:
 public:
 	Customer(unsigned int nif, string name, string address, int phoneNumber);
 	virtual ~Customer();
+
+	enum CUSTOMER_TYPE
+	{
+		CompanyCustomer,
+		PrivateCustomer
+	};
+
 	string getName();
 	string getAddress();
 	int getPhoneNumber();
@@ -35,6 +42,7 @@ public:
 	void setPhoneNumber(int phoneNumber);
 	virtual float getDiscount() = 0;
 	virtual void accumulateService(Service* service) = 0;
+	virtual CUSTOMER_TYPE getCustomerType() = 0;
 };
 
 

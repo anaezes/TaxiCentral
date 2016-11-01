@@ -20,6 +20,7 @@ public:
 	int getCost();
 	float getDiscount();
 	void accumulateService(Service* service);
+	CUSTOMER_TYPE getCustomerType();
 };
 
 #endif /* PRIVATECUSTOMER_H_ */

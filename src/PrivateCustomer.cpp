@@ -28,3 +28,8 @@ float PrivateCustomer::getDiscount()
 void PrivateCustomer::accumulateService(Service* service)
 {
 }
+
+Customer::CUSTOMER_TYPE PrivateCustomer::getCustomerType()
+{
+	return CUSTOMER_TYPE::PrivateCustomer;
+}
