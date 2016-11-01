@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <string>
-using namespace std;
+
 
 #include "Customer.h"
 #include "Service.h"
@@ -17,6 +17,7 @@ using namespace std;
 #include "CentralTaxis.h"
 #include "utilities.h"
 
+using namespace std;
 
 unsigned short int customersMenu(CentralTaxis &central);
 
@@ -26,7 +27,7 @@ unsigned short int editCustomerMenu(CentralTaxis &central);
 
 unsigned short int serviceMenu(CentralTaxis &central);
 
-unsigned short int discountsMenu(CentralTaxis &central);
+unsigned short int routesMenu(CentralTaxis &central);
 
 unsigned short int mainMenu(CentralTaxis &central);
 

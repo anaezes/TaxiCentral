@@ -4,20 +4,18 @@
 using namespace std;
 
 /******************************************
-Customer management
+			Customer management
  ******************************************/
 
 
 void cleanDisplay()
 {
-
 	std::system("clear");
 }
 
 unsigned short int customersMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
-	int id = 0;
 
 	/*Menu of customers, where the user can choose what the option that wants*/
 	cleanDisplay();
@@ -26,10 +24,9 @@ unsigned short int customersMenu(CentralTaxis &central)
 	cout << endl;
 	cout << TAB << "1- Show information about all customers" << endl;
 	cout << TAB << "2- Show information about one customer" << endl;
-	cout << TAB << "3- Show customers in alphabetical order" << endl;
-	cout << TAB << "4- Edit customers" << endl;
-	cout << TAB << "5- Remove customers" << endl;
-	cout << TAB << "6- Insert new customer" << endl;
+	cout << TAB << "3- Edit customers" << endl;
+	cout << TAB << "4- Remove customers" << endl;
+	cout << TAB << "5- Insert new customer" << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -45,15 +42,13 @@ unsigned short int customersMenu(CentralTaxis &central)
 		break;
 
 	case 3:
-		break;
-
-	case 4:
 		editCustomerMenu(central);
 		break;
 
-	case 5:
+	case 4:
 		break;
-	case 6:
+
+	case 5:
 		break;
 
 	default:
@@ -102,8 +97,8 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 		cout << TAB_BIG << "What do you want to change?" << endl;
 		cout << endl;
 		cout << TAB << "1- Name" << endl;
-		cout << TAB << "2- Accession date" << endl;
-		cout << TAB << "3- Address" << endl;
+		cout << TAB << "2- Address" << endl;
+		cout << TAB << "3- Phone Number" << endl;
 		cout << TAB << "0- Out if there is not longer anything to be changed" << endl;
 
 
@@ -135,7 +130,7 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 }
 
 /******************************************
-Service management
+			Service management
  ******************************************/
 unsigned short int serviceMenu(CentralTaxis &central)
 {
@@ -149,11 +144,10 @@ unsigned short int serviceMenu(CentralTaxis &central)
 	cout << TAB << "1- Show information about all the services" << endl;
 	cout << TAB << "2- Show a day services" << endl;
 	cout << TAB << "3- Show services between two dates" << endl;
-	cout << TAB << "4- Show services in chronological order" << endl;
-	cout << TAB << "5- Show services about one customer" << endl;
-	cout << TAB << "6- Edit service" << endl;
-	cout << TAB << "7- Remove service" << endl;
-	cout << TAB << "8- Insert new service" << endl;
+	cout << TAB << "4- Show services about one customer" << endl;
+	cout << TAB << "5- Edit service" << endl;
+	cout << TAB << "6- Remove service" << endl;
+	cout << TAB << "7- Insert new service" << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -179,8 +173,6 @@ unsigned short int serviceMenu(CentralTaxis &central)
 		break;
 	case 7:
 		break;
-	case 8:
-		break;
 
 	default:
 		cout << "Invalid option. Try again." << endl;
@@ -192,19 +184,18 @@ unsigned short int serviceMenu(CentralTaxis &central)
 
 
 /******************************************
-Discounts Menu
+				Routes Menu
  ******************************************/
 
-unsigned short int discountsMenu(CentralTaxis &central)
+unsigned short int routesMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
-	unsigned int id;
 
 	cleanDisplay();
 
-	cout << TAB_BIG << "DISCOUNTS MENU" << endl;
+	cout << TAB_BIG << "ROUTES MENU" << endl;
 	cout << endl;
-	cout << TAB << "1- Show available discounts" << endl;
+	cout << TAB << "1- Show available routes" << endl;
 
 	cout << TAB << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -223,7 +214,7 @@ unsigned short int discountsMenu(CentralTaxis &central)
 }
 
 /******************************************
-Main Menu
+				Main Menu
  ******************************************/
 
 unsigned short int mainMenu(CentralTaxis &central)
@@ -238,7 +229,8 @@ unsigned short int mainMenu(CentralTaxis &central)
 		cout << endl;
 		cout << TAB << "1- Customers management" << endl;
 		cout << TAB << "2- Services management" << endl;
-		cout << TAB << "3- Discounts" << endl;
+		cout << TAB << "3- Routes management" << endl;
+		cout << TAB << "4- Show discounts availables" << endl;
 		cout << TAB << "0- Exit program" << endl << endl;
 
 		cout << TAB << "What is the option that you want? ";
@@ -256,7 +248,10 @@ unsigned short int mainMenu(CentralTaxis &central)
 			break;
 
 		case 3:
-			discountsMenu(central);
+			routesMenu(central);
+			break;
+		case 4:
+			central.showDiscounts();
 			break;
 		case 0:
 			return 0;
