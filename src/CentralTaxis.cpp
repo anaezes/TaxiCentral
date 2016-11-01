@@ -230,70 +230,49 @@ bool CentralTaxis::readServicesFile()
 
 bool CentralTaxis::readRoutesFile()
 {
-	vector<string> customersLines;
+	vector<string> routesLines;
 
 	/* try to get the file lines */
-	if(!readFile(customersFile, customersLines))
+	if(!readFile(routesFile, routesLines))
 		return false;
 	else
 	{
-		int nCustomers;
-		stringstream ss(customersLines[0]);
-		ss >> nCustomers;
+		int nRoutes;
+		stringstream ss(routesLines[0]);
+		ss >> nRoutes;
 
-		for(int i = 1; i <= nCustomers ; i++)
+		for(int i = 1; i <= nRoutes ; i++)
 		{
 			string substring;
-			stringstream line(customersLines[i]);
+			stringstream line(routesLines[i]);
 
-			string typeCustomer;
-			unsigned int nif;
-			string name;
-			string address;
-			int phoneNumber;
-			int points;
-			double cost;
+			string origin;
+			string destination;
+			double distance;
+			string expectedTime;
 
 			int item = 0;
 			string currItem;
 			while(getline(line,currItem, ';'))
 			{
 				if(item == 0)
-					typeCustomer = currItem;
+					origin = currItem;
 				else if(item == 1)
-				{
-					stringstream ss(currItem);
-					ss >> nif;
-				}
+					destination = currItem;
 				else if(item == 2)
-					name = currItem;
+				{
+					stringstream ss(currItem);
+					ss >> distance;
+				}
 				else if(item == 3)
-					address = currItem;
-				else if(item == 4)
-				{
-					stringstream ss(currItem);
-					ss >> phoneNumber;
-				}
-				else if(item == 5)
-				{
-					stringstream ss(currItem);
-					if(typeCustomer == "P")
-						ss >> points;
-					else
-						ss >> cost;
-				}
+					expectedTime = currItem;
 
 				item++;
 			}
 
 
-			Customer* newCustomer;
-			if(typeCustomer == "P")
-				newCustomer = new PrivateCustomer(nif, name, address, phoneNumber, points);
-			else
-				newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, cost);
-
-			customers.push_back(newCustomer);
+			Route* newRoute = new Route(origin, destination, distance, expectedTime);
+			routes.push_back(newRoute);
 		}
 	}
 
