@@ -52,6 +52,10 @@ bool CentralTaxis::removeCustomer(unsigned int nif)
 	return true;
 }
 
+
+void CentralTaxis::showDiscounts()
+{}
+
 /*
   Reads a given file and separates it to a vector
   of its lines. Returns true if success.

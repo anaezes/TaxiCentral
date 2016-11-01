@@ -53,6 +53,8 @@ public:
 	bool readCustomersFile();
 	bool readServicesFile();
 	bool readRoutesFile();
+
+	void showDiscounts();
 };
 
 #endif /* CentralTaxis_H_ */

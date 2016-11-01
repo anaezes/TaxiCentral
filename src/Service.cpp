@@ -3,6 +3,11 @@
 
 // define class Customer
 
+
+double Service::rateForKm = 1.0;
+double Service::rateForExtraMin = 0.5;
+
+
 Service::Service(Customer* customer, double cost, Route* route, Date date, string payment)
 {
 
@@ -10,7 +15,15 @@ Service::Service(Customer* customer, double cost, Route* route, Date date, strin
 	this->cost=cost;
 	this->route=route;
 	this->date= date;
-	this->payment= payment;
+
+	if(payment == "cash")
+		this->payment = PAYMENT_TYPE::Cash;
+	else if(payment == "ATM")
+		this->payment = PAYMENT_TYPE::ATM;
+	else if(payment == "credit")
+		this->payment = PAYMENT_TYPE::Credit;
+	else
+		this->payment = PAYMENT_TYPE::EndOfMonth;
 
 }
 
@@ -36,8 +49,12 @@ Date Service::getDate()
 	return date;
 }
 
-string Service::getPayment()
+PAYMENT_TYPE Service::getPayment()
  {
  	 return payment;
  }
 
+double Service::computeCost()
+{
+	return 10.4;
+}

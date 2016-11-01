@@ -16,6 +16,14 @@ class Customer;
 
 using namespace std;
 
+enum PAYMENT_TYPE
+{
+	Cash,
+	ATM,
+	Credit,
+	EndOfMonth
+};
+
 class Service
 {
 private:
@@ -23,18 +31,20 @@ private:
 	double cost;
 	Route* route;
 	Date date;
-	string payment;
+	PAYMENT_TYPE payment;
+	double computeCost();
 
 public:
 	static double rateForKm;
 	static double rateForExtraMin;
 	Service(Customer* customer, double cost, Route* route, Date date, string payment);
 	~Service();
+
 	Customer* getCustomer();
 	double getCost();
 	Route* getRoute();
 	Date getDate();
-	string getPayment();
+	PAYMENT_TYPE getPayment();
 };
 
 
