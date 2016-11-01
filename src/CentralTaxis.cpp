@@ -27,6 +27,7 @@ string CentralTaxis::getCustomersFileName() const
 {
 	return customersFile;
 }
+
 string CentralTaxis::getServicesFileName() const
 {
 	return servicesFile;
@@ -171,8 +172,6 @@ bool CentralTaxis::readServicesFile()
 			string origin;
 			string destination;
 
-			Route route;
-			Date date;
 			string startTime;
 			string endTime;
 
@@ -193,32 +192,32 @@ bool CentralTaxis::readServicesFile()
 				else if(item == 2)
 					destination = currItem;
 				else if(item == 3)
-					date(currItem);
+					Date date(currItem);
 				else if(item == 4)
 					startTime = currItem;
 				else if(item == 5)
 					endTime = currItem;
-				else if(item == 5)
+				else if(item == 6)
 				{
 					stringstream ss(currItem);
 					ss >> cost;
 				}
-				else if(item == 6)
+				else if(item == 7)
 					paymentType = currItem;
 
 				item++;
 			}
-			size_t i;
-			for(i = 0; i < customers.size(); i++)
+
+			size_t j;
+			for(j = 0; j < customers.size(); j++)
 			{
-				if(customers[i]->getNif() == nif)
+				if(customers[j]->getNif() == nif)
 					break;
 			}
 
 			Route* routeService = new Route(origin, destination);
 
-
-			Service* newService = new Service(customers[i],cost, routeService, date, paymentType);
+			Service* newService = new Service(customers[j], cost, routeService, date, paymentType);
 
 			services.push_back(newService);
 		}
@@ -246,8 +245,8 @@ bool CentralTaxis::readRoutesFile()
 			string substring;
 			stringstream line(routesLines[i]);
 
-			string origin;
-			string destination;
+			string source;
+			string arrival;
 			double distance;
 			string expectedTime;
 
@@ -256,9 +255,9 @@ bool CentralTaxis::readRoutesFile()
 			while(getline(line,currItem, ';'))
 			{
 				if(item == 0)
-					origin = currItem;
+					source = currItem;
 				else if(item == 1)
-					destination = currItem;
+					arrival = currItem;
 				else if(item == 2)
 				{
 					stringstream ss(currItem);
@@ -271,7 +270,7 @@ bool CentralTaxis::readRoutesFile()
 			}
 
 
-			Route* newRoute = new Route(origin, destination, distance, expectedTime);
+			Route* newRoute = new Route(source, arrival, distance, expectedTime);
 			routes.push_back(newRoute);
 		}
 	}

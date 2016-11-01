@@ -32,7 +32,7 @@ public:
 	void setAddress(string address);
 	void setPhoneNumber(int phoneNumber);
 	virtual float getDiscount() = 0;
-	virtual void accumulateService = 0;
+	virtual void accumulateService() = 0;
 
 };
 

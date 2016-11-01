@@ -38,14 +38,14 @@ unsigned short int customersMenu(CentralTaxis &central)
 		break;
 
 	case 2:
-		oneCustomerMenu();
+		oneCustomerMenu(central);
 		break;
 
 	case 3:
 		break;
 
 	case 4:
-		editCustomerMenu();
+		editCustomerMenu(central);
 		break;
 
 	case 5:
@@ -100,7 +100,7 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 		cout << endl;
 		cout << TAB << "1- Name" << endl;
 		cout << TAB << "2- Accession date" << endl;
-		cout << TAB << "3- Adress" << endl;
+		cout << TAB << "3- Address" << endl;
 		cout << TAB << "0- Out if there is not longer anything to be changed" << endl;
 
 
@@ -245,15 +245,15 @@ unsigned short int mainMenu(CentralTaxis &central)
 			switch (chosenOption)
 			{
 			case 1:
-				customersMenu();
+				customersMenu(central);
 				break;
 
 			case 2:
-				serviceMenu();
+				serviceMenu(central);
 				break;
 
 			case 3:
-				discountsMenu();
+				discountsMenu(central);
 				break;
 			case 0:
 				return 0;

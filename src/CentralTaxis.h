@@ -7,6 +7,8 @@
 #define CENTRALTAXIS_H_
 
 #include "Customer.h"
+#include "PrivateCustomer.h"
+#include "CompanyCustomer.h"
 #include "Service.h"
 #include "Route.h"
 #include "Date.h"
@@ -28,7 +30,7 @@ private:
 	string routesFile;
 	vector<Customer*> customers;
 	vector<Service*> services;
-	vector<Routes*> routes;
+	vector<Route*> routes;
 
 public:
 	CentralTaxis(string name, string customersFile, string servicesFile, string routesFile);
