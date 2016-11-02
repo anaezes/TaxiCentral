@@ -21,6 +21,7 @@ public:
 	float getDiscount();
 	void accumulateService(Service* service);
 	CUSTOMER_TYPE getCustomerType();
+	ostream & operator<<(ostream &out);
 };
 
 #endif /* PRIVATECUSTOMER_H_ */
