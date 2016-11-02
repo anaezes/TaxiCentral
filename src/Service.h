@@ -45,9 +45,12 @@ public:
 	Route* getRoute();
 	Date getDate();
 	PAYMENT_TYPE getPayment();
+
 };
 
+void showServices(vector<Service*> services);
 
+void showAllServicesInfo(vector<Service*> services);
 
 
 
