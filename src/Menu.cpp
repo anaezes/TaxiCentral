@@ -156,6 +156,7 @@ unsigned short int serviceMenu(CentralTaxis &central)
 	switch (chosenOption)
 	{
 	case 1:
+			showAllServicesInfo(central.getServices());
 		break;
 
 	case 2:
