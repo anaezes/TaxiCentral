@@ -35,6 +35,7 @@ unsigned short int customersMenu(CentralTaxis &central)
 	switch (chosenOption)
 	{
 	case 1:
+		showAllCustomersInfo(central.getCustomers());
 		break;
 
 	case 2:
@@ -75,9 +76,11 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 	switch (chosenOption)
 	{
 	case 1:
+		showCustomersInfoByNif(central.getCustomers());
 		break;
 
 	case 2:
+		showCustomersInfoByName(central.getCustomers());
 		break;
 
 	default:
