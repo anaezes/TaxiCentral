@@ -2,93 +2,42 @@
  * Date.h
  *
  */
+#pragma once
 
-#ifndef DATE_H_
-#define DATE_H_
-
-#include <vector>
+#include <iostream>
 #include <string>
 
 using namespace std;
 
 class Date
 {
-private:
-	unsigned int day;
-	unsigned int month;
-	unsigned int year;
-	string startTime;
-	string endTime;
-
 public:
-	Date();
-	Date(unsigned int day, unsigned int month, unsigned int year, string startTime, string endTime);
-	Date(unsigned int year, unsigned int month, unsigned int day);
-	Date(string yearMonthDay);
-	unsigned int getDay() const;
-	unsigned int getMonth() const;
-	unsigned int getYear() const;
-	string getStartTime();
-	string getEndTime();
-	string getDate();
-	void setDay(unsigned day);
-	void setMonth(unsigned month);
-	void setYear(unsigned year);
-	void setStartTime(string startTime);
-	void setEndTime(string endTime);
-	void show();
-	bool isLeapYear();
-	unsigned int nDays();
-	bool isValid();
-	bool operator==(const Date& date);
-	bool operator>(const Date &date);
-	bool operator<(const Date &date);
+  Date();
+  Date(unsigned int day, unsigned int month, unsigned int year);
+  Date(string dayMonthYear);
+  void setYear(unsigned int year);
+  void setMonth(unsigned int month);
+  void setDay(unsigned int day);
+  void setDate(string date);
+  unsigned int getYear() const;
+  unsigned int getMonth() const;
+  unsigned int getDay() const;
+  string asString();
+  void show();
+  bool isValid();
+  bool isEqualTo(const Date &date);
+  bool isAfter(const Date &date);
+  bool isBefore(const Date &date);
+  bool operator==(const Date &date);
+  bool operator>=(const Date &date);
+  bool operator<=(const Date &date);
 
-
+private:
+  unsigned int year;
+  unsigned int month;
+  unsigned int day;
+  bool isLeapYear();
+  unsigned int nDays();
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif /* DATE_H_ */
+string realTime();
