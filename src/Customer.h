@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <sstream>
+#include <utility>
 
 using namespace std;
 
@@ -49,7 +50,11 @@ public:
 	virtual string getInformation();
 };
 
-void showAllCustomersInfo(vector<Customer*> vectorCustomers);
+void showAllCustomersInfo(vector<Customer*> customers);
+
+void showCustomersInfoByNif(vector<Customer*> customers);
+
+void showCustomersInfoByName(vector<Customer*> customers);
 
 
 
