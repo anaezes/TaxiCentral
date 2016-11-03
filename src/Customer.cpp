@@ -88,6 +88,25 @@ unsigned int readCustomerNif()
 
 }
 
+unsigned int readCustomerPhoneNumber()
+{
+	string input;
+	unsigned int phone;
+
+	cout << "Phone number: ";
+	cin >> input ;
+
+	std::stringstream convertor(input);
+
+	if(convertor.fail())
+		throw InvalidPhoneNumberException();
+
+	if(convertor >> phone)
+		return phone;
+	else
+		throw InvalidPhoneNumberException();
+
+}
 
 /*
   Function used while sorting customers

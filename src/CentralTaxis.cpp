@@ -110,17 +110,19 @@ void CentralTaxis::editCustomerPhoneNumber()
 			cout << "Customer not found! " << endl << endl;
 		else
 		{
-			int newPhone;
-			cout << "New phoneNumber: ";
-			cin >> newPhone;
+			int newPhone = readCustomerPhoneNumber();
 
 			customer->setPhoneNumber(newPhone);
 			saveCustomers();
-			cout << endl << "Success, customer's address was modified. " << endl << endl;
+			cout << endl << "Success, customer's phone number was modified. " << endl << endl;
 		}
 
 	}
 	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
+	catch(InvalidPhoneNumberException &e)
 	{
 		cout << e;
 	}

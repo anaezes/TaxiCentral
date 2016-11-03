@@ -62,7 +62,20 @@ public:
 	}
 };
 
+class InvalidPhoneNumberException
+{
+public:
+	friend ostream & operator<<(std::ostream &out, InvalidPhoneNumberException &e)
+	{
+		out << "Error: Phone number not valid!" << endl << endl;
+
+		return out;
+	}
+};
+
 unsigned int readCustomerNif();
+
+unsigned int readCustomerPhoneNumber();
 
 Customer* customerExists(unsigned int, vector<Customer*>);
 
