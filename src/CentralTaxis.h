@@ -46,8 +46,11 @@ public:
 	void addService(Service* service);
 	void addRoute(Route* route);
 	void addCustomer(Customer* customer);
-	bool editCustomer(unsigned int nif);
-	bool removeCustomer(unsigned int nif);
+	void editCustomerName();
+	void editCustomerAddress();
+	void editCustomerPhoneNumber();
+	void removeCustomer();
+	void saveCustomers();
 
 	bool readFile(const string &fileName, vector<string> &fileLines);
 	bool readCustomersFile();

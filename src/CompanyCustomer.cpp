@@ -45,3 +45,16 @@ string CompanyCustomer::getInformation()
 
 	return information.str();
 }
+
+/*
+ * returns a string with all information
+ * of the customer in the format needed
+ */
+string CompanyCustomer::toFileFormat()
+{
+	stringstream information;
+
+	information << "C"<< Customer::toFileFormat() <<  ";" << this->cost;
+
+	return information.str();
+}

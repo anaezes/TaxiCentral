@@ -64,6 +64,32 @@ void Customer::setPhoneNumber(int phoneNumber)
 /*           CUSTOMERS GENERAL FUNCTIONS              */
 /******************************************************/
 
+
+/*
+   Validates all id inputs customers
+ */
+int validatInputCustomer()
+{
+	string input;
+	unsigned int nif;
+
+	cout << "NIF customer: ";
+	cin >> input ;
+
+	std::stringstream convertor(input);
+
+	if(convertor.fail())
+		return 0;
+	else
+	{
+		if(convertor >> nif)
+			return nif;
+		else
+			return 0;
+	}
+}
+
+
 /*
   Function used while sorting customers
   by name.
@@ -112,11 +138,22 @@ string Customer::getInformation()
 }
 
 
+/*
+ * returns a string with all information
+ * of the customer in the format needed
+ */
+string Customer::toFileFormat()
+{
+	stringstream information;
+	information << this->getNif() << ";" <<this->getName() << ";"
+			<< this->getAddress() << ";" << this->getPhoneNumber();
+
+	return information.str();
+}
+
 void showCustomersInfoByNif(vector<Customer*> customers)
 {
-	unsigned int nif;
-	cout << "Nif: " ;
-	cin >> nif;
+	unsigned int nif = validatInputCustomer();
 	cout << endl << endl;
 
 	bool found = false;

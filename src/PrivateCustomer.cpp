@@ -46,3 +46,16 @@ string PrivateCustomer::getInformation()
 
 	return information.str();
 }
+
+/*
+ * returns a string with all information
+ * of the customer in the format needed
+ */
+string PrivateCustomer::toFileFormat()
+{
+	stringstream information;
+
+	information << "P"<< Customer::toFileFormat() << ";" << this->points;
+
+	return information.str();
+}

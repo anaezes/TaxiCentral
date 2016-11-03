@@ -113,12 +113,15 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 		switch (chosenOption)
 		{
 		case 1:
+			central.editCustomerName();
 			break;
 
 		case 2:
+			central.editCustomerAddress();
 			break;
 
 		case 3:
+			central.editCustomerPhoneNumber();
 			break;
 
 		case 0:

@@ -23,6 +23,7 @@ public:
 	void accumulateService(Service* service);
 	CUSTOMER_TYPE getCustomerType();
 	string getInformation();
+	string toFileFormat();
 };
 
 

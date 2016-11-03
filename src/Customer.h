@@ -48,7 +48,10 @@ public:
 	virtual void accumulateService(Service* service) = 0;
 	virtual CUSTOMER_TYPE getCustomerType() = 0;
 	virtual string getInformation();
+	virtual string toFileFormat();
 };
+
+int validatInputCustomer();
 
 void showAllCustomersInfo(vector<Customer*> customers);
 

@@ -42,14 +42,76 @@ void CentralTaxis::addService(Service* service)
 {
 }
 
-bool CentralTaxis::editCustomer(unsigned int nif)
+
+// Customers functions
+void CentralTaxis::editCustomerName()
 {
-	return true;
+	unsigned int nif = validatInputCustomer();
+
+	if(nif == 0)
+		cout << endl << "ID not valid!" << endl << endl;
+	else{
+		size_t i = 0;
+		bool found = false;
+		while(!found)
+		{
+			if(nif == customers[i]->getNif())
+				found = true;
+			else
+				i++;
+		}
+
+		if(!found)
+			cout << "Customer not found! " << endl;
+		else
+		{
+			string newName;
+			cout << "New name: ";
+			cin.ignore();
+			getline(cin, newName);
+
+			customers[i]->setName(newName);
+			saveCustomers();
+			cout << endl << "Success, customer was modify. " << endl << endl;
+		}
+	}
 }
 
-bool CentralTaxis::removeCustomer(unsigned int nif)
+
+void CentralTaxis::editCustomerAddress()
 {
-	return true;
+
+}
+
+void CentralTaxis::editCustomerPhoneNumber()
+{
+
+}
+
+void CentralTaxis::removeCustomer()
+{
+
+}
+
+/*
+  Save customers in file after modification
+ */
+void CentralTaxis::saveCustomers()
+{
+	ofstream c_file;
+	c_file.open(customersFile);
+
+	c_file << customers.size() << endl;
+
+	for(size_t i = 0; i < customers.size() ; i++)
+	{
+		c_file << customers[i]->toFileFormat();
+
+		if(i < customers.size()-1)
+			c_file << endl;
+	}
+
+	c_file.close();
 }
 
 
@@ -149,7 +211,6 @@ bool CentralTaxis::readCustomersFile()
 		}
 	}
 
-
 	return true;
 }
 
@@ -227,7 +288,6 @@ bool CentralTaxis::readServicesFile()
 		}
 	}
 
-
 	return true;
 }
 
@@ -278,7 +338,6 @@ bool CentralTaxis::readRoutesFile()
 			routes.push_back(newRoute);
 		}
 	}
-
 
 	return true;
 }
