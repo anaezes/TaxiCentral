@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 #include <iostream>
 
 using namespace std;
@@ -21,7 +22,10 @@ public:
 	float getDiscount();
 	void accumulateService(Service* service);
 	CUSTOMER_TYPE getCustomerType();
-	ostream & operator<<(ostream &out);
+	string getInformation();
 };
+
+
+
 
 #endif /* PRIVATECUSTOMER_H_ */

@@ -73,16 +73,6 @@ bool compareByName( Customer* name_a,Customer* name_b)
 	return name_a->getName() < name_b->getName();
 }
 
-ostream& Customer::operator<<(std::ostream &out)
-{
-	out << setw(5) << nif;
-	out << setw(25) << name;
-	out << setw(20) << address;
-	out << setw(20) << phoneNumber;
-
-	return out;
-}
-
 /*
   Function used while sorting customers
   by name.
@@ -93,15 +83,25 @@ void showAllCustomersInfo(vector<Customer*> customers)
 
 	std::sort(customers.begin(), customers.end(), compareByName);
 
-	cout << setw(5) << "TYPE" << setw(5) << "NIF" << setw(25) << "Name" << setw(20) << "Address"
-			<< setw(15) << "PhoneNumber" << setw(10) << "Points/Cost" << endl;
-	cout << " ---------------------------------------------------------------- " << endl;
+	cout << setw(3) << "TYPE" << setw(14) << "NIF" << setw(25) << "Name" << setw(54) << "Address"
+			<< setw(20) << "Phone" << setw(20) << "Points/Cost" << endl;
+	cout << " ------------------------------------------------------------------------------------------------------------------------------------------ " << endl;
 
 	for(size_t i = 0; i < customers.size() ; i++)
 	{
-		cout << customers[i];
+		cout << customers[i]->getInformation();
 	}
 
 	cout << endl << endl;
 }
 
+string Customer::getInformation()
+{
+	stringstream information;
+	information << setw(15) << this->getNif();
+	information << setw(25) << this->getName();
+	information << setw(55) << this->getAddress();
+	information << setw(20) << this->getPhoneNumber();
+
+	return information.str();
+}

@@ -34,11 +34,15 @@ Customer::CUSTOMER_TYPE PrivateCustomer::getCustomerType()
 	return CUSTOMER_TYPE::PrivateCustomer;
 }
 
-ostream& PrivateCustomer::operator<<(std::ostream &out)
+string PrivateCustomer::getInformation()
 {
-	out << setw(5) << "P";
-	cout << this;
-	out << setw(15) << points;
 
-	return out;
+	stringstream information;
+
+	information << setw(3) << "P";
+	information << setw(15) << Customer::getInformation();
+	information << setw(20) << this->points;
+	information << endl;
+
+	return information.str();
 }

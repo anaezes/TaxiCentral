@@ -34,11 +34,14 @@ Customer::CUSTOMER_TYPE CompanyCustomer::getCustomerType()
 	return CUSTOMER_TYPE::CompanyCustomer;
 }
 
-ostream& CompanyCustomer::operator<<(std::ostream &out)
+string CompanyCustomer::getInformation()
 {
-	out << setw(5) << "C";
-	cout << this;
-	out << setw(15) << cost;
+	stringstream information;
 
-	return out;
+	information << setw(3) << "C";
+	information << setw(15) << Customer::getInformation();
+	information << setw(20) << this->cost;
+	information << endl;
+
+	return information.str();
 }

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -45,8 +46,7 @@ public:
 	virtual float getDiscount() = 0;
 	virtual void accumulateService(Service* service) = 0;
 	virtual CUSTOMER_TYPE getCustomerType() = 0;
-	virtual ostream & operator<<(ostream &out);
-
+	virtual string getInformation();
 };
 
 void showAllCustomersInfo(vector<Customer*> vectorCustomers);
