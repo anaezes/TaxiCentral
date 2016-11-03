@@ -54,7 +54,7 @@ string CompanyCustomer::toFileFormat()
 {
 	stringstream information;
 
-	information << "C"<< Customer::toFileFormat() <<  ";" << this->cost;
+	information << "C" << ";" << Customer::toFileFormat() <<  ";" << this->cost;
 
 	return information.str();
 }

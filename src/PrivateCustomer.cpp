@@ -55,7 +55,7 @@ string PrivateCustomer::toFileFormat()
 {
 	stringstream information;
 
-	information << "P"<< Customer::toFileFormat() << ";" << this->points;
+	information << "P" << ";" << Customer::toFileFormat() << ";" << this->points;
 
 	return information.str();
 }
