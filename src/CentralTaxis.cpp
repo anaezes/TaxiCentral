@@ -72,7 +72,7 @@ void CentralTaxis::editCustomerName()
 
 			customers[i]->setName(newName);
 			saveCustomers();
-			cout << endl << "Success, customer was modify. " << endl << endl;
+			cout << endl << "Success, customer's name was modified. " << endl << endl;
 		}
 	}
 }
@@ -80,7 +80,35 @@ void CentralTaxis::editCustomerName()
 
 void CentralTaxis::editCustomerAddress()
 {
+	unsigned int nif = validatInputCustomer();
 
+	if(nif == 0)
+		cout << endl << "ID not valid!" << endl << endl;
+	else{
+		size_t i = 0;
+		bool found = false;
+		while(!found)
+		{
+			if(nif == customers[i]->getNif())
+				found = true;
+			else
+				i++;
+		}
+
+		if(!found)
+			cout << "Customer not found! " << endl;
+		else
+		{
+			string newAddress;
+			cout << "New address: ";
+			cin.ignore();
+			getline(cin, newAddress);
+
+			customers[i]->setAddress(newAddress);
+			saveCustomers();
+			cout << endl << "Success, customer's address was modified. " << endl << endl;
+		}
+	}
 }
 
 void CentralTaxis::editCustomerPhoneNumber()
