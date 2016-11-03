@@ -46,23 +46,13 @@ void CentralTaxis::addService(Service* service)
 // Customers functions
 void CentralTaxis::editCustomerName()
 {
-	unsigned int nif = validatInputCustomer();
+	try{
+		unsigned int nif = readCustomerNif();
 
-	if(nif == 0)
-		cout << endl << "ID not valid!" << endl << endl;
-	else{
-		size_t i = 0;
-		bool found = false;
-		while(!found)
-		{
-			if(nif == customers[i]->getNif())
-				found = true;
-			else
-				i++;
-		}
+		Customer* customer = customerExists(nif, customers);
 
-		if(!found)
-			cout << "Customer not found! " << endl;
+		if(customer ==  NULL)
+			cout << "Customer not found! " << endl << endl;
 		else
 		{
 			string newName;
@@ -70,33 +60,27 @@ void CentralTaxis::editCustomerName()
 			cin.ignore();
 			getline(cin, newName);
 
-			customers[i]->setName(newName);
+			customer->setName(newName);
 			saveCustomers();
 			cout << endl << "Success, customer's name was modified. " << endl << endl;
 		}
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
 	}
 }
 
 
 void CentralTaxis::editCustomerAddress()
 {
-	unsigned int nif = validatInputCustomer();
+	try{
+		unsigned int nif = readCustomerNif();
 
-	if(nif == 0)
-		cout << endl << "ID not valid!" << endl << endl;
-	else{
-		size_t i = 0;
-		bool found = false;
-		while(!found)
-		{
-			if(nif == customers[i]->getNif())
-				found = true;
-			else
-				i++;
-		}
+		Customer* customer = customerExists(nif, customers);
 
-		if(!found)
-			cout << "Customer not found! " << endl;
+		if(customer ==  NULL)
+			cout << "Customer not found! " << endl << endl;
 		else
 		{
 			string newAddress;
@@ -104,16 +88,42 @@ void CentralTaxis::editCustomerAddress()
 			cin.ignore();
 			getline(cin, newAddress);
 
-			customers[i]->setAddress(newAddress);
+			customer->setAddress(newAddress);
 			saveCustomers();
 			cout << endl << "Success, customer's address was modified. " << endl << endl;
 		}
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
 	}
 }
 
 void CentralTaxis::editCustomerPhoneNumber()
 {
+	try{
+		unsigned int nif = readCustomerNif();
 
+		Customer* customer = customerExists(nif, customers);
+
+		if(customer ==  NULL)
+			cout << "Customer not found! " << endl << endl;
+		else
+		{
+			int newPhone;
+			cout << "New phoneNumber: ";
+			cin >> newPhone;
+
+			customer->setPhoneNumber(newPhone);
+			saveCustomers();
+			cout << endl << "Success, customer's address was modified. " << endl << endl;
+		}
+
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
 }
 
 void CentralTaxis::removeCustomer()

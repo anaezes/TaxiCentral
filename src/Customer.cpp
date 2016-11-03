@@ -68,7 +68,7 @@ void Customer::setPhoneNumber(int phoneNumber)
 /*
    Validates all id inputs customers
  */
-int validatInputCustomer()
+unsigned int readCustomerNif()
 {
 	string input;
 	unsigned int nif;
@@ -79,14 +79,13 @@ int validatInputCustomer()
 	std::stringstream convertor(input);
 
 	if(convertor.fail())
-		return 0;
+		throw InvalidNifException();
+
+	if(convertor >> nif)
+		return nif;
 	else
-	{
-		if(convertor >> nif)
-			return nif;
-		else
-			return 0;
-	}
+		throw InvalidNifException();
+
 }
 
 
@@ -151,28 +150,35 @@ string Customer::toFileFormat()
 	return information.str();
 }
 
-void showCustomersInfoByNif(vector<Customer*> customers)
+Customer* customerExists(unsigned int nif, vector<Customer*> customers)
 {
-	unsigned int nif = validatInputCustomer();
-	cout << endl << endl;
-
-	bool found = false;
-	size_t i = 0;
-	while(!found && i < customers.size())
+	for(size_t i= 0 ; i < customers.size(); i++)
 	{
 		if(customers[i]->getNif() == nif)
-			found = true;
-		else
-			i++;
+			return customers[i];
 	}
 
-	if(found)
-	{
-		printCustomerTable();
-		cout << customers[i]->getInformation() << endl;
+	return NULL;
+}
+
+void showCustomersInfoByNif(vector<Customer*> customers)
+{
+	try {
+		unsigned int nif = readCustomerNif();
+		Customer* customer = customerExists(nif, customers);
+
+		if(customer !=  NULL)
+		{
+			printCustomerTable();
+			cout << customer->getInformation() << endl;
+		}
+		else
+			cout << "Customer not found!" << endl << endl;
 	}
-	else
-		cout << "Customer not found!" << endl;
+	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
 }
 
 void showCustomersInfoByName(vector<Customer*> customers)

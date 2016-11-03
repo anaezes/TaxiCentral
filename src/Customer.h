@@ -41,23 +41,36 @@ public:
 	int getPhoneNumber();
 	float getPoints();
 	unsigned int getNif() const;
-	void setName(string name);
-	void setAddress(string address);
-	void setPhoneNumber(int phoneNumber);
+	void setName(string);
+	void setAddress(string);
+	void setPhoneNumber(int);
 	virtual float getDiscount() = 0;
-	virtual void accumulateService(Service* service) = 0;
+	virtual void accumulateService(Service*) = 0;
 	virtual CUSTOMER_TYPE getCustomerType() = 0;
 	virtual string getInformation();
 	virtual string toFileFormat();
 };
 
-int validatInputCustomer();
+class InvalidNifException
+{
+public:
+	friend ostream & operator<<(std::ostream &out, InvalidNifException &e)
+	{
+		out << "Error: Nif not valid!" << endl << endl;
 
-void showAllCustomersInfo(vector<Customer*> customers);
+		return out;
+	}
+};
 
-void showCustomersInfoByNif(vector<Customer*> customers);
+unsigned int readCustomerNif();
 
-void showCustomersInfoByName(vector<Customer*> customers);
+Customer* customerExists(unsigned int, vector<Customer*>);
+
+void showAllCustomersInfo(vector<Customer*>);
+
+void showCustomersInfoByNif(vector<Customer*>);
+
+void showCustomersInfoByName(vector<Customer*>);
 
 
 
