@@ -43,6 +43,7 @@ public:
 	virtual float getDiscount() = 0;
 	virtual void accumulateService(Service* service) = 0;
 	virtual CUSTOMER_TYPE getCustomerType() = 0;
+	friend ostream& operator<<(ostream& os,Customer obj);
 };
 
 

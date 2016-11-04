@@ -60,12 +60,18 @@ double Service::computeCost()
 	return 10.4;
 }
 
+ostream& Service::operator<<(ostream& os,Service obj)
+{
+    os << obj;
+    return os;
+}
+
 void showServices(vector<Service*> services)
 {
 	 for(size_t i = 0; i < services.size() ; i++)
 	    {
 	      //cout << setw(5) << services.at(i)->getCustomer()->getNif();
-	      cout << setw(12) << services.at(i)->getRoute().getSource();
+	      //cout << setw(12) << services.at(i)->getRoute().getSource();
 	     // cout << setw(12) << services.at(i)->getRoute()->getArrival();
 	      //cout << setw(10) << services.at(i)->getDate().getDate();
 	     // cout << setw(14) << services.at(i)->getRoute()->getDistance();

@@ -62,3 +62,8 @@ void Route::setExpectedTime(string expectedTime)
 {
 	this->expectedTime = expectedTime;
 }
+ostream& Route::operator<<(ostream& os,Route obj)
+{
+    os << obj;
+    return os;
+}

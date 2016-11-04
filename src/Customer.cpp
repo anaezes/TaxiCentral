@@ -52,3 +52,9 @@ void Customer::setPhoneNumber(int phoneNumber)
 {
 	this->phoneNumber=phoneNumber;
 }
+
+ostream& Customer::operator<<(ostream& os,Customer obj)
+{
+    os << obj;
+    return os;
+}

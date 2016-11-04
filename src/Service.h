@@ -45,6 +45,7 @@ public:
 	Route* getRoute();
 	Date getDate();
 	PAYMENT_TYPE getPayment();
+	friend ostream& operator<<(ostream& os,Service obj);
 
 };
 

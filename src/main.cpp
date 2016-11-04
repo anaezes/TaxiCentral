@@ -9,9 +9,9 @@ using namespace std;
 int main()
 {
 	string nameCentralTaxis = "Taxis XPTO";
-	string customersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/customers.txt";
-	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
-	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
+	string customersFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/customers.txt";
+	string servicesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/services.txt";
+	string routesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/routes.txt";
 
 	CentralTaxis central(nameCentralTaxis, customersFile, servicesFile, routesFile);
 
