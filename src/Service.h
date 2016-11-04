@@ -11,7 +11,9 @@
 
 #include <vector>
 #include <string>
-
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 class Customer;
 
 using namespace std;
@@ -45,7 +47,7 @@ public:
 	Route* getRoute();
 	Date getDate();
 	PAYMENT_TYPE getPayment();
-	friend ostream& operator<<(ostream& os,Service obj);
+	string getInformation();
 
 };
 

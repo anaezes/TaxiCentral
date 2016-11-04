@@ -1,6 +1,4 @@
 #include "Service.h"
-#include <iostream>
-#include <iomanip>
 
 // define class Customer
 
@@ -60,25 +58,28 @@ double Service::computeCost()
 	return 10.4;
 }
 
-ostream& Service::operator<<(ostream& os,Service obj)
+string Service::getInformation()
 {
-    os << obj;
-    return os;
+	stringstream information;
+
+	 //information << setw(5) << this->getCustomer()->getNif();
+	 information << setw(12) << this->getRoute()->getSource();
+	 information << setw(12) << this->getRoute()->getArrival();
+	 information << setw(10) << this->getDate().getDate();
+	 information << setw(14) << this->getRoute()->getDistance();
+	 information << setw(17) << this->getRoute()->getExpectedTime();
+	 information << setw(15) << this->getPayment();
+
+	   return information.str();
 }
 
 void showServices(vector<Service*> services)
 {
+
 	 for(size_t i = 0; i < services.size() ; i++)
 	    {
-	      //cout << setw(5) << services.at(i)->getCustomer()->getNif();
-	      //cout << setw(12) << services.at(i)->getRoute().getSource();
-	     // cout << setw(12) << services.at(i)->getRoute()->getArrival();
-	      //cout << setw(10) << services.at(i)->getDate().getDate();
-	     // cout << setw(14) << services.at(i)->getRoute()->getDistance();
-	      //cout << setw(17) << services.at(i)->getRoute()->getExpectedTime();
-	     // cout << setw(15) << services.at(i)->getPayment();
-
-	}
+		 	 cout << services.at(i)->getInformation();
+	    }
 }
 
 void showAllServicesInfo(vector<Service*> services)

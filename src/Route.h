@@ -31,7 +31,6 @@ public:
 	void setArrival(string arrival);
 	void setDistance(double distance);
 	void setExpectedTime(string expectedTime);
-	friend ostream& operator<<(ostream& os,Route obj);
 };
 
 
