@@ -130,7 +130,35 @@ void CentralTaxis::editCustomerPhoneNumber()
 
 void CentralTaxis::removeCustomer()
 {
+	try{
+		unsigned int nif = readCustomerNif();
 
+		bool found = false;
+		size_t i = 0;
+		while (i < customers.size() && !found)
+		{
+			if(customers[i]->getNif() == nif)
+			{
+				found = true;
+				delete customers[i];
+				customers[i] = NULL;
+				customers.erase(customers.begin()+i);
+			}
+			else i++;
+		}
+
+		if(found)
+		{
+			saveCustomers();
+			cout << endl << "Success, customer's was removed. " << endl << endl;
+		}
+		else
+			cout << "Customer not found! " << endl << endl;
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
 }
 
 /*

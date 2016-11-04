@@ -47,6 +47,7 @@ unsigned short int customersMenu(CentralTaxis &central)
 		break;
 
 	case 4:
+		central.removeCustomer();
 		break;
 
 	case 5:
