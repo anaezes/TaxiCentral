@@ -164,7 +164,7 @@ unsigned short int serviceMenu(CentralTaxis &central)
 	switch (chosenOption)
 	{
 	case 1:
-			showAllServicesInfo(central.getServices());
+		showAllServicesInfo(central.getServices());
 		break;
 
 	case 2:
@@ -204,7 +204,8 @@ unsigned short int routesMenu(CentralTaxis &central)
 
 	cout << TAB_BIG << "ROUTES MENU" << endl;
 	cout << endl;
-	cout << TAB << "1- Show available routes" << endl << endl;
+	cout << TAB << "1- Show available routes" << endl;
+	cout << TAB << "2- Remove a route" << endl << endl;
 
 	cout << TAB << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -214,6 +215,9 @@ unsigned short int routesMenu(CentralTaxis &central)
 	{
 	case 1:
 		showAvailableRoutes(central.getRoutes());
+		break;
+	case 2:
+		central.removeRoute();
 		break;
 	default:
 		cout << "Invalid option. Try again." << endl;

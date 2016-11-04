@@ -35,7 +35,9 @@ public:
 	void setDistance(double distance);
 	void setExpectedTime(string expectedTime);
 	string getInformation();
+	string toFileFormat();
 };
+
 
 void showAvailableRoutes(vector<Route*> routes);
 

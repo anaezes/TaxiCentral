@@ -48,7 +48,12 @@ void CentralTaxis::addService(Service* service)
 }
 
 
-// Customers functions
+/*
+ *
+ * Functions for Customers
+ *
+ *
+ * */
 void CentralTaxis::editCustomerName()
 {
 	try{
@@ -243,8 +248,122 @@ void CentralTaxis::saveCustomers()
 }
 
 
+/*
+ *
+ * Functions for Routes
+ *
+ *
+ * */
+
+void CentralTaxis::removeRoute()
+{
+
+	string source;
+	cout << "Insert source: ";
+	cin.ignore();
+	getline(cin,source);
+	std::transform(source.begin(), source.end(), source.begin(), ::tolower);
+
+	string arrival;
+	cout << "Insert arrival: ";
+	getline(cin,arrival);
+	std::transform(arrival.begin(), arrival.end(), arrival.begin(), ::tolower);
+
+	size_t i = 0;
+	bool found = false;
+
+	while(!found && i < routes.size())
+	{
+		string currArrival = routes[i]->getArrival();
+		std::transform(currArrival.begin(), currArrival.end(), currArrival.begin(), ::tolower);
+
+		string currSource = routes[i]->getSource();
+		std::transform(currSource.begin(), currSource.end(), currSource.begin(), ::tolower);
+
+		if(currArrival == arrival && currSource == source)
+		{
+			found = true;
+			delete routes[i];
+			routes[i] = NULL;
+			routes.erase(routes.begin()+i);
+		}
+		i++;
+	}
+
+	if(found)
+	{
+		saveRoutes();
+		cout << endl << "Success, routes's was removed. " << endl << endl;
+	}
+	else
+		cout << "Route not found! " << endl << endl;
+}
+
+void CentralTaxis::insertNewRoute()
+{}
+
+void CentralTaxis::saveRoutes()
+{
+	ofstream c_file;
+	c_file.open(routesFile);
+
+	c_file << routes.size() << endl;
+
+	for(size_t i = 0; i < routes.size() ; i++)
+	{
+		c_file << routes[i]->toFileFormat();
+
+		if(i < routes.size()-1)
+			c_file << endl;
+	}
+
+	c_file.close();
+}
+
+
+
+
+
+
+
+
+
+/*
+ *
+ * Funtions for Discounts
+ *
+ *
+ * */
+
 void CentralTaxis::showDiscounts()
 {}
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *
+ *  Functions to read files
+ *
+ *
+ * */
+
+
+
+
+
+
+
+
+
+
 
 /*
   Reads a given file and separates it to a vector

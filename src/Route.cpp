@@ -75,6 +75,22 @@ string Route::getInformation()
 }
 
 
+string Route::toFileFormat()
+{
+	stringstream information;
+
+	information << this->getSource() << ";" <<this->getArrival() << ";"
+				<< this->getDistance() << ";" << this->getExpectedTime();
+
+	return information.str();
+}
+
+
+
+
+
+
+
 void showAvailableRoutes(vector<Route*> routes)
 {
 	printRoutesTable();
@@ -90,3 +106,5 @@ void printRoutesTable()
 	cout << endl << setw(20)<< "Source" << setw(20) << "Arrival" << setw(17) << "Distance"<< setw(17) << "Expected Time" << endl;
 		cout << " ----------------------------------------------------------------------------- " << endl;
 }
+
+

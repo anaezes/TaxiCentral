@@ -18,6 +18,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
@@ -52,6 +54,10 @@ public:
 	void removeCustomer();
 	void insertNewCustomer();
 	void saveCustomers();
+
+	void removeRoute();
+	void insertNewRoute();
+	void saveRoutes();
 
 	bool readFile(const string &fileName, vector<string> &fileLines);
 	bool readCustomersFile();
