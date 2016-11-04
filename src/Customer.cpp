@@ -137,9 +137,7 @@ void showAllCustomersInfo(vector<Customer*> customers)
 
 	printCustomerTable();
 	for(size_t i = 0; i < customers.size() ; i++)
-	{
 		cout << customers[i]->getInformation();
-	}
 
 	cout << endl << endl;
 }
@@ -151,7 +149,6 @@ string Customer::getInformation()
 	information << setw(25) << this->getName();
 	information << setw(55) << this->getAddress();
 	information << setw(20) << this->getPhoneNumber();
-
 	return information.str();
 }
 
