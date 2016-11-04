@@ -8,6 +8,9 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -31,11 +34,12 @@ public:
 	void setArrival(string arrival);
 	void setDistance(double distance);
 	void setExpectedTime(string expectedTime);
+	string getInformation();
 };
 
+void showAvailableRoutes(vector<Route*> routes);
 
-
-
+void printRoutesTable();
 
 
 
