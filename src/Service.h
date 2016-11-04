@@ -8,15 +8,18 @@
 
 #include "Route.h"
 #include "Date.h"
+#include "Customer.h"
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-class Customer;
+
 
 using namespace std;
+
+class Customer;
 
 enum PAYMENT_TYPE
 {

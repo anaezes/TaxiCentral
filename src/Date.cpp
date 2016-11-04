@@ -68,7 +68,7 @@ unsigned int Date::getDay() const
   return day;
 }
 
-string Date::asString()
+string Date::dateAsString()
 {
   stringstream ss;
   ss << to_string(day) << "/" << to_string(month) << "/" << to_string(year);
@@ -165,5 +165,5 @@ string realTime()
 
   Date newDate(day, month + 1, year);
 
-  return newDate.asString();
+  return newDate.dateAsString();
 }

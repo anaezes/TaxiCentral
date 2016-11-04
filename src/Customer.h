@@ -17,6 +17,7 @@
 #include <utility>
 
 using namespace std;
+class Service;
 
 class Customer
 {

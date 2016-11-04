@@ -1,8 +1,5 @@
 #include "Service.h"
 
-// define class Customer
-
-
 double Service::rateForKm = 1.0;
 double Service::rateForExtraMin = 0.5;
 
@@ -49,9 +46,9 @@ Date Service::getDate()
 }
 
 PAYMENT_TYPE Service::getPayment()
- {
- 	 return payment;
- }
+{
+	return payment;
+}
 
 double Service::computeCost()
 {
@@ -62,34 +59,33 @@ string Service::getInformation()
 {
 	stringstream information;
 
-	 //information << setw(5) << this->getCustomer()->getNif();
-	 information << setw(12) << this->getRoute()->getSource();
-	 information << setw(12) << this->getRoute()->getArrival();
-	 information << setw(10) << this->getDate().getDate();
-	 information << setw(14) << this->getRoute()->getDistance();
-	 information << setw(17) << this->getRoute()->getExpectedTime();
-	 information << setw(15) << this->getPayment();
+	information << setw(5) << this->getCustomer()->getNif();
+	information << setw(12) << this->getRoute()->getSource();
+	information << setw(12) << this->getRoute()->getArrival();
+	information << setw(10) << this->getDate().dateAsString();
+	information << setw(14) << this->getRoute()->getDistance();
+	information << setw(17) << this->getRoute()->getExpectedTime();
+	information << setw(15) << this->getPayment();
 
-	   return information.str();
+	return information.str();
 }
 
 void showServices(vector<Service*> services)
 {
 
-	 for(size_t i = 0; i < services.size() ; i++)
-	    {
-		 	 cout << services.at(i)->getInformation();
-	    }
+	for(size_t i = 0; i < services.size() ; i++)
+		cout << services.at(i)->getInformation();
+
 }
 
 void showAllServicesInfo(vector<Service*> services)
 {
 
-	 cout << setw(5) << "Customer NIF" << setw(12) << "Source" << setw(12) << "Arrival" << setw(10) << "Date";
-	 cout << setw(14) << "Distance"  << setw(17) << "Expected Time"  << setw(15) << "Payment Type" <<  endl;
-	 cout << " ----------------------------------------------------------------------------------------------- " << endl;
+	cout << setw(5) << "Customer NIF" << setw(12) << "Source" << setw(12) << "Arrival" << setw(10) << "Date";
+	cout << setw(14) << "Distance"  << setw(17) << "Expected Time"  << setw(15) << "Payment Type" <<  endl;
+	cout << " ----------------------------------------------------------------------------------------------- " << endl;
 
-	 showServices(services);
+	showServices(services);
 
 	cout << endl << endl;
 }

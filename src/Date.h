@@ -22,7 +22,7 @@ public:
   unsigned int getYear() const;
   unsigned int getMonth() const;
   unsigned int getDay() const;
-  string asString();
+  string dateAsString();
   void show();
   bool isValid();
   bool isEqualTo(const Date &date);
