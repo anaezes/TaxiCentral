@@ -23,6 +23,11 @@ vector<Service*> CentralTaxis::getServices() const
 	return services;
 }
 
+vector<Route*> CentralTaxis::getRoutes() const
+{
+	return routes;
+}
+
 string CentralTaxis::getCustomersFileName() const
 {
 	return customersFile;

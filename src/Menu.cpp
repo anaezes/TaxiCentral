@@ -26,7 +26,7 @@ unsigned short int customersMenu(CentralTaxis &central)
 	cout << TAB << "2- Show information about one customer" << endl;
 	cout << TAB << "3- Edit customers" << endl;
 	cout << TAB << "4- Remove customers" << endl;
-	cout << TAB << "5- Insert new customer" << endl;
+	cout << TAB << "5- Insert new customer" << endl << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -69,7 +69,7 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 	cout << TAB_BIG << "How do you want search?" << endl;
 	cout << endl;
 	cout << TAB << "1- Through NIF" << endl;
-	cout << TAB << "2- Through name" << endl;
+	cout << TAB << "2- Through name" << endl << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -104,7 +104,7 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 		cout << TAB << "1- Name" << endl;
 		cout << TAB << "2- Address" << endl;
 		cout << TAB << "3- Phone Number" << endl;
-		cout << TAB << "0- Out if there is not longer anything to be changed" << endl;
+		cout << TAB << "0- Out if there is not longer anything to be changed" << endl << endl;
 
 
 		cout << "What is the option that you want? ";
@@ -155,7 +155,7 @@ unsigned short int serviceMenu(CentralTaxis &central)
 	cout << TAB << "4- Show services about one customer" << endl;
 	cout << TAB << "5- Edit service" << endl;
 	cout << TAB << "6- Remove service" << endl;
-	cout << TAB << "7- Insert new service" << endl;
+	cout << TAB << "7- Insert new service" << endl << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -204,7 +204,7 @@ unsigned short int routesMenu(CentralTaxis &central)
 
 	cout << TAB_BIG << "ROUTES MENU" << endl;
 	cout << endl;
-	cout << TAB << "1- Show available routes" << endl;
+	cout << TAB << "1- Show available routes" << endl << endl;
 
 	cout << TAB << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -213,6 +213,7 @@ unsigned short int routesMenu(CentralTaxis &central)
 	switch (chosenOption)
 	{
 	case 1:
+		showAvailableRoutes(central.getRoutes());
 		break;
 	default:
 		cout << "Invalid option. Try again." << endl;
