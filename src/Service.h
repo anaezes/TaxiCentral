@@ -51,12 +51,15 @@ public:
 	Date getDate();
 	PAYMENT_TYPE getPayment();
 	string getInformation();
+	string getPaymentAsString();
 
 };
 
 void showServices(vector<Service*> services);
 
 void showAllServicesInfo(vector<Service*> services);
+
+void printServicesTable();
 
 
 

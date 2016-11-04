@@ -12,14 +12,15 @@ Service::Service(Customer* customer, double cost, Route* route, Date date, strin
 	this->route=route;
 	this->date= date;
 
-	if(payment == "cash")
+	if(payment == "Cash")
 		this->payment = PAYMENT_TYPE::Cash;
 	else if(payment == "ATM")
 		this->payment = PAYMENT_TYPE::ATM;
-	else if(payment == "credit")
+	else if(payment == "Credit")
 		this->payment = PAYMENT_TYPE::Credit;
 	else
 		this->payment = PAYMENT_TYPE::EndOfMonth;
+
 
 }
 
@@ -50,6 +51,18 @@ PAYMENT_TYPE Service::getPayment()
 	return payment;
 }
 
+string Service::getPaymentAsString()
+{
+	if(payment == PAYMENT_TYPE::Cash)
+		return "cash";
+	else if(payment == PAYMENT_TYPE::ATM )
+		return "ATM";
+	else if(payment == PAYMENT_TYPE::Credit)
+		return "Credit";
+	else
+		return "EndOfMonth";
+}
+
 double Service::computeCost()
 {
 	return 10.4;
@@ -58,34 +71,37 @@ double Service::computeCost()
 string Service::getInformation()
 {
 	stringstream information;
-
 	information << setw(5) << this->getCustomer()->getNif();
-	information << setw(12) << this->getRoute()->getSource();
-	information << setw(12) << this->getRoute()->getArrival();
-	information << setw(10) << this->getDate().dateAsString();
-	information << setw(14) << this->getRoute()->getDistance();
-	information << setw(17) << this->getRoute()->getExpectedTime();
-	information << setw(15) << this->getPayment();
-
+	information << setw(20) << this->getRoute()->getSource();
+	information << setw(20) << this->getRoute()->getArrival();
+	information << setw(17) << this->getDate().dateAsString();
+	information << setw(14) << this->getCost();
+	information << setw(17) << this->getPaymentAsString();
 	return information.str();
 }
 
-void showServices(vector<Service*> services)
+
+/*
+   Sort transactions by increasing date
+*/
+bool compareByDate( Service* s1, Service* s2)
 {
-
-	for(size_t i = 0; i < services.size() ; i++)
-		cout << services.at(i)->getInformation();
-
+  return !(s1->getDate() >= s2->getDate());
 }
 
 void showAllServicesInfo(vector<Service*> services)
 {
-
-	cout << setw(5) << "Customer NIF" << setw(12) << "Source" << setw(12) << "Arrival" << setw(10) << "Date";
-	cout << setw(14) << "Distance"  << setw(17) << "Expected Time"  << setw(15) << "Payment Type" <<  endl;
-	cout << " ----------------------------------------------------------------------------------------------- " << endl;
-
-	showServices(services);
+	std::sort(services.begin(), services.end(), compareByDate);
+	printServicesTable();
+	for(size_t i = 0; i < services.size() ; i++)
+		cout << services[i]->getInformation() << endl;
 
 	cout << endl << endl;
+}
+
+void printServicesTable()
+{
+	cout << setw(9) << "NIF" << setw(20) << "Source" << setw(20) << "Arrival" << setw(17) << "Date";
+	cout << setw(14) << "Cost"  << setw(17)  << "Payment Type" <<  endl;
+	cout << " ------------------------------------------------------------------------------------------------- " << endl;
 }
