@@ -161,6 +161,61 @@ void CentralTaxis::removeCustomer()
 	}
 }
 
+void CentralTaxis::insertNewCustomer()
+{
+	try{
+
+		char typeCustomer;
+		bool typeValid = false;
+		cout << "Type of Customer - 'P' for Private or 'C' for Company : ";
+
+		while(!typeValid)
+		{
+
+			cin.ignore();
+			cin >> typeCustomer;
+
+			if(typeCustomer == 'P' || typeCustomer == 'C')
+				typeValid = true;
+			else
+				cout << "Type of Customer wrong, try again : ";
+
+		}
+
+		unsigned int nif = readCustomerNif();
+
+		string name;
+		cout << "Name: ";
+		cin.ignore();
+		getline(cin, name);
+
+		string address;
+		cout << "Address: ";
+		getline(cin, address);
+
+		unsigned int phoneNumber = readCustomerPhoneNumber();
+
+		Customer* newCustomer;
+		if(typeCustomer == 'P')
+			newCustomer = new PrivateCustomer(nif, name, address, phoneNumber, 0);
+		else
+			newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, 0);
+
+		customers.push_back(newCustomer);
+		saveCustomers();
+		cout << endl << "Success, new customer's was added. " << endl << endl;
+
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
+	catch(InvalidPhoneNumberException &e)
+	{
+		cout << e;
+	}
+}
+
 /*
   Save customers in file after modification
  */

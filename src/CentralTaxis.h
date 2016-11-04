@@ -50,6 +50,7 @@ public:
 	void editCustomerAddress();
 	void editCustomerPhoneNumber();
 	void removeCustomer();
+	void insertNewCustomer();
 	void saveCustomers();
 
 	bool readFile(const string &fileName, vector<string> &fileLines);

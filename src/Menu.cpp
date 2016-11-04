@@ -51,6 +51,7 @@ unsigned short int customersMenu(CentralTaxis &central)
 		break;
 
 	case 5:
+		central.insertNewCustomer();
 		break;
 
 	default:
