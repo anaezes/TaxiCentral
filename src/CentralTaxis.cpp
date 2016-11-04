@@ -313,6 +313,7 @@ bool CentralTaxis::readCustomersFile()
 				}
 				else if(item == 5)
 				{
+					currItem = currItem.substr(0, currItem.size()-1);
 					stringstream ss(currItem);
 					if(typeCustomer == "P")
 						ss >> points;
@@ -342,7 +343,7 @@ bool CentralTaxis::readServicesFile()
 	vector<string> servicesLines;
 
 	/* try to get the file lines */
-	if(!readFile(customersFile, servicesLines))
+	if(!readFile(servicesFile, servicesLines))
 		return false;
 	else
 	{
@@ -376,7 +377,7 @@ bool CentralTaxis::readServicesFile()
 					ss >> nif;
 				}
 				else if(item == 1)
-					origin == currItem;
+					origin = currItem;
 				else if(item == 2)
 					destination = currItem;
 				else if(item == 3)
@@ -391,7 +392,7 @@ bool CentralTaxis::readServicesFile()
 					ss >> cost;
 				}
 				else if(item == 7)
-					paymentType = currItem;
+					paymentType = currItem.substr(0, currItem.size()-1);
 
 				item++;
 			}
@@ -451,7 +452,7 @@ bool CentralTaxis::readRoutesFile()
 					ss >> distance;
 				}
 				else if(item == 3)
-					expectedTime = currItem;
+					expectedTime = currItem.substr(0, currItem.size()-1);
 
 				item++;
 			}
