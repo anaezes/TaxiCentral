@@ -205,7 +205,8 @@ unsigned short int routesMenu(CentralTaxis &central)
 	cout << TAB_BIG << "ROUTES MENU" << endl;
 	cout << endl;
 	cout << TAB << "1- Show available routes" << endl;
-	cout << TAB << "2- Remove a route" << endl << endl;
+	cout << TAB << "2- Remove a route" << endl ;
+	cout << TAB << "3- Insert new route" << endl << endl;
 
 	cout << TAB << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -218,6 +219,9 @@ unsigned short int routesMenu(CentralTaxis &central)
 		break;
 	case 2:
 		central.removeRoute();
+		break;
+	case 3:
+		central.insertNewRoute();
 		break;
 	default:
 		cout << "Invalid option. Try again." << endl;

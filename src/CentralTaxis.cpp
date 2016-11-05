@@ -300,7 +300,39 @@ void CentralTaxis::removeRoute()
 }
 
 void CentralTaxis::insertNewRoute()
-{}
+{
+	try{
+		string source;
+		cout << "Source: ";
+		cin.ignore();
+		getline(cin, source);
+		cout << endl;
+
+		string arrival;
+		cout << "Arrival: ";
+		getline(cin, arrival);
+		cout << endl;
+
+		double distance = readDistance();
+
+		int expectedTime = readExpectedTime();
+
+		Route* newRoute = new Route(source,arrival,distance,expectedTime);
+
+		routes.push_back(newRoute);
+		saveRoutes();
+		cout << endl << "Success, new route's was added. " << endl << endl;
+
+	}
+	catch(InvalidDistanceException &e)
+	{
+		cout << e;
+	}
+	catch(InvalidExpectedTimeException &e)
+	{
+		cout << e;
+	}
+}
 
 void CentralTaxis::saveRoutes()
 {
@@ -560,7 +592,7 @@ bool CentralTaxis::readRoutesFile()
 			string source;
 			string arrival;
 			double distance;
-			string expectedTime;
+			int expectedTime;
 
 			int item = 0;
 			string currItem;
@@ -576,8 +608,10 @@ bool CentralTaxis::readRoutesFile()
 					ss >> distance;
 				}
 				else if(item == 3)
-					expectedTime = currItem.substr(0, currItem.size()-1);
-
+				{
+					stringstream ss(currItem);
+					ss >> expectedTime;
+				}
 				item++;
 			}
 
