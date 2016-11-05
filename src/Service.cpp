@@ -105,3 +105,177 @@ void printServicesTable()
 	cout << setw(14) << "Cost"  << setw(17)  << "Payment Type" <<  endl;
 	cout << " ------------------------------------------------------------------------------------------------- " << endl;
 }
+
+void showServicesDay(vector<Service*> services)
+{
+	string date;
+	bool service_found=false;
+	bool date_valid=false;
+	bool first_time=false;
+
+	do {
+
+	 cout <<"Please enter the day(day/month/year): "<< endl;
+	 cin >> date;
+
+	Date valid_date(date);
+
+	if(!valid_date.isValid()){
+		cout << "This date isn't valid." << endl;
+	}
+	else date_valid=true;
+
+	} while(!date_valid);
+
+	cout << endl << endl;
+
+	for(int i=0; i < services.size();i++){
+
+		if(services.at(i)->getDate() == date){
+			if(!first_time){
+				printServicesTable();
+				service_found=true;
+				cout << services.at(i)->getInformation() << endl;
+				first_time=true;
+			}
+			else{
+			first_time=true;
+			service_found=true;
+			cout << services.at(i)->getInformation() << endl;
+			}
+		}
+
+	}
+
+	if(!service_found)
+		cout << "Services not found!" << endl;
+
+}
+
+void showServicesBetweenDays(vector<Service*> services)
+{
+	string date1,date2;
+	bool service_found=false;
+	bool date_valid=false;
+	bool first_time=false;
+
+	do {
+
+		cout <<"Please enter the first day(day/month/year): "<< endl;
+		cin >> date1;
+
+		Date valid_date(date1);
+
+		if(!valid_date.isValid()){
+			cout << "This date isn't valid." << endl;
+		}
+		else date_valid=true;
+
+	} while(!date_valid);
+
+
+	date_valid=false;
+
+	do {
+
+		cout <<"Please enter the second day(day/month/year): "<< endl;
+		cin >> date2;
+
+		Date valid_date(date2);
+
+		if(!valid_date.isValid()){
+			cout << "This date isn't valid." << endl;
+		}
+		else date_valid=true;
+
+	} while(!date_valid);
+
+	cout << endl << endl;
+
+
+	for(int i=0; i < services.size();i++)
+	{
+
+		if(services.at(i)->getDate()>= date1 && services.at(i)->getDate()<= date2)
+		{
+			if(!first_time){
+				printServicesTable();
+				service_found=true;
+				cout << services.at(i)->getInformation() << endl;
+				first_time=true;
+			}
+			else{
+			first_time=true;
+			service_found=true;
+			cout << services.at(i)->getInformation() << endl;
+			}
+		}
+
+	}
+
+	if(!service_found)
+		cout << "Services not found!" << endl;
+
+}
+
+void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> customers)
+{
+	unsigned int nif = readCustomerNif();
+	Customer* customer = customerExists(nif, customers);
+
+	if(customer !=  NULL)
+	{
+		printServicesTable();
+
+		for(int i=0; i < services.size();i++){
+			if(services.at(i)->getCustomer()->getNif() == nif)
+				cout << services.at(i)->getInformation() << endl;
+		}
+
+	}
+	else cout << "Customer Services not found!" << endl << endl;
+
+	/*
+		catch(Customer::InvalidNifException &e)
+		{
+			cout << e;
+		}
+*/
+}
+
+void showCustomerServicesByName(vector<Service*> services, vector<Customer*> customers)
+{
+	string name;
+	cout << "Name: " ;
+	cin.ignore();
+	getline(cin, name);
+	cout << endl << endl;
+
+
+	bool found = false;
+	bool first_time=false;
+	size_t i = 0;
+
+	for(int i=0; i < services.size();i++){
+
+		if(services.at(i)->getCustomer()->getName() == name){
+			if(!first_time){
+				printServicesTable();
+				found=true;
+				cout << services.at(i)->getInformation() << endl;
+				first_time=true;
+			}
+			else{
+			first_time=true;
+			found=true;
+			cout << services.at(i)->getInformation() << endl;
+			}
+		}
+
+	}
+
+
+	if(!found)
+		cout << "Customer Services not found!" << endl << endl;
+
+}

@@ -25,7 +25,9 @@ unsigned short int oneCustomerMenu(CentralTaxis &central);
 
 unsigned short int editCustomerMenu(CentralTaxis &central);
 
-unsigned short int serviceMenu(CentralTaxis &central);
+unsigned short int oneCustomerServicesMenu(CentralTaxis &central);
+
+unsigned short int servicesMenu(CentralTaxis &central);
 
 unsigned short int routesMenu(CentralTaxis &central);
 

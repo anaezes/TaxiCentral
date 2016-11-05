@@ -140,7 +140,38 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 /******************************************
 			Service management
  ******************************************/
-unsigned short int serviceMenu(CentralTaxis &central)
+
+unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
+{
+	unsigned short int chosenOption;
+
+	cout << TAB_BIG << "How do you want search?" << endl;
+	cout << endl;
+	cout << TAB << "1- Through NIF" << endl;
+	cout << TAB << "2- Through name" << endl << endl;
+
+	cout << "What is the option that you want? ";
+	cin >> chosenOption;
+	cout << endl;
+
+	switch (chosenOption)
+	{
+	case 1:
+		showCustomerServicesByNif(central.getServices(), central.getCustomers());
+		break;
+
+	case 2:
+		showCustomerServicesByName(central.getServices(), central.getCustomers());
+		break;
+
+	default:
+		cout << "Invalid option. Try again." << endl;
+		break;
+	}
+
+	return 0;
+}
+unsigned short int servicesMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
@@ -168,12 +199,15 @@ unsigned short int serviceMenu(CentralTaxis &central)
 		break;
 
 	case 2:
+		showServicesDay(central.getServices());
 		break;
 
 	case 3:
+		showServicesBetweenDays(central.getServices());
 		break;
 
 	case 4:
+		oneCustomerServicesMenu(central);
 		break;
 
 	case 5:
@@ -239,6 +273,7 @@ unsigned short int mainMenu(CentralTaxis &central)
 
 	do
 	{
+		cout << endl << endl;
 		cout << TAB_BIG << "Main Menu" << endl;
 		cout << endl;
 		cout << TAB << "1- Customers management" << endl;
@@ -258,7 +293,7 @@ unsigned short int mainMenu(CentralTaxis &central)
 			break;
 
 		case 2:
-			serviceMenu(central);
+			servicesMenu(central);
 			break;
 
 		case 3:
