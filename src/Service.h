@@ -53,6 +53,7 @@ public:
 	string getInformation();
 	string getPaymentAsString();
 
+
 };
 
 void showServices(vector<Service*> services);
@@ -61,7 +62,13 @@ void showAllServicesInfo(vector<Service*> services);
 
 void printServicesTable();
 
+void showServicesDay(vector<Service*> services);
 
+void showServicesBetweenDays(vector<Service*> services);
+
+void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> customers);
+
+void showCustomerServicesByName(vector<Service*> services, vector<Customer*> customers);
 
 
 
