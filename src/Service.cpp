@@ -138,11 +138,9 @@ void showServicesDay(vector<Service*> services)
 				cout << services.at(i)->getInformation() << endl;
 				first_time=true;
 			}
-			else{
-			first_time=true;
-			service_found=true;
+			else
 			cout << services.at(i)->getInformation() << endl;
-			}
+
 		}
 
 	}
@@ -204,11 +202,9 @@ void showServicesBetweenDays(vector<Service*> services)
 				cout << services.at(i)->getInformation() << endl;
 				first_time=true;
 			}
-			else{
-			first_time=true;
-			service_found=true;
+			else
 			cout << services.at(i)->getInformation() << endl;
-			}
+
 		}
 
 	}
@@ -254,7 +250,6 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 
 	bool found = false;
 	bool first_time=false;
-	size_t i = 0;
 
 	for(int i=0; i < services.size();i++){
 
@@ -265,15 +260,12 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 				cout << services.at(i)->getInformation() << endl;
 				first_time=true;
 			}
-			else{
-			first_time=true;
-			found=true;
+			else
 			cout << services.at(i)->getInformation() << endl;
-			}
+
 		}
 
 	}
-
 
 	if(!found)
 		cout << "Customer Services not found!" << endl << endl;
