@@ -83,10 +83,10 @@ string Service::getInformation()
 
 /*
    Sort transactions by increasing date
-*/
+ */
 bool compareByDate( Service* s1, Service* s2)
 {
-  return !(s1->getDate() >= s2->getDate());
+	return !(s1->getDate() >= s2->getDate());
 }
 
 void showAllServicesInfo(vector<Service*> services)
@@ -115,21 +115,21 @@ void showServicesDay(vector<Service*> services)
 
 	do {
 
-	 cout <<"Please enter the day(day/month/year): "<< endl;
-	 cin >> date;
+		cout <<"Please enter the day(day/month/year): "<< endl;
+		cin >> date;
 
-	Date valid_date(date);
+		Date valid_date(date);
 
-	if(!valid_date.isValid()){
-		cout << "This date isn't valid." << endl;
-	}
-	else date_valid=true;
+		if(!valid_date.isValid()){
+			cout << "This date isn't valid." << endl;
+		}
+		else date_valid=true;
 
 	} while(!date_valid);
 
 	cout << endl << endl;
 
-	for(int i=0; i < services.size();i++){
+	for(size_t i=0; i < services.size();i++){
 
 		if(services.at(i)->getDate() == date){
 			if(!first_time){
@@ -139,7 +139,7 @@ void showServicesDay(vector<Service*> services)
 				first_time=true;
 			}
 			else
-			cout << services.at(i)->getInformation() << endl;
+				cout << services.at(i)->getInformation() << endl;
 
 		}
 
@@ -191,7 +191,7 @@ void showServicesBetweenDays(vector<Service*> services)
 	cout << endl << endl;
 
 
-	for(int i=0; i < services.size();i++)
+	for(size_t i=0; i < services.size();i++)
 	{
 
 		if(services.at(i)->getDate()>= date1 && services.at(i)->getDate()<= date2)
@@ -203,7 +203,7 @@ void showServicesBetweenDays(vector<Service*> services)
 				first_time=true;
 			}
 			else
-			cout << services.at(i)->getInformation() << endl;
+				cout << services.at(i)->getInformation() << endl;
 
 		}
 
@@ -216,27 +216,27 @@ void showServicesBetweenDays(vector<Service*> services)
 
 void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> customers)
 {
-	unsigned int nif = readCustomerNif();
-	Customer* customer = customerExists(nif, customers);
+	try{
+		unsigned int nif = readCustomerNif();
+		Customer* customer = customerExists(nif, customers);
 
-	if(customer !=  NULL)
-	{
-		printServicesTable();
-
-		for(int i=0; i < services.size();i++){
-			if(services.at(i)->getCustomer()->getNif() == nif)
-				cout << services.at(i)->getInformation() << endl;
-		}
-
-	}
-	else cout << "Customer Services not found!" << endl << endl;
-
-	/*
-		catch(Customer::InvalidNifException &e)
+		if(customer !=  NULL)
 		{
-			cout << e;
+			printServicesTable();
+
+			for(size_t i=0; i < services.size();i++){
+				if(services.at(i)->getCustomer()->getNif() == nif)
+					cout << services.at(i)->getInformation() << endl;
+			}
+
 		}
-*/
+		else cout << "Customer Services not found!" << endl << endl;
+	}
+	catch(InvalidNifException &e)
+	{
+		cout << e;
+	}
+
 }
 
 void showCustomerServicesByName(vector<Service*> services, vector<Customer*> customers)
@@ -246,14 +246,17 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 	cin.ignore();
 	getline(cin, name);
 	cout << endl << endl;
-
+	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 
 	bool found = false;
 	bool first_time=false;
 
-	for(int i=0; i < services.size();i++){
+	for(size_t i=0; i < services.size();i++){
 
-		if(services.at(i)->getCustomer()->getName() == name){
+		string nameCustomer = services.at(i)->getCustomer()->getName();
+		std::transform(nameCustomer.begin(), nameCustomer.end(), nameCustomer.begin(), ::tolower);
+
+		if( nameCustomer == name){
 			if(!first_time){
 				printServicesTable();
 				found=true;
@@ -261,7 +264,7 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 				first_time=true;
 			}
 			else
-			cout << services.at(i)->getInformation() << endl;
+				cout << services.at(i)->getInformation() << endl;
 
 		}
 
