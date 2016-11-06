@@ -3,8 +3,7 @@
  *
  */
 
-#ifndef CENTRALTAXIS_H_
-#define CENTRALTAXIS_H_
+#pragma once
 
 #include "Customer.h"
 #include "PrivateCustomer.h"
@@ -66,5 +65,3 @@ public:
 
 	void showDiscounts();
 };
-
-#endif /* CentralTaxis_H_ */

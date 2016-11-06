@@ -3,8 +3,7 @@
  *
  */
 
-#ifndef CUSTOMER_H_
-#define CUSTOMER_H_
+#pragma once
 
 #include "Service.h"
 
@@ -85,8 +84,3 @@ void showAllCustomersInfo(vector<Customer*>);
 void showCustomersInfoByNif(vector<Customer*>);
 
 void showCustomersInfoByName(vector<Customer*>);
-
-
-
-
-#endif /* CUSTOMER_H_ */

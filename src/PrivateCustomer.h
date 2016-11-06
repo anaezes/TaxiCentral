@@ -1,5 +1,4 @@
-#ifndef PRIVATECUSTOMER_H_
-#define PRIVATECUSTOMER_H_
+#pragma once
 
 #include "Customer.h"
 #include "Service.h"
@@ -26,6 +25,3 @@ public:
 	string toFileFormat();
 };
 
-
-
-#endif /* PRIVATECUSTOMER_H_ */

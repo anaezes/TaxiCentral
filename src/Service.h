@@ -3,8 +3,7 @@
  *
  */
 
-#ifndef SERVICE_H_
-#define SERVICE_H_
+#pragma once
 
 #include "Route.h"
 #include "Date.h"
@@ -70,42 +69,3 @@ void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> cust
 
 void showCustomerServicesByName(vector<Service*> services, vector<Customer*> customers);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif /* SERVICE_H_ */
