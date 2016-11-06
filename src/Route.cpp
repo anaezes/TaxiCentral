@@ -18,7 +18,6 @@ Route::Route(string source, string arrival)
 	this->arrival = arrival;
 }
 
-
 Route::~Route() {}
 
 string Route::getSource()
@@ -108,6 +107,7 @@ string Route::toFileFormat()
  * */
 
 
+
 double readDistance()
 {
 	string input;
@@ -116,13 +116,12 @@ double readDistance()
 	cout << "Distance of this route: ";
 	cin >> input ;
 
-	std::stringstream convertor(input);
-
-	if(convertor.fail())
-		throw InvalidDistanceException();
-
-	if(convertor >> distance)
+	if(is_number(input))
+	{
+		std::stringstream convertor(input);
+		convertor >> distance;
 		return distance;
+	}
 	else
 		throw InvalidDistanceException();
 
@@ -137,13 +136,12 @@ int readExpectedTime()
 	cout << "Expected time of this route: ";
 	cin >> input ;
 
-	std::stringstream convertor(input);
-
-	if(convertor.fail())
-		throw InvalidExpectedTimeException();
-
-	if(convertor >> expectedTime)
+	if(is_number(input))
+	{
+		std::stringstream convertor(input);
+		convertor >> expectedTime;
 		return expectedTime;
+	}
 	else
 		throw InvalidExpectedTimeException();
 

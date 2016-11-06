@@ -3,14 +3,18 @@
  *
  */
 
-#ifndef ROUTE_H_
-#define ROUTE_H_
+#pragma once
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <algorithm>
+#include <utility>
+
+#include "utilities.h"
+
 
 using namespace std;
 
@@ -69,47 +73,3 @@ void showAvailableRoutes(vector<Route*> routes);
 
 void printRoutesTable();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif /* ROUTE_H_ */
