@@ -78,11 +78,12 @@ unsigned int readCustomerNif()
 
 	std::stringstream convertor(input);
 
-	if(convertor.fail())
-		throw InvalidNifException();
-
-	if(convertor >> nif)
+	if(is_number(input))
+	{
+		std::stringstream convertor(input);
+		convertor >> nif;
 		return nif;
+	}
 	else
 		throw InvalidNifException();
 
@@ -98,11 +99,12 @@ unsigned int readCustomerPhoneNumber()
 
 	std::stringstream convertor(input);
 
-	if(convertor.fail())
-		throw InvalidPhoneNumberException();
-
-	if(convertor >> phone)
+	if(is_number(input))
+	{
+		std::stringstream convertor(input);
+		convertor >> phone;
 		return phone;
+	}
 	else
 		throw InvalidPhoneNumberException();
 
@@ -204,13 +206,13 @@ void showCustomersInfoByName(vector<Customer*> customers)
 	cin.ignore();
 	getline(cin, name);
 	cout << endl << endl;
-
+	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 
 	bool found = false;
 	size_t i = 0;
 	while(!found && i < customers.size())
 	{
-		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+
 		string nameCustomer = customers[i]->getName();
 		std::transform(nameCustomer.begin(), nameCustomer.end(), nameCustomer.begin(), ::tolower);
 
