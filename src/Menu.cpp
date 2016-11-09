@@ -171,6 +171,7 @@ unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 
 	return 0;
 }
+
 unsigned short int servicesMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
@@ -184,9 +185,7 @@ unsigned short int servicesMenu(CentralTaxis &central)
 	cout << TAB << "2- Show a day services" << endl;
 	cout << TAB << "3- Show services between two dates" << endl;
 	cout << TAB << "4- Show services about one customer" << endl;
-	cout << TAB << "5- Edit service" << endl;
-	cout << TAB << "6- Remove service" << endl;
-	cout << TAB << "7- Insert new service" << endl << endl;
+	cout << TAB << "5- Insert new service" << endl << endl;
 
 	cout << "What is the option that you want? ";
 	cin >> chosenOption;
@@ -211,10 +210,8 @@ unsigned short int servicesMenu(CentralTaxis &central)
 		break;
 
 	case 5:
-		break;
-	case 6:
-		break;
-	case 7:
+		central.insertNewService();
+		cout << "acabei"<< endl;
 		break;
 
 	default:
