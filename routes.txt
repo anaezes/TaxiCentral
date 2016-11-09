@@ -1,8 +1,6 @@
-7
+5
 Braga;Porto;57.1;37
 Porto;Lisboa;313;175
 Faro;Santarem;306;175
 Faro;Lisboa;278;157
-Viana do Castelo;Guimaraes;81.1;59
-Porto;Aveiro;50;60
-Porto;Vila Nova de Gaia;10;2
+Porto;Aveiro;30;25
