@@ -35,25 +35,28 @@ private:
 	double cost;
 	Route* route;
 	Date date;
+	int time;
 	PAYMENT_TYPE payment;
 	double computeCost();
 
 public:
 	static double rateForKm;
 	static double rateForExtraMin;
-	Service(Customer* customer, double cost, Route* route, Date date, string payment);
+	Service(Customer* customer, double cost, Route* route, Date date, int time, string payment);
 	~Service();
 
 	Customer* getCustomer();
 	double getCost();
 	Route* getRoute();
 	Date getDate();
+	int getTime();
+	string getTimeinFormat();
 	PAYMENT_TYPE getPayment();
 	string getInformation();
 	string getPaymentAsString();
-
-
+	string toFileFormat();
 };
+
 
 void showServices(vector<Service*> services);
 

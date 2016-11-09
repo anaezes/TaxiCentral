@@ -20,7 +20,10 @@
 #include <algorithm>
 #include <utility>
 
+class Service;
+
 using namespace std;
+
 
 class CentralTaxis
 {
@@ -44,21 +47,28 @@ public:
 	string getServicesFileName() const;
 	string getRoutesFileName() const;
 
-	void addService(Service* service);
-	void addRoute(Route* route);
-	void addCustomer(Customer* customer);
 	void editCustomerName();
 	void editCustomerAddress();
 	void editCustomerPhoneNumber();
+
 	void removeCustomer();
-	void insertNewCustomer();
+	Customer* insertNewCustomer();
 	void saveCustomers();
 
 	void removeRoute();
 	void insertNewRoute();
+	Route* insertNewRoute(string, string);
 	void saveRoutes();
 
-	bool readFile(const string &fileName, vector<string> &fileLines);
+	void insertNewService();
+	Customer* processCustomerNewService();
+	Route* findRoute(string, string);
+	Route* processRouteNewService();
+	int processTimeService();
+	string processTypeOfPayment(Customer*);
+	void saveService();
+
+	bool readFile(const string&, vector<string>&);
 	bool readCustomersFile();
 	bool readServicesFile();
 	bool readRoutesFile();
