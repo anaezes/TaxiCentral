@@ -27,6 +27,7 @@ float CompanyCustomer::getDiscount()
 
 void CompanyCustomer::accumulateService(Service* service)
 {
+	this->cost = cost + service->getCost();
 }
 
 Customer::CUSTOMER_TYPE CompanyCustomer::getCustomerType()

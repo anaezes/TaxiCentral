@@ -27,6 +27,9 @@ float PrivateCustomer::getDiscount()
 
 void PrivateCustomer::accumulateService(Service* service)
 {
+	int pointsService = (int)service->getCost()/10;
+	this->points = this->points + pointsService;
+	cout << "Points after this service: " << this->points << endl;
 }
 
 Customer::CUSTOMER_TYPE PrivateCustomer::getCustomerType()
