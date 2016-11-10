@@ -10,6 +10,7 @@
 #include "CompanyCustomer.h"
 #include "Service.h"
 #include "Route.h"
+#include "Voucher.h"
 #include "Date.h"
 
 #include <vector>
@@ -20,6 +21,7 @@
 #include <algorithm>
 #include <utility>
 #include <math.h>
+#include <map>
 
 class Service;
 
@@ -33,6 +35,7 @@ private:
 	string customersFile;
 	string servicesFile;
 	string routesFile;
+	string vouchersFile;
 	vector<Customer*> customers;
 	vector<Service*> services;
 	vector<Route*> routes;
@@ -44,6 +47,7 @@ public:
 	vector<Service*> getServices() const;
 	vector<Route*> getRoutes() const;
 
+	string getVouchersFileName() const;
 	string getCustomersFileName() const;
 	string getServicesFileName() const;
 	string getRoutesFileName() const;
@@ -71,7 +75,8 @@ public:
 	void saveService();
 
 	bool readFile(const string&, vector<string>&);
-	bool readCustomersFile();
+	bool readVouchersFile(map<int, Voucher*>&);
+	bool readCustomersFile(const map<int, Voucher*> &);
 	bool readServicesFile();
 	bool readRoutesFile();
 

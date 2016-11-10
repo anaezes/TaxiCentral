@@ -709,7 +709,57 @@ bool CentralTaxis::readFile(const string &fileName, vector<string> &fileLines)
 	}
 }
 
-bool CentralTaxis::readCustomersFile()
+bool CentralTaxis::readVouchersFile(map<int, Voucher*> &mapVouchers)
+{
+	vector<string> vouchersLines;
+
+	/* try to get the file lines */
+	if(!readFile(vouchersFile, vouchersLines))
+		return false;
+	else
+	{
+		int nCustomers;
+		stringstream ss(vouchersLines[0]);
+		ss >> nCustomers;
+
+		for(int i = 1; i <= nCustomers ; i++)
+		{
+			string substring;
+			stringstream line(vouchersLines[i]);
+
+
+			int nif;
+			Date date;
+			double value;
+
+			int item = 0;
+			string currItem;
+			while(getline(line,currItem, ';'))
+			{
+				if(item == 0)
+				{
+					stringstream ss(currItem);
+					ss >> nif;
+				}
+				else if(item == 2)
+					date = currItem;
+				else if(item == 3)
+				{
+					stringstream ss(currItem);
+					ss >> value;
+				}
+
+				item++;
+			}
+
+			Voucher* newVoucher = new Voucher(date, value);
+			mapVouchers.insert( std::pair<int,Voucher*>(nif,newVoucher));
+		}
+	}
+	return true;
+}
+
+bool CentralTaxis::readCustomersFile(const map<int, Voucher*> &mapVouchers)
 {
 	vector<string> customersLines;
 
@@ -773,8 +823,12 @@ bool CentralTaxis::readCustomersFile()
 			if(typeCustomer == "P")
 				newCustomer = new PrivateCustomer(nif, name, address, phoneNumber, points);
 			else
-				newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, cost);
-
+			{
+				Voucher* voucher = NULL;
+				if(mapVouchers.find(nif) != mapVouchers.end())
+					voucher = mapVouchers.find(nif)->second;
+				newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, cost, voucher);
+			}
 			customers.push_back(newCustomer);
 		}
 	}
