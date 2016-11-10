@@ -75,6 +75,8 @@ public:
 
 unsigned int readCustomerNif();
 
+Customer* customerExists(unsigned int, vector<Customer*>);
+
 unsigned int readCustomerPhoneNumber();
 
 Customer* customerExists(unsigned int, vector<Customer*>);
