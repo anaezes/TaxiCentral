@@ -9,17 +9,22 @@ using namespace std;
 int main()
 {
 	string nameCentralTaxis = "Taxis XPTO";
-	string customersFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/customers.txt";
-	string servicesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/services.txt";
-	string routesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/routes.txt";
+	string vouchersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/vouchers.txt";
+	string customersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/customers.txt";
+	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
+	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
 
 	CentralTaxis central(nameCentralTaxis, customersFile, servicesFile, routesFile);
 
-	bool customersSuccess = central.readCustomersFile();
+	map<int, Voucher*> mapVouchers;
+
+	bool vouchersSuccess = central.readVouchersFile(mapVouchers);
+	bool customersSuccess = central.readCustomersFile(mapVouchers);
 	bool servicesSuccess = central.readServicesFile();
 	bool routesSuccess = central.readRoutesFile();
 
-	if(!(customersSuccess && servicesSuccess && routesSuccess))
+
+	if(!(vouchersSuccess && customersSuccess && servicesSuccess && routesSuccess))
 	{
 		cout << "Error while reading a file" << endl;
 		return -1;
