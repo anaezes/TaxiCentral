@@ -19,6 +19,7 @@
 #include <sstream>
 #include <algorithm>
 #include <utility>
+#include <math.h>
 
 class Service;
 
@@ -66,6 +67,7 @@ public:
 	Route* processRouteNewService();
 	int processTimeService();
 	string processTypeOfPayment(Customer*);
+	void processExtraRateService(double&, string);
 	void saveService();
 
 	bool readFile(const string&, vector<string>&);

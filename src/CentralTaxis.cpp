@@ -398,25 +398,27 @@ Customer* CentralTaxis::processCustomerNewService()
 {
 
 	//register customer or not ?
-	cout << "Registered customer y/n ? ";
+	cout << "1 for registered customer " << endl;
+	cout << "2 for not registered customer " << endl;
 
 	char option;
 	bool valid = false;
 	while(!valid)
 	{
+		cout << "> " ;
 		cin >> option;
 		option = tolower(option);
 
-		if(option == 'y' || option == 'n')
+		if(option == '1' || option == '2')
 			valid = true;
 		else
-			{
+		{
 			cout << "Option not valid, try again";
 			cin.ignore(20);
-			}
+		}
 	}
 
-	if(option == 'y')
+	if(option == '1')
 	{
 		try{
 			unsigned int nif = readCustomerNif();
@@ -432,21 +434,22 @@ Customer* CentralTaxis::processCustomerNewService()
 	}
 	else
 	{
-		cout << TAB << "Insert new client -> N" << endl;
-		cout << TAB << "Proceed without registering -> R" << endl;
+		cout << TAB << "1 - For insert new client" << endl;
+		cout << TAB << "2 - Proceed without registering" << endl;
 		valid = false;
 		while(!valid)
 		{
+			cout << "> " ;
 			cin >> option;
 			option = tolower(option);
 
-			if(option == 'n' || option == 'r')
+			if(option == '1' || option == '2')
 				valid = true;
 			else
 				cout << "Option not valid, try again";
 		}
 
-		if(option == 'n')
+		if(option == '1')
 		{
 			Customer* customer = insertNewCustomer();
 			return customer;
@@ -487,7 +490,6 @@ Route* CentralTaxis::processRouteNewService()
 	string arrival;
 	cout << "Arrival: ";
 	getline(cin, arrival);
-	cout << endl;
 
 	Route* route = findRoute(source, arrival);
 
@@ -531,6 +533,7 @@ string CentralTaxis::processTypeOfPayment(Customer* customer)
 {
 	char payment;
 
+	cout << endl;
 	cout << TAB_BIG << "Chose type of payment: " << endl;
 	cout << TAB << "1- For Cash" << endl;
 	cout << TAB << "2- For ATM" << endl ;
@@ -539,6 +542,7 @@ string CentralTaxis::processTypeOfPayment(Customer* customer)
 	{
 		while(!valid)
 		{
+			cout << "> ";
 			cin >> payment;
 
 			if(payment == '1' || payment == '2')
@@ -553,6 +557,7 @@ string CentralTaxis::processTypeOfPayment(Customer* customer)
 		cout << TAB << "4- For end of month" << endl ;
 		while(!valid)
 		{
+			cout << "> ";
 			cin >> payment;
 
 
@@ -582,30 +587,52 @@ string CentralTaxis::processTypeOfPayment(Customer* customer)
 	return "EndOfMonth"; //security
 }
 
+void CentralTaxis::processExtraRateService(double &cost, string payment)
+{
+	double rate = 0;
+
+	if(payment == "Credit")
+	{
+		rate = (ceil(0.02*cost*100))/100;
+		cout << "Rate for Credit Payment = " << rate << endl;
+	}
+
+	else if(payment == "EndOfMonth")
+	{
+		rate = (ceil(0.05*cost*100))/100;
+		cout << "Rate for End of month Payment = " << rate << endl;
+	}
+
+	cost += rate;
+	cout << "Total cost: " << cost << endl;
+}
+
 void CentralTaxis::insertNewService()
 {
-	Customer* customer = processCustomerNewService();
-
-	Route* route = processRouteNewService();
-
-	Date dateOfDay(realTime());
-
-	int time = processTimeService();
-
-	double cost = Service::rateForKm *route->getDistance() + (time - route->getExpectedTime())* Service::rateForExtraMin;
-
-	string payment = processTypeOfPayment(customer);
-
-	/*A faltar: Adicionar pontos/montante ao cliente*/
-
 	/* A faltar: se cliente não for nulo verificar se tem descontos ativos */
+
+	Customer* customer = processCustomerNewService();
+	Route* route = processRouteNewService();
+	Date dateOfDay(realTime());
+	int time = processTimeService();
+	string payment = processTypeOfPayment(customer);
+	double cost = Service::rateForKm * route->getDistance() + (time - route->getExpectedTime()) * Service::rateForExtraMin;
+
+	if(customer != NULL && (payment == "Credit" || payment == "EndOfMonth"))
+		processExtraRateService(cost, payment);
 
 	Service* newService = new Service(customer, cost, route, dateOfDay, time, payment);
 
 	services.push_back(newService);
 	saveService();
-	cout << endl << "Success, new Service's was added. " << endl << endl;
+	cout << endl << "Success, new Service was added. " << endl;
 
+	/*A faltar: Adicionar pontos/montante ao cliente*/
+	if(customer != NULL)
+	{
+		customer->accumulateService(newService);
+		saveCustomers();
+	}
 }
 
 void CentralTaxis::saveService()
@@ -730,7 +757,7 @@ bool CentralTaxis::readCustomersFile()
 				}
 				else if(item == 5)
 				{
-					currItem = currItem.substr(0, currItem.size()-1);
+					currItem = currItem.substr(0, currItem.size());
 					stringstream ss(currItem);
 					if(typeCustomer == "P")
 						ss >> points;
