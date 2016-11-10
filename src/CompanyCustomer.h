@@ -2,6 +2,7 @@
 
 #include "Customer.h"
 #include "Service.h"
+#include "Voucher.h"
 
 #include <vector>
 #include <string>
@@ -14,8 +15,10 @@ class CompanyCustomer: public Customer
 {
 private:
 	double cost;
+	Voucher* voucher;
 public:
 	CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost);
+	CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost, Voucher* voucher);
 	~CompanyCustomer();
 	int getCost();
 	float getDiscount();

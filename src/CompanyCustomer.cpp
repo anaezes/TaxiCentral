@@ -4,6 +4,14 @@ CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, 
 Customer(nif, name, address, phoneNumber)
 {
 	this->cost = cost;
+	this->voucher = NULL;
+}
+
+CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost, Voucher* voucher):
+Customer(nif, name, address, phoneNumber)
+{
+	this->cost = cost;
+	this->voucher = voucher;
 }
 
 CompanyCustomer::~CompanyCustomer()
