@@ -211,7 +211,6 @@ unsigned short int servicesMenu(CentralTaxis &central)
 
 	case 5:
 		central.insertNewService();
-		cout << "acabei"<< endl;
 		break;
 
 	default:
