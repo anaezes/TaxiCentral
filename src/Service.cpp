@@ -88,7 +88,7 @@ string Service::getInformation()
 
 
 	if(this->getCustomer() == NULL)
-		information << setw(5) << "NOT REGISTED";
+		information << setw(12) << "N.R.  ";
 	else
 	information <<setw(12) << this->getCustomer()->getNif();
 
