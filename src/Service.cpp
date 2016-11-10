@@ -6,14 +6,12 @@ double Service::rateForExtraMin = 0.5;
 
 Service::Service(Customer* customer, double cost, Route* route, Date date, int time, string payment)
 {
-
 	this->customer= customer;
 	this->cost=cost;
 	this->route=route;
 	this->date= date;
 	this->time=time;
 
-	cout << "payment = " <<  payment << endl;
 	if(payment == "Cash")
 		this->payment = PAYMENT_TYPE::Cash;
 	else if(payment == "ATM")
@@ -75,7 +73,7 @@ string Service::getPaymentAsString()
 		return "ATM";
 	else if(payment == 2)
 		return "Credit";
-	else if(payment == 3)
+	else
 		return "EndOfMonth";
 }
 
@@ -87,7 +85,14 @@ double Service::computeCost()
 string Service::getInformation()
 {
 	stringstream information;
-	information << setw(5) << this->getCustomer()->getNif();
+
+
+	if(this->getCustomer() == NULL)
+		information << setw(5) << "NOT REGISTED";
+	else
+	information <<setw(12) << this->getCustomer()->getNif();
+
+
 	information << setw(20) << this->getRoute()->getSource();
 	information << setw(20) << this->getRoute()->getArrival();
 	information << setw(17) << this->getDate().dateAsString();
@@ -101,7 +106,12 @@ string Service::toFileFormat()
 {
 	stringstream information;
 
-	information << this->getCustomer()->getNif() << ";" << this->getRoute()->getSource() << ";"
+	if(customer == NULL)
+		information << 000000000;
+	else
+		information << this->getCustomer()->getNif();
+
+	information << ";" << this->getRoute()->getSource() << ";"
 			<< this->getRoute()->getArrival() << ";" << this->getDate().dateAsString() << ";"
 			<< this->getTime() << ";" << this->getCost() << ";" << this->getPaymentAsString();
 
@@ -128,7 +138,7 @@ void showAllServicesInfo(vector<Service*> services)
 
 void printServicesTable()
 {
-	cout << setw(9) << "NIF" << setw(20) << "Source" << setw(20) << "Arrival" << setw(17) << "Date";
+	cout << setw(12) << "NIF" << setw(20) << "Source" << setw(20) << "Arrival" << setw(17) << "Date";
 	cout << setw(10) << "Time" << setw(10) << "Cost"  << setw(17)  << "Payment Type" <<  endl;
 	cout << " --------------------------------------------------------------------------------------------------------- " << endl;
 }
