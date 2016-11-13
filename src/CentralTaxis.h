@@ -36,12 +36,15 @@ private:
 	string servicesFile;
 	string routesFile;
 	string vouchersFile;
+	map<int,Voucher*> mapVouchers;
 	vector<Customer*> customers;
 	vector<Service*> services;
 	vector<Route*> routes;
 
 public:
-	CentralTaxis(string name, string customersFile, string servicesFile, string routesFile);
+	CentralTaxis(string name, string vouchersFile, string customersFile, string servicesFile, string routesFile);
+
+	void loadVouchers(map<int,Voucher*>&);
 
 	vector<Customer*> getCustomers() const;
 	vector<Service*> getServices() const;
@@ -72,6 +75,7 @@ public:
 	int processTimeService();
 	string processTypeOfPayment(Customer*);
 	void processExtraRateService(double&, string);
+	bool useDiscount(Customer*, float);
 	void saveService();
 
 	bool readFile(const string&, vector<string>&);
