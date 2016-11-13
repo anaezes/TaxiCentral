@@ -8,7 +8,7 @@ Customer(nif, name, address, phoneNumber)
 }
 
 CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost, Voucher* voucher):
-Customer(nif, name, address, phoneNumber)
+				Customer(nif, name, address, phoneNumber)
 {
 	this->cost = cost;
 	this->voucher = voucher;
@@ -27,10 +27,17 @@ int CompanyCustomer::getCost()
 
 float CompanyCustomer::getDiscount()
 {
-	//apenas para testes (!!!!)
-	float a = 0.5;
 
-	return a;
+	if(voucher == NULL)
+		return 0;
+
+	Date dateOfDay(realTime());
+
+	//verify if voucher is expired
+	if(!(dateOfDay <= voucher->getDuration()))
+		return 0;
+
+	return voucher->getValue();
 }
 
 void CompanyCustomer::accumulateService(Service* service)
