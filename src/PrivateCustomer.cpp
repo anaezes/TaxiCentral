@@ -19,10 +19,19 @@ int PrivateCustomer::getPoints()
 
 float PrivateCustomer::getDiscount()
 {
-	//apenas para testes (!!!!)
-	float b = 0.7;
+	if(points < 50)
+		return 0;
+	else if(points >= 50 && points < 100)
+		return 0.1;
+	else if(points >= 100 && points < 150)
+		return 0.2;
+	else if(points >= 150 && points < 200)
+		return 0.3;
+	else if(points >= 200 && points < 250)
+		return 0.4;
+	else
+		return 0.5;
 
-	return b;
 }
 
 void PrivateCustomer::accumulateService(Service* service)
@@ -62,3 +71,12 @@ string PrivateCustomer::toFileFormat()
 
 	return information.str();
 }
+
+void PrivateCustomer::resetPoints()
+{
+	this->points = 0;
+}
+
+
+
+
