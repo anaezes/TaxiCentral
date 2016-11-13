@@ -15,3 +15,11 @@ double Voucher::getValue()
 {
 	return value;
 }
+
+string Voucher::getInformation()
+{
+	stringstream information;
+	information << this->getDuration().dateAsString() << setw(15) << (this->getValue()*100);
+	return information.str();
+
+}

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 #include "Date.h"
 
@@ -16,4 +18,5 @@ public:
 	Voucher(Date duration, double value);
 	Date getDuration();
 	double getValue();
+	string getInformation();
 };
