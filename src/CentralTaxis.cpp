@@ -1,22 +1,29 @@
 #include "CentralTaxis.h"
 
 
-CentralTaxis::CentralTaxis(string name, string customersFile, string servicesFile, string routesFile) :
+CentralTaxis::CentralTaxis(string name, string vouchersFile, string customersFile, string servicesFile, string routesFile) :
+mapVouchers(),
 customers(),
 services(),
 routes()
 {
 	this->name = name;
+	this->vouchersFile = vouchersFile;
 	this->customersFile = customersFile;
 	this->servicesFile = servicesFile;
 	this->routesFile =routesFile;
+
+}
+
+void CentralTaxis::loadVouchers(map<int,Voucher*> &mapVouchers)
+{
+	this->mapVouchers.insert(mapVouchers.begin(), mapVouchers.end());
 }
 
 vector<Customer*> CentralTaxis::getCustomers() const
 {
 	return customers;
 }
-
 
 vector<Service*> CentralTaxis::getServices() const
 {
@@ -38,14 +45,6 @@ string CentralTaxis::getServicesFileName() const
 	return servicesFile;
 }
 
-void CentralTaxis::addCustomer(Customer* customer)
-{
-
-}
-
-void CentralTaxis::addService(Service* service)
-{
-}
 
 
 /*
@@ -171,25 +170,31 @@ void CentralTaxis::removeCustomer()
 	}
 }
 
-void CentralTaxis::insertNewCustomer()
+Customer* CentralTaxis::insertNewCustomer()
 {
 	try{
+		cleanDisplay();
 
-		char typeCustomer;
+		unsigned short int typeCustomer;
 		bool typeValid = false;
-		cout << "Type of Customer - 'P' for Private or 'C' for Company : ";
+
+			cout << endl << endl;
+			cout << TAB_BIG << "Select customer type:" << endl;
+			cout << endl;
+			cout << TAB << "1- Private customer" << endl;
+			cout << TAB << "2- Company customer" << endl;
 
 		while(!typeValid)
 		{
-
-			cin.ignore();
 			cin >> typeCustomer;
 
-			if(typeCustomer == 'P' || typeCustomer == 'C')
+			if(typeCustomer == 1 || typeCustomer == 2)
 				typeValid = true;
 			else
+				{
 				cout << "Type of Customer wrong, try again : ";
-
+				cin.ignore();
+				}
 		}
 
 		unsigned int nif = readCustomerNif();
@@ -206,7 +211,7 @@ void CentralTaxis::insertNewCustomer()
 		unsigned int phoneNumber = readCustomerPhoneNumber();
 
 		Customer* newCustomer;
-		if(typeCustomer == 'P')
+		if(typeCustomer == 1)
 			newCustomer = new PrivateCustomer(nif, name, address, phoneNumber, 0);
 		else
 			newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, 0);
@@ -214,15 +219,18 @@ void CentralTaxis::insertNewCustomer()
 		customers.push_back(newCustomer);
 		saveCustomers();
 		cout << endl << "Success, new customer's was added. " << endl << endl;
+		return newCustomer;
 
 	}
 	catch(InvalidNifException &e)
 	{
 		cout << e;
+		return NULL;
 	}
 	catch(InvalidPhoneNumberException &e)
 	{
 		cout << e;
+		return NULL;
 	}
 }
 
@@ -334,6 +342,34 @@ void CentralTaxis::insertNewRoute()
 	}
 }
 
+Route* CentralTaxis::insertNewRoute(string source, string arrival)
+{
+	try{
+
+		double distance = readDistance();
+
+		int expectedTime = readExpectedTime();
+
+		Route* newRoute = new Route(source,arrival,distance,expectedTime);
+
+		routes.push_back(newRoute);
+		saveRoutes();
+		cout << endl << "Success, new route's was added. " << endl << endl;
+		return newRoute;
+
+	}
+	catch(InvalidDistanceException &e)
+	{
+		cout << e;
+		return NULL;
+	}
+	catch(InvalidExpectedTimeException &e)
+	{
+		cout << e;
+		return NULL;
+	}
+}
+
 void CentralTaxis::saveRoutes()
 {
 	ofstream c_file;
@@ -356,8 +392,405 @@ void CentralTaxis::saveRoutes()
 
 
 
+/*
+ *
+ * Funtions for Services
+ *
+ *
+ * */
+
+Customer* CentralTaxis::processCustomerNewService()
+{
+	cleanDisplay();
+
+	cout << endl << endl;
+	cout << TAB_BIG << "Select customer type:" << endl;
+	cout << endl;
+	cout << TAB << "1- Registered customer" << endl;
+	cout << TAB << "2- Casual customer" << endl;
+
+	char option;
+	bool valid = false;
+	while(!valid)
+	{
+		cout << "> " ;
+		cin >> option;
+
+		if(option == '1' || option == '2')
+			valid = true;
+		else
+		{
+			cout << "Option not valid, try again";
+			cin.ignore();
+		}
+	}
+
+	if(option == '1')
+	{
+		Customer* customer = NULL;
+
+		while(customer == NULL)
+		{
+			try{
+				unsigned int nif = readCustomerNif();
+				customer = customerExists(nif, customers);
+
+				if(customer != NULL)
+					return customer;
+			}
+			catch(InvalidNifException &e)
+			{
+				cout << e;
+			}
+			if(customer == NULL)
+				cout << "Nif not found, please try again." << endl;
+		}
+	}
+	else
+	{
+		cout << TAB << "1 - For insert new customer" << endl;
+		cout << TAB << "2 - Proceed without registering" << endl;
+		valid = false;
+		while(!valid)
+		{
+			cout << "> " ;
+			cin >> option;
+
+			if(option == '1' || option == '2')
+				valid = true;
+			else
+			{
+				cout << "Option not valid, try again";
+				cin.ignore();
+			}
+		}
+
+		if(option == '1')
+		{
+			Customer* customer = insertNewCustomer();
+			return customer;
+		}
+	}
+
+	return NULL;
+}
+
+Route* CentralTaxis::findRoute(string source, string arrival)
+{
+	std::transform(source.begin(), source.end(), source.begin(), ::tolower);
+	std::transform(arrival.begin(), arrival.end(), arrival.begin(), ::tolower);
+
+	size_t i = 0;
+	while(i < routes.size())
+	{
+		string currArrival = routes[i]->getArrival();
+		std::transform(currArrival.begin(), currArrival.end(), currArrival.begin(), ::tolower);
+		string currSource = routes[i]->getSource();
+		std::transform(currSource.begin(), currSource.end(), currSource.begin(), ::tolower);
+
+		if( currArrival== arrival && currSource == source)
+			return routes[i];
+		i++;
+	}
+
+	return NULL;
+}
+
+Route* CentralTaxis::processRouteNewService()
+{
+	cleanDisplay();
+	cout << endl << endl;
+	string source;
+	cout << "Source: ";
+	cin.ignore();
+	getline(cin, source);
+
+	string arrival;
+	cout << "Arrival: ";
+	getline(cin, arrival);
+
+	Route* route = findRoute(source, arrival);
+
+	if(route == NULL)
+	{
+		cout << "Route not exist yet...";
+		cout << endl << "Please insert new route:" << endl;
+		route = insertNewRoute(source, arrival);
+	}
+
+	return route;
+}
+
+int CentralTaxis::processTimeService()
+{
+
+	string input;
+	double time = 0;
+
+	cout << "Time of this service (minutes): ";
+
+	bool valid = false;
+	while(!valid)
+	{
+		cin >> input ;
+
+		if(is_number(input))
+		{
+			std::stringstream convertor(input);
+			convertor >> time;
+			return time;
+		}
+		else
+		{
+			cout << endl << "Time not valid, try again: ";
+			cin.ignore();
+		}
+	}
+
+	return time;
+}
+
+string CentralTaxis::processTypeOfPayment(Customer* customer)
+{
+	cleanDisplay();
+
+	char payment;
+
+	cout << endl;
+	cout << TAB_BIG << "Chose type of payment: " << endl;
+	cout << TAB << "1- Cash" << endl;
+	cout << TAB << "2- ATM" << endl ;
+	bool valid = false;
+	if(customer == NULL)
+	{
+		while(!valid)
+		{
+			cout << "> ";
+			cin >> payment;
+
+			if(payment == '1' || payment == '2')
+				valid = true;
+			else
+				cout << endl << "Payment type not valid, try again."<< endl;
+			cin.ignore();
+		}
+	}
+	else
+	{
+		cout << TAB << "3- Credit" << endl;
+		cout << TAB << "4- End of month" << endl ;
+		while(!valid)
+		{
+			cout << "> ";
+			cin >> payment;
+
+			if(payment == '1' || payment == '2' || payment == '3' || payment == '4')
+				valid = true;
+			else
+			{
+				cout << endl << "Payment type not valid, try again."<< endl;
+				cin.ignore();
+			}
+		}
+	}
+
+	switch (payment)
+	{
+	case '1':
+		return "Cash";
+		break;
+	case '2':
+		return "ATM";
+		break;
+	case '3':
+		return "Credit";
+		break;
+	case '4':
+		return "EndOfMonth";
+		break;
+	}
+
+	return "EndOfMonth"; //security
+}
+
+void CentralTaxis::processExtraRateService(double &cost, string payment)
+{
+	double rate = 0;
+
+	if(payment == "Credit")
+	{
+		rate = (ceil(0.02*cost*100))/100;
+		cout << "Rate for Credit Payment = " << rate << endl;
+	}
+
+	else if(payment == "EndOfMonth")
+	{
+		rate = (ceil(0.05*cost*100))/100;
+		cout << "Rate for End of month Payment = " << rate << endl;
+	}
+
+	cost += rate;
+	cout << "Total cost: " << cost << endl;
+}
+
+bool CentralTaxis::useDiscount(Customer* customer, float discount)
+{
+	if(customer->getCustomerType() == Customer::CompanyCustomer)
+		return true;
 
 
+	cout << "You have a discount of : " << (100*discount) << " percentage." << endl << endl;
+	cout << TAB << "Do you want to use it ?" << endl;
+	cout << TAB << "1- Yes " << endl;
+	cout << TAB << "2- No " << endl;
+
+	char option;
+	bool valid = false;
+	while(!valid)
+	{
+		cout << "> " ;
+		cin >> option;
+
+		if(option == '1' || option == '2')
+			valid = true;
+		else
+		{
+			cout << "Option not valid, try again";
+			cin.ignore();
+		}
+	}
+
+	if(option == '1')
+	{
+		PrivateCustomer* tmp = dynamic_cast<PrivateCustomer*>(customer);
+		tmp->resetPoints();
+		return true;
+	}
+	else
+		return false;
+}
+
+void CentralTaxis::offerVoucher(CompanyCustomer* customer)
+{
+
+	double value;
+	if(customer->getCost() < 250)
+		value = 0;
+	else if(customer->getCost() >= 250 && customer->getCost() < 500)
+		value = 0.05;
+	else if(customer->getCost() >= 500 && customer->getCost() < 750)
+		value = 0.10;
+	else if(customer->getCost() >= 750 && customer->getCost() < 1000)
+		value = 0.15;
+	else
+		value = 0.20;
+
+	Voucher* voucher = NULL;
+	if(value != 0)
+	{
+		Date dateOfDay(realTime());
+		//Date dateOfDay("30/01/2016");
+
+		Date nextMonth = dateOfDay.getNextMonth();
+		voucher = new Voucher(nextMonth, value);
+		voucher = customer->addVoucher(voucher);
+		mapVouchers.insert( std::pair<int,Voucher*>(customer->getNif(),voucher));
+
+		//cout << "Success: new voucher was created:" << endl;
+		//cout << << "Expiration date: " << nextMonth.dateAsString() << endl;
+	}
+}
+
+void CentralTaxis::insertNewService()
+{
+	Customer* customer = processCustomerNewService();
+	Route* route = processRouteNewService();
+	Date dateOfDay(realTime());
+	//Date dateOfDay("30/01/2016");
+	int time = processTimeService();
+	string payment = processTypeOfPayment(customer);
+
+	// computes cost and applies discount (if any)
+	double cost = Service::rateForKm * route->getDistance() + (time - route->getExpectedTime()) * Service::rateForExtraMin;
+
+	float discount = 0;
+	if (customer != NULL)
+	{
+		discount = customer->getDiscount();
+		if(discount != 0)
+		{
+			if(!useDiscount(customer, discount))
+				discount = 0;
+
+			else
+			{
+				cout << endl << "Cost of this service: " << cost << endl;
+				cost -= cost*discount;
+				cout << "Cost of this service with discount: " << cost << endl;
+			}
+		}
+	}
+
+	if(discount == 0)
+		cout << "Cost of this service: " << cost << endl;
+
+	if(customer != NULL && (payment == "Credit" || payment == "EndOfMonth"))
+		processExtraRateService(cost, payment);
+
+	Service* newService = new Service(customer, cost, route, dateOfDay, time, payment);
+
+	services.push_back(newService);
+	saveServices();
+	cout << endl << "Success, new Service was added. " << endl;
+
+	if(customer->getCustomerType() == Customer::CompanyCustomer)
+		offerVoucher(dynamic_cast<CompanyCustomer*>(customer));
+
+	if(customer != NULL)
+	{
+		customer->accumulateService(newService);
+		saveCustomers();
+		saveVouchers();
+	}
+
+	cout << endl << endl;
+}
+
+void CentralTaxis::saveServices()
+{
+	ofstream c_file;
+	c_file.open(servicesFile);
+
+	c_file << services.size() << endl;
+
+	for(size_t i = 0; i < services.size() ; i++)
+	{
+		c_file << services[i]->toFileFormat();
+
+		if(i < services.size()-1)
+			c_file << endl;
+	}
+
+	c_file.close();
+}
+
+void CentralTaxis::saveVouchers()
+{
+
+	if(mapVouchers.size() != 0)
+	{
+		ofstream c_file;
+		c_file.open(vouchersFile);
+
+		c_file << mapVouchers.size() << endl;
+
+		for (auto const& it : mapVouchers)
+			c_file << it.first << ";" << it.second->toFileFormat() << endl;
+		c_file.close();
+	}
+
+
+}
 
 
 /*
@@ -367,15 +800,23 @@ void CentralTaxis::saveRoutes()
  *
  * */
 
+void printVoucherTable()
+{
+	cout << setw(12) << "NIF" << setw(20) << "Expires at" << setw(15) << " %" << endl;
+	cout << " ---------------------------------------------------- " << endl;
+}
+
 void CentralTaxis::showDiscounts()
-{}
-
-
-
-
-
-
-
+{
+	if(mapVouchers.size() != 0)
+	{
+		printVoucherTable();
+		for (auto const& it : mapVouchers)
+			std::cout << setw(12) << it.first << setw(35) << it.second->getInformation() << endl;
+	}
+	else
+		cout << "No vouchers available" << endl;
+}
 
 
 
@@ -386,14 +827,6 @@ void CentralTaxis::showDiscounts()
  *
  *
  * */
-
-
-
-
-
-
-
-
 
 
 
@@ -421,7 +854,58 @@ bool CentralTaxis::readFile(const string &fileName, vector<string> &fileLines)
 	}
 }
 
-bool CentralTaxis::readCustomersFile()
+bool CentralTaxis::readVouchersFile(map<int, Voucher*> &mapVouchers)
+{
+	vector<string> vouchersLines;
+
+	/* try to get the file lines */
+	if(!readFile(vouchersFile, vouchersLines))
+		return false;
+	else
+	{
+		int nVouchers;
+		stringstream ss(vouchersLines[0]);
+		ss >> nVouchers;
+
+		for(int i = 1; i <= nVouchers ; i++)
+		{
+			string substring;
+			stringstream line(vouchersLines[i]);
+
+
+			int nif;
+			Date date;
+			double value;
+
+			int item = 0;
+			string currItem;
+			while(getline(line,currItem, ';'))
+			{
+				if(item == 0)
+				{
+					stringstream ss(currItem);
+					ss >> nif;
+				}
+				else if(item == 1)
+					date = currItem;
+				else if(item == 2)
+				{
+					stringstream ss(currItem);
+					ss >> value;
+				}
+
+				item++;
+			}
+
+			Voucher* newVoucher = new Voucher(date, value);
+			mapVouchers.insert( std::pair<int,Voucher*>(nif,newVoucher));
+		}
+	}
+
+	return true;
+}
+
+bool CentralTaxis::readCustomersFile(const map<int, Voucher*> &mapVouchers)
 {
 	vector<string> customersLines;
 
@@ -469,7 +953,7 @@ bool CentralTaxis::readCustomersFile()
 				}
 				else if(item == 5)
 				{
-					currItem = currItem.substr(0, currItem.size()-1);
+					currItem = currItem.substr(0, currItem.size());
 					stringstream ss(currItem);
 					if(typeCustomer == "P")
 						ss >> points;
@@ -485,8 +969,12 @@ bool CentralTaxis::readCustomersFile()
 			if(typeCustomer == "P")
 				newCustomer = new PrivateCustomer(nif, name, address, phoneNumber, points);
 			else
-				newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, cost);
-
+			{
+				Voucher* voucher = NULL;
+				if(mapVouchers.find(nif) != mapVouchers.end())
+					voucher = mapVouchers.find(nif)->second;
+				newCustomer = new CompanyCustomer(nif, name, address, phoneNumber, cost, voucher);
+			}
 			customers.push_back(newCustomer);
 		}
 	}
@@ -522,7 +1010,8 @@ bool CentralTaxis::readServicesFile()
 
 			double cost;
 			string paymentType;
-			Date date1;
+			Date date;
+			unsigned int time;
 			int item = 0;
 			string currItem;
 			while(getline(line,currItem, ';'))
@@ -537,18 +1026,19 @@ bool CentralTaxis::readServicesFile()
 				else if(item == 2)
 					destination = currItem;
 				else if(item == 3)
-					date1 = currItem;
+					date = currItem;
 				else if(item == 4)
-					startTime = currItem;
+				{
+					stringstream ss(currItem);
+					ss >> time;
+				}
 				else if(item == 5)
-					endTime = currItem;
-				else if(item == 6)
 				{
 					stringstream ss(currItem);
 					ss >> cost;
 				}
-				else if(item == 7)
-					paymentType = currItem.substr(0, currItem.size()-1);
+				else if(item == 6)
+					paymentType = currItem.substr(0, currItem.size());
 
 				item++;
 			}
@@ -562,7 +1052,7 @@ bool CentralTaxis::readServicesFile()
 
 			Route* routeService = new Route(origin, destination);
 
-			Service* newService = new Service(customers[j], cost, routeService, date1, paymentType);
+			Service* newService = new Service(customers[j], cost, routeService, date, time, paymentType);
 
 			services.push_back(newService);
 		}

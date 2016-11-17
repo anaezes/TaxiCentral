@@ -10,7 +10,9 @@
 #include "CompanyCustomer.h"
 #include "Service.h"
 #include "Route.h"
+#include "Voucher.h"
 #include "Date.h"
+#include "utilities.h"
 
 #include <vector>
 #include <string>
@@ -19,8 +21,13 @@
 #include <sstream>
 #include <algorithm>
 #include <utility>
+#include <math.h>
+#include <map>
+
+class Service;
 
 using namespace std;
+
 
 class CentralTaxis
 {
@@ -29,37 +36,54 @@ private:
 	string customersFile;
 	string servicesFile;
 	string routesFile;
+	string vouchersFile;
+	map<int,Voucher*> mapVouchers;
 	vector<Customer*> customers;
 	vector<Service*> services;
 	vector<Route*> routes;
 
 public:
-	CentralTaxis(string name, string customersFile, string servicesFile, string routesFile);
+	CentralTaxis(string name, string vouchersFile, string customersFile, string servicesFile, string routesFile);
+
+	void loadVouchers(map<int,Voucher*>&);
 
 	vector<Customer*> getCustomers() const;
 	vector<Service*> getServices() const;
 	vector<Route*> getRoutes() const;
 
+	string getVouchersFileName() const;
 	string getCustomersFileName() const;
 	string getServicesFileName() const;
 	string getRoutesFileName() const;
 
-	void addService(Service* service);
-	void addRoute(Route* route);
-	void addCustomer(Customer* customer);
 	void editCustomerName();
 	void editCustomerAddress();
 	void editCustomerPhoneNumber();
+
 	void removeCustomer();
-	void insertNewCustomer();
+	Customer* insertNewCustomer();
 	void saveCustomers();
 
 	void removeRoute();
 	void insertNewRoute();
+	Route* insertNewRoute(string, string);
 	void saveRoutes();
 
-	bool readFile(const string &fileName, vector<string> &fileLines);
-	bool readCustomersFile();
+	void insertNewService();
+	Customer* processCustomerNewService();
+	Route* findRoute(string, string);
+	Route* processRouteNewService();
+	int processTimeService();
+	string processTypeOfPayment(Customer*);
+	void processExtraRateService(double&, string);
+	bool useDiscount(Customer*, float);
+	void offerVoucher(CompanyCustomer*);
+	void saveServices();
+	void saveVouchers();
+
+	bool readFile(const string&, vector<string>&);
+	bool readVouchersFile(map<int, Voucher*>&);
+	bool readCustomersFile(const map<int, Voucher*> &);
 	bool readServicesFile();
 	bool readRoutesFile();
 

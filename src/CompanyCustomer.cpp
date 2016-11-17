@@ -4,6 +4,14 @@ CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, 
 Customer(nif, name, address, phoneNumber)
 {
 	this->cost = cost;
+	this->voucher = NULL;
+}
+
+CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost, Voucher* voucher):
+Customer(nif, name, address, phoneNumber)
+{
+	this->cost = cost;
+	this->voucher = voucher;
 }
 
 CompanyCustomer::~CompanyCustomer()
@@ -19,14 +27,23 @@ int CompanyCustomer::getCost()
 
 float CompanyCustomer::getDiscount()
 {
-	//apenas para testes (!!!!)
-	float a = 0.5;
 
-	return a;
+	cout << "Company discount" << endl;
+	if(voucher == NULL)
+		return 0;
+
+	Date dateOfDay(realTime());
+
+	//verify if voucher is expired
+	if(!(dateOfDay <= voucher->getDuration()))
+		return 0;
+
+	return voucher->getValue();
 }
 
 void CompanyCustomer::accumulateService(Service* service)
 {
+	this->cost = cost + service->getCost();
 }
 
 Customer::CUSTOMER_TYPE CompanyCustomer::getCustomerType()
@@ -58,3 +75,31 @@ string CompanyCustomer::toFileFormat()
 
 	return information.str();
 }
+
+Voucher* CompanyCustomer::addVoucher(Voucher* voucher)
+{
+	if(this->voucher == NULL)
+	{
+		this->voucher = voucher;
+		return voucher;
+	}
+	else
+	{
+		double value = this->voucher->getValue() + voucher->getValue();
+
+		//Date dateOfDay(realTime());
+		Date dateOfDay("30/01/2016");
+		Date nextMonth = dateOfDay.getNextMonth();
+		this->voucher->setDate(nextMonth);
+
+		if(value <= 0.20)
+			this->voucher->setValue(value);
+		else
+			this->voucher->setValue(0.20);
+
+
+	}
+
+	return this->voucher;
+}
+

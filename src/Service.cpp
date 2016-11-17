@@ -4,13 +4,13 @@ double Service::rateForKm = 1.0;
 double Service::rateForExtraMin = 0.5;
 
 
-Service::Service(Customer* customer, double cost, Route* route, Date date, string payment)
+Service::Service(Customer* customer, double cost, Route* route, Date date, int time, string payment)
 {
-
 	this->customer= customer;
 	this->cost=cost;
 	this->route=route;
 	this->date= date;
+	this->time=time;
 
 	if(payment == "Cash")
 		this->payment = PAYMENT_TYPE::Cash;
@@ -20,8 +20,6 @@ Service::Service(Customer* customer, double cost, Route* route, Date date, strin
 		this->payment = PAYMENT_TYPE::Credit;
 	else
 		this->payment = PAYMENT_TYPE::EndOfMonth;
-
-
 }
 
 Service::~Service(){}
@@ -46,6 +44,22 @@ Date Service::getDate()
 	return date;
 }
 
+int Service::getTime()
+{
+	return time;
+}
+
+string Service::getTimeinFormat()
+{
+	int hour = time / 60;
+	int minutes = time %60;
+
+	stringstream tmp;
+	tmp << hour << 'h' << minutes << 'm';
+
+	return tmp.str();
+}
+
 PAYMENT_TYPE Service::getPayment()
 {
 	return payment;
@@ -53,11 +67,11 @@ PAYMENT_TYPE Service::getPayment()
 
 string Service::getPaymentAsString()
 {
-	if(payment == PAYMENT_TYPE::Cash)
-		return "cash";
-	else if(payment == PAYMENT_TYPE::ATM )
+	if(payment == 0)
+		return "Cash";
+	else if(payment == 1)
 		return "ATM";
-	else if(payment == PAYMENT_TYPE::Credit)
+	else if(payment == 2)
 		return "Credit";
 	else
 		return "EndOfMonth";
@@ -71,15 +85,39 @@ double Service::computeCost()
 string Service::getInformation()
 {
 	stringstream information;
-	information << setw(5) << this->getCustomer()->getNif();
+
+
+	if(this->getCustomer() == NULL)
+		information << setw(12) << "N.R.  ";
+	else
+	information <<setw(12) << this->getCustomer()->getNif();
+
+
 	information << setw(20) << this->getRoute()->getSource();
 	information << setw(20) << this->getRoute()->getArrival();
 	information << setw(17) << this->getDate().dateAsString();
-	information << setw(14) << this->getCost();
+	information << setw(10) << this->getTimeinFormat();
+	information << setw(10) << this->getCost();
 	information << setw(17) << this->getPaymentAsString();
 	return information.str();
 }
 
+string Service::toFileFormat()
+{
+	stringstream information;
+
+	//If casual customer
+	if(customer == NULL)
+		information << 000000000;
+	else
+		information << this->getCustomer()->getNif();
+
+	information << ";" << this->getRoute()->getSource() << ";"
+			<< this->getRoute()->getArrival() << ";" << this->getDate().dateAsString() << ";"
+			<< this->getTime() << ";" << this->getCost() << ";" << this->getPaymentAsString();
+
+	return information.str();
+}
 
 /*
    Sort transactions by increasing date
@@ -92,6 +130,8 @@ bool compareByDate( Service* s1, Service* s2)
 void showAllServicesInfo(vector<Service*> services)
 {
 	std::sort(services.begin(), services.end(), compareByDate);
+
+	cout << endl << endl;
 	printServicesTable();
 	for(size_t i = 0; i < services.size() ; i++)
 		cout << services[i]->getInformation() << endl;
@@ -101,13 +141,14 @@ void showAllServicesInfo(vector<Service*> services)
 
 void printServicesTable()
 {
-	cout << setw(9) << "NIF" << setw(20) << "Source" << setw(20) << "Arrival" << setw(17) << "Date";
-	cout << setw(14) << "Cost"  << setw(17)  << "Payment Type" <<  endl;
-	cout << " ------------------------------------------------------------------------------------------------- " << endl;
+	cout << setw(12) << "NIF" << setw(20) << "Source" << setw(20) << "Arrival" << setw(17) << "Date";
+	cout << setw(10) << "Time" << setw(10) << "Cost"  << setw(17)  << "Payment Type" <<  endl;
+	cout << " --------------------------------------------------------------------------------------------------------- " << endl;
 }
 
 void showServicesDay(vector<Service*> services)
 {
+	cout << endl << endl;
 	string date;
 	bool service_found=false;
 	bool date_valid=false;
@@ -265,7 +306,6 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 			}
 			else
 				cout << services.at(i)->getInformation() << endl;
-
 		}
 
 	}

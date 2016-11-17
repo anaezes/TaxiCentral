@@ -133,7 +133,7 @@ int readExpectedTime()
 	string input;
 	double expectedTime;
 
-	cout << "Expected time of this route: ";
+	cout << "Expected time of this route (minutes): ";
 	cin >> input ;
 
 	if(is_number(input))

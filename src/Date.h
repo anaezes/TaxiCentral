@@ -31,6 +31,7 @@ public:
   bool operator==(const Date &date);
   bool operator>=(const Date &date);
   bool operator<=(const Date &date);
+  Date getNextMonth();
 
 private:
   unsigned int year;

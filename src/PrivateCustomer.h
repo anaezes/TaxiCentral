@@ -23,5 +23,6 @@ public:
 	CUSTOMER_TYPE getCustomerType();
 	string getInformation();
 	string toFileFormat();
+	void resetPoints();
 };
 
