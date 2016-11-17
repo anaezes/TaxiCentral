@@ -12,6 +12,7 @@
 #include "Route.h"
 #include "Voucher.h"
 #include "Date.h"
+#include "utilities.h"
 
 #include <vector>
 #include <string>
@@ -76,7 +77,9 @@ public:
 	string processTypeOfPayment(Customer*);
 	void processExtraRateService(double&, string);
 	bool useDiscount(Customer*, float);
-	void saveService();
+	void offerVoucher(CompanyCustomer*);
+	void saveServices();
+	void saveVouchers();
 
 	bool readFile(const string&, vector<string>&);
 	bool readVouchersFile(map<int, Voucher*>&);

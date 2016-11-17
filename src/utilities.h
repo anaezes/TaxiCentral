@@ -8,6 +8,11 @@
 #define TAB_BIG "          "
 #define TAB "   "
 
+inline void cleanDisplay()
+{
+	std::system("clear");
+}
+
 inline bool is_number(const std::string &str)
 {
 	return std::all_of(str.begin(), str.end(), ::isdigit); // C++11

@@ -7,12 +7,6 @@ using namespace std;
 			Customer management
  ******************************************/
 
-
-void cleanDisplay()
-{
-	std::system("clear");
-}
-
 unsigned short int customersMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
@@ -20,44 +14,55 @@ unsigned short int customersMenu(CentralTaxis &central)
 	/*Menu of customers, where the user can choose what the option that wants*/
 	cleanDisplay();
 
-	cout << TAB_BIG << "CUSTOMER MENU MANAGEMENT" << endl;
-	cout << endl;
-	cout << TAB << "1- Show information about all customers" << endl;
-	cout << TAB << "2- Show information about one customer" << endl;
-	cout << TAB << "3- Edit customers" << endl;
-	cout << TAB << "4- Remove customers" << endl;
-	cout << TAB << "5- Insert new customer" << endl << endl;
-
-	cout << "What is the option that you want? ";
-	cin >> chosenOption;
-	cout << endl;
-
-	switch (chosenOption)
+	do
 	{
-	case 1:
-		showAllCustomersInfo(central.getCustomers());
-		break;
+		cout << endl << endl;
+		cout << TAB_BIG << "CUSTOMER MENU MANAGEMENT" << endl;
+		cout << endl;
+		cout << TAB << "1- Show information about all customers" << endl;
+		cout << TAB << "2- Show information about one customer" << endl;
+		cout << TAB << "3- Edit customers" << endl;
+		cout << TAB << "4- Remove customers" << endl;
+		cout << TAB << "5- Insert new customer" << endl;
+		cout << TAB << "0- Back" << endl << endl;
 
-	case 2:
-		oneCustomerMenu(central);
-		break;
+		cout << "What is the option that you want? ";
+		cin >> chosenOption;
 
-	case 3:
-		editCustomerMenu(central);
-		break;
+		cleanDisplay();
 
-	case 4:
-		central.removeCustomer();
-		break;
+		switch (chosenOption)
+		{
+		case 1:
+			showAllCustomersInfo(central.getCustomers());
+			break;
 
-	case 5:
-		central.insertNewCustomer();
-		break;
+		case 2:
+			oneCustomerMenu(central);
+			break;
 
-	default:
-		cout << "Invalid option. Try again." << endl;
-		break;
-	}
+		case 3:
+			editCustomerMenu(central);
+			break;
+
+		case 4:
+			central.removeCustomer();
+			break;
+
+		case 5:
+			central.insertNewCustomer();
+			break;
+
+		case 0:
+		{
+			cleanDisplay();
+			return 0;
+		}
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+	} while (chosenOption != 0);
 
 	return 0;
 }
@@ -66,29 +71,40 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
-	cout << TAB_BIG << "How do you want search?" << endl;
-	cout << endl;
-	cout << TAB << "1- Through NIF" << endl;
-	cout << TAB << "2- Through name" << endl << endl;
-
-	cout << "What is the option that you want? ";
-	cin >> chosenOption;
-	cout << endl;
-
-	switch (chosenOption)
+	do
 	{
-	case 1:
-		showCustomersInfoByNif(central.getCustomers());
-		break;
+		cout << endl << endl;
+		cout << TAB_BIG << "How do you want search?" << endl;
+		cout << endl;
+		cout << TAB << "1- Through NIF" << endl;
+		cout << TAB << "2- Through name" << endl;
+		cout << TAB << "0- Back" << endl << endl;
 
-	case 2:
-		showCustomersInfoByName(central.getCustomers());
-		break;
+		cout << "What is the option that you want? ";
+		cin >> chosenOption;
 
-	default:
-		cout << "Invalid option. Try again." << endl;
-		break;
-	}
+		cleanDisplay();
+		switch (chosenOption)
+		{
+		case 1:
+			showCustomersInfoByNif(central.getCustomers());
+			break;
+
+		case 2:
+			showCustomersInfoByName(central.getCustomers());
+			break;
+
+		case 0:
+		{
+			cleanDisplay();
+			return 0;
+		}
+
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+	} while (chosenOption != 0);
 
 	return 0;
 }
@@ -98,20 +114,19 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 	unsigned short int chosenOption;
 	do
 	{
-
+		cout << endl << endl;
 		cout << TAB_BIG << "What do you want to change?" << endl;
 		cout << endl;
 		cout << TAB << "1- Name" << endl;
 		cout << TAB << "2- Address" << endl;
 		cout << TAB << "3- Phone Number" << endl;
-		cout << TAB << "0- Out if there is not longer anything to be changed" << endl << endl;
+		cout << TAB << "0- Back" << endl << endl;
 
 
 		cout << "What is the option that you want? ";
 		cin >> chosenOption;
-		cout << endl;
 
-
+		cleanDisplay();
 		switch (chosenOption)
 		{
 		case 1:
@@ -127,7 +142,10 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 			break;
 
 		case 0:
+		{
+			cleanDisplay();
 			return 0;
+		}
 
 		default:
 			cout << "Invalid option. Try again." << endl;
@@ -145,30 +163,39 @@ unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
 
-	cout << TAB_BIG << "How do you want search?" << endl;
-	cout << endl;
-	cout << TAB << "1- Through NIF" << endl;
-	cout << TAB << "2- Through name" << endl << endl;
+	do {
+		cout << endl << endl;
+		cout << TAB_BIG << "How do you want search?" << endl;
+		cout << endl;
+		cout << TAB << "1- Through NIF" << endl;
+		cout << TAB << "2- Through name" << endl;
+		cout << TAB << "0- Back" << endl << endl;
 
-	cout << "What is the option that you want? ";
-	cin >> chosenOption;
-	cout << endl;
+		cout << "What is the option that you want? ";
+		cin >> chosenOption;
 
-	switch (chosenOption)
-	{
-	case 1:
-		showCustomerServicesByNif(central.getServices(), central.getCustomers());
-		break;
+		cleanDisplay();
+		switch (chosenOption)
+		{
+		case 1:
+			showCustomerServicesByNif(central.getServices(), central.getCustomers());
+			break;
 
-	case 2:
-		showCustomerServicesByName(central.getServices(), central.getCustomers());
-		break;
+		case 2:
+			showCustomerServicesByName(central.getServices(), central.getCustomers());
+			break;
 
-	default:
-		cout << "Invalid option. Try again." << endl;
-		break;
-	}
+		case 0:
+		{
+			cleanDisplay();
+			return 0;
+		}
 
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+	} while (chosenOption != 0);
 	return 0;
 }
 
@@ -179,44 +206,54 @@ unsigned short int servicesMenu(CentralTaxis &central)
 	/*Menu of services, where the user can choose what the option that wants*/
 	cleanDisplay();
 
-	cout << TAB_BIG << "SERVICE MENU MANAGEMENT" << endl;
-	cout << endl;
-	cout << TAB << "1- Show information about all the services" << endl;
-	cout << TAB << "2- Show a day services" << endl;
-	cout << TAB << "3- Show services between two dates" << endl;
-	cout << TAB << "4- Show services about one customer" << endl;
-	cout << TAB << "5- Insert new service" << endl << endl;
+	do{
+		cout << endl << endl;
+		cout << TAB_BIG << "SERVICE MENU MANAGEMENT" << endl;
+		cout << endl;
+		cout << TAB << "1- Show information about all the services" << endl;
+		cout << TAB << "2- Show a day services" << endl;
+		cout << TAB << "3- Show services between two dates" << endl;
+		cout << TAB << "4- Show services about one customer" << endl;
+		cout << TAB << "5- Insert new service" << endl;
+		cout << TAB << "0- Back" << endl << endl;
+		cout << "What is the option that you want? ";
+		cin >> chosenOption;
 
-	cout << "What is the option that you want? ";
-	cin >> chosenOption;
-	cout << endl;
+		cleanDisplay();
+		switch (chosenOption)
+		{
+		case 1:
+			showAllServicesInfo(central.getServices());
+			break;
 
-	switch (chosenOption)
-	{
-	case 1:
-		showAllServicesInfo(central.getServices());
-		break;
+		case 2:
+			showServicesDay(central.getServices());
+			break;
 
-	case 2:
-		showServicesDay(central.getServices());
-		break;
+		case 3:
+			showServicesBetweenDays(central.getServices());
+			break;
 
-	case 3:
-		showServicesBetweenDays(central.getServices());
-		break;
+		case 4:
+			oneCustomerServicesMenu(central);
+			break;
 
-	case 4:
-		oneCustomerServicesMenu(central);
-		break;
+		case 5:
+			central.insertNewService();
+			break;
 
-	case 5:
-		central.insertNewService();
-		break;
+		case 0:
+		{
+			cleanDisplay();
+			return 0;
+		}
 
-	default:
-		cout << "Invalid option. Try again." << endl;
-		break;
-	}
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+
+	} while (chosenOption != 0);
 
 	return 0;
 }
@@ -229,44 +266,70 @@ unsigned short int servicesMenu(CentralTaxis &central)
 unsigned short int routesMenu(CentralTaxis &central)
 {
 	unsigned short int chosenOption;
-
 	cleanDisplay();
 
-	cout << TAB_BIG << "ROUTES MENU" << endl;
-	cout << endl;
-	cout << TAB << "1- Show available routes" << endl;
-	cout << TAB << "2- Remove a route" << endl ;
-	cout << TAB << "3- Insert new route" << endl << endl;
-
-	cout << TAB << "What is the option that you want? ";
-	cin >> chosenOption;
-	cout << endl;
-
-	switch (chosenOption)
+	do
 	{
-	case 1:
-		showAvailableRoutes(central.getRoutes());
-		break;
-	case 2:
-		central.removeRoute();
-		break;
-	case 3:
-		central.insertNewRoute();
-		break;
-	default:
-		cout << "Invalid option. Try again." << endl;
-		break;
+		cout << endl << endl;
+		cout << TAB_BIG << "ROUTES MENU" << endl;
+		cout << endl;
+		cout << TAB << "1- Show available routes" << endl;
+		cout << TAB << "2- Remove a route" << endl ;
+		cout << TAB << "3- Insert new route" << endl;
+		cout << TAB << "0- Back" << endl << endl;
 
-	}
+		cout << TAB << "What is the option that you want? ";
+		cin >> chosenOption;
+
+		cleanDisplay();
+		switch (chosenOption)
+		{
+		case 1:
+			showAvailableRoutes(central.getRoutes());
+			break;
+
+		case 2:
+			central.removeRoute();
+			break;
+
+		case 3:
+			central.insertNewRoute();
+			break;
+
+		case 0:
+		{
+			cleanDisplay();
+			return 0;
+		}
+
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+
+	} while (chosenOption != 0);
+
 	return 0;
 }
 
 /******************************************
 				Main Menu
  ******************************************/
+void showLogo()
+{
+	cout << ".-----.            _    .--.              .-.             .-.  " << endl;
+	cout << "`-. .-'           :_;  : .--'            .' `.            : :  " << endl;
+	cout << "  : : .--.  .-.,-..-.  : :    .--. ,-.,-.`. .'.--.  .--.  : :  " << endl;
+	cout << "  : :' .; ; `.  .': :  : :__ ' '_.': ,. : : : : ..'' .; ; : :_ " << endl;
+	cout << "  :_;`.__,_;:_,._;:_;  `.__.'`.__.':_;:_; :_; :_;  `.__,_;`.__;" << endl;
+}
 
 unsigned short int mainMenu(CentralTaxis &central)
 {
+	cleanDisplay();
+	cout << endl << "Welcome!" << endl << endl;
+	showLogo();
+
 	unsigned short int chosenOption;
 	ifstream fin;
 	string line;
@@ -312,6 +375,6 @@ unsigned short int mainMenu(CentralTaxis &central)
 
 	} while (chosenOption != 0);
 
-	return 0;
+	return 1;
 
 }

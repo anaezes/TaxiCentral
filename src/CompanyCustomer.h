@@ -26,5 +26,6 @@ public:
 	CUSTOMER_TYPE getCustomerType();
 	string getInformation();
 	string toFileFormat();
+	Voucher* addVoucher(Voucher* voucher);
 };
 

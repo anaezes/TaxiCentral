@@ -106,6 +106,7 @@ string Service::toFileFormat()
 {
 	stringstream information;
 
+	//If casual customer
 	if(customer == NULL)
 		information << 000000000;
 	else
@@ -129,6 +130,8 @@ bool compareByDate( Service* s1, Service* s2)
 void showAllServicesInfo(vector<Service*> services)
 {
 	std::sort(services.begin(), services.end(), compareByDate);
+
+	cout << endl << endl;
 	printServicesTable();
 	for(size_t i = 0; i < services.size() ; i++)
 		cout << services[i]->getInformation() << endl;
@@ -145,6 +148,7 @@ void printServicesTable()
 
 void showServicesDay(vector<Service*> services)
 {
+	cout << endl << endl;
 	string date;
 	bool service_found=false;
 	bool date_valid=false;

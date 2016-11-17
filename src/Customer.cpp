@@ -75,6 +75,7 @@ unsigned int readCustomerNif()
 
 	cout << "NIF customer: ";
 	cin >> input ;
+	cout << endl;
 
 	std::stringstream convertor(input);
 
@@ -137,6 +138,7 @@ void showAllCustomersInfo(vector<Customer*> customers)
 
 	std::sort(customers.begin(), customers.end(), compareByName);
 
+	cout << endl << endl;
 	printCustomerTable();
 	for(size_t i = 0; i < customers.size() ; i++)
 		cout << customers[i]->getInformation();
@@ -182,6 +184,7 @@ Customer* customerExists(unsigned int nif, vector<Customer*> customers)
 void showCustomersInfoByNif(vector<Customer*> customers)
 {
 	try {
+		cout << endl << endl;
 		unsigned int nif = readCustomerNif();
 		Customer* customer = customerExists(nif, customers);
 
@@ -201,6 +204,7 @@ void showCustomersInfoByNif(vector<Customer*> customers)
 
 void showCustomersInfoByName(vector<Customer*> customers)
 {
+	cout << endl << endl;
 	string name;
 	cout << "Name: " ;
 	cin.ignore();

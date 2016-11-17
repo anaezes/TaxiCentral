@@ -23,3 +23,22 @@ string Voucher::getInformation()
 	return information.str();
 
 }
+
+void Voucher::setValue(double value)
+{
+	this->value = value;
+}
+
+void Voucher::setDate(Date date)
+{
+	this->duration = date;
+}
+
+string Voucher::toFileFormat()
+{
+	stringstream information;
+
+	information << getDuration().dateAsString()<< ";" << getValue();
+
+	return information.str();
+}

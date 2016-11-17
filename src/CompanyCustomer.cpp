@@ -8,7 +8,7 @@ Customer(nif, name, address, phoneNumber)
 }
 
 CompanyCustomer::CompanyCustomer(unsigned int nif, string name, string address, int phoneNumber, double cost, Voucher* voucher):
-				Customer(nif, name, address, phoneNumber)
+Customer(nif, name, address, phoneNumber)
 {
 	this->cost = cost;
 	this->voucher = voucher;
@@ -28,6 +28,7 @@ int CompanyCustomer::getCost()
 float CompanyCustomer::getDiscount()
 {
 
+	cout << "Company discount" << endl;
 	if(voucher == NULL)
 		return 0;
 
@@ -74,3 +75,31 @@ string CompanyCustomer::toFileFormat()
 
 	return information.str();
 }
+
+Voucher* CompanyCustomer::addVoucher(Voucher* voucher)
+{
+	if(this->voucher == NULL)
+	{
+		this->voucher = voucher;
+		return voucher;
+	}
+	else
+	{
+		double value = this->voucher->getValue() + voucher->getValue();
+
+		//Date dateOfDay(realTime());
+		Date dateOfDay("30/01/2016");
+		Date nextMonth = dateOfDay.getNextMonth();
+		this->voucher->setDate(nextMonth);
+
+		if(value <= 0.20)
+			this->voucher->setValue(value);
+		else
+			this->voucher->setValue(0.20);
+
+
+	}
+
+	return this->voucher;
+}
+

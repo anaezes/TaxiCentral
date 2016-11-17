@@ -14,10 +14,7 @@ int main()
 	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
 	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
 
-
-
 	map<int, Voucher*> mapVouchers;
-
 
 	CentralTaxis central(nameCentralTaxis, vouchersFile, customersFile, servicesFile, routesFile);
 	bool vouchersSuccess = central.readVouchersFile(mapVouchers);
@@ -32,11 +29,8 @@ int main()
 		return -1;
 	}
 	else
-	{
-		cout << endl << endl << setw(10) << "Computer says welcome to program!" << endl << endl;
 		mainMenu(central);
 
-	}
 
 	return 0;
 }
