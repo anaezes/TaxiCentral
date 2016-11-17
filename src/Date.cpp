@@ -135,6 +135,7 @@ bool Date::operator<=(const Date &date)
   return (date1 <= date2);
 }
 
+
 bool Date::isEqualTo(const Date &date)
 {
   return year == date.getYear() && month == date.getMonth() && day == date.getDay();
