@@ -9,10 +9,10 @@ using namespace std;
 int main()
 {
 	string nameCentralTaxis = "Taxis XPTO";
-	string vouchersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/vouchers.txt";
-	string customersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/customers.txt";
-	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
-	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
+	string vouchersFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/vouchers.txt";
+	string customersFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/customers.txt";
+	string servicesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/services.txt";
+	string routesFile = "/home/sissi/Documentos/Aeda_trabalho/EmTaxis/routes.txt";
 
 	map<int, Voucher*> mapVouchers;
 
@@ -30,7 +30,6 @@ int main()
 	}
 	else
 		mainMenu(central);
-
 
 	return 0;
 }

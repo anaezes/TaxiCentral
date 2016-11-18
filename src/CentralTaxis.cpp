@@ -178,11 +178,11 @@ Customer* CentralTaxis::insertNewCustomer()
 		unsigned short int typeCustomer;
 		bool typeValid = false;
 
-			cout << endl << endl;
-			cout << TAB_BIG << "Select customer type:" << endl;
-			cout << endl;
-			cout << TAB << "1- Private customer" << endl;
-			cout << TAB << "2- Company customer" << endl;
+		cout << endl << endl;
+		cout << TAB_BIG << "Select customer type:" << endl;
+		cout << endl;
+		cout << TAB << "1- Private customer" << endl;
+		cout << TAB << "2- Company customer" << endl;
 
 		while(!typeValid)
 		{
@@ -191,10 +191,10 @@ Customer* CentralTaxis::insertNewCustomer()
 			if(typeCustomer == 1 || typeCustomer == 2)
 				typeValid = true;
 			else
-				{
+			{
 				cout << "Type of Customer wrong, try again : ";
 				cin.ignore();
-				}
+			}
 		}
 
 		unsigned int nif = readCustomerNif();
