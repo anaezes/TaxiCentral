@@ -1,6 +1,0 @@
-6
-Braga;Porto;57.1;37
-Porto;Lisboa;313;175
-Faro;Santarem;306;175
-Faro;Lisboa;278;157
-Porto;Aveiro;30;25
