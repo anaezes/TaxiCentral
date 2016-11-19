@@ -81,8 +81,14 @@ unsigned int readCustomerPhoneNumber();
 
 Customer* customerExists(unsigned int, vector<Customer*>);
 
+bool verifyNifAlreadyExist(unsigned int, vector<Customer*>);
+
+bool compareByNif( Customer*, Customer*);
+
 void showAllCustomersInfo(vector<Customer*>);
 
 void showCustomersInfoByNif(vector<Customer*>);
 
 void showCustomersInfoByName(vector<Customer*>);
+
+void showAllCustomersInfoByType(vector<Customer*> customers, char type);

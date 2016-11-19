@@ -25,9 +25,6 @@ public:
   string dateAsString();
   void show();
   bool isValid();
-  bool isEqualTo(const Date &date);
-  bool isAfter(const Date &date);
-  bool isBefore(const Date &date);
   bool operator==(const Date &date);
   bool operator>=(const Date &date);
   bool operator<=(const Date &date);

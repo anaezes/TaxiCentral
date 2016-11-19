@@ -27,8 +27,6 @@ int CompanyCustomer::getCost()
 
 float CompanyCustomer::getDiscount()
 {
-
-	cout << "Company discount" << endl;
 	if(voucher == NULL)
 		return 0;
 
@@ -39,6 +37,11 @@ float CompanyCustomer::getDiscount()
 		return 0;
 
 	return voucher->getValue();
+}
+
+void CompanyCustomer::resetCost()
+{
+	this->cost = 0;
 }
 
 void CompanyCustomer::accumulateService(Service* service)

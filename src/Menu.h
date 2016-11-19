@@ -18,6 +18,8 @@ using namespace std;
 
 unsigned short int customersMenu(CentralTaxis &central);
 
+unsigned short int customerMenuType(CentralTaxis &central);
+
 unsigned short int oneCustomerMenu(CentralTaxis &central);
 
 unsigned short int editCustomerMenu(CentralTaxis &central);

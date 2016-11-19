@@ -156,7 +156,7 @@ void showServicesDay(vector<Service*> services)
 
 	do {
 
-		cout <<"Please enter the day(day/month/year): "<< endl;
+		cout <<"Please enter the day(day/month/year): ";
 		cin >> date;
 
 		Date valid_date(date);
@@ -193,6 +193,8 @@ void showServicesDay(vector<Service*> services)
 
 void showServicesBetweenDays(vector<Service*> services)
 {
+	cout << endl << endl;
+
 	string date1,date2;
 	bool service_found=false;
 	bool date_valid=false;
@@ -200,7 +202,7 @@ void showServicesBetweenDays(vector<Service*> services)
 
 	do {
 
-		cout <<"Please enter the first day(day/month/year): "<< endl;
+		cout <<"Please enter the first day(day/month/year): ";
 		cin >> date1;
 
 		Date valid_date(date1);
@@ -217,7 +219,7 @@ void showServicesBetweenDays(vector<Service*> services)
 
 	do {
 
-		cout <<"Please enter the second day(day/month/year): "<< endl;
+		cout <<"Please enter the second day(day/month/year): ";
 		cin >> date2;
 
 		Date valid_date(date2);
@@ -258,6 +260,7 @@ void showServicesBetweenDays(vector<Service*> services)
 void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> customers)
 {
 	try{
+		cout << endl << endl;
 		unsigned int nif = readCustomerNif();
 		Customer* customer = customerExists(nif, customers);
 
@@ -282,6 +285,7 @@ void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> cust
 
 void showCustomerServicesByName(vector<Service*> services, vector<Customer*> customers)
 {
+	cout << endl << endl;
 	string name;
 	cout << "Name: " ;
 	cin.ignore();

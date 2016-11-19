@@ -115,50 +115,30 @@ bool Date::isValid()
 }
 
 bool Date::operator==(const Date &date)
-														{
+{
 	return year == date.getYear() && month == date.getMonth() && day == date.getDay();
-														}
+}
 
 bool Date::operator>=(const Date &date)
-														{
+{
 	int date1 = year * 10000 + month * 100 + day;
 	int date2 = date.getYear() * 10000 + date.getMonth() * 100 + date.getDay();
 
 	return (date1 >= date2);
-														}
+}
 
 bool Date::operator<=(const Date &date)
-														{
+{
 	int date1 = year * 10000 + month * 100 + day;
 	int date2 = date.getYear() * 10000 + date.getMonth() * 100 + date.getDay();
 
 	return (date1 <= date2);
-														}
-
-bool Date::isEqualTo(const Date &date)
-{
-	return year == date.getYear() && month == date.getMonth() && day == date.getDay();
-}
-
-bool Date::isAfter(const Date &date)
-{
-	int date1 = year * 10000 + month * 100 + day;
-	int date2 = date.getYear() * 10000 + date.getMonth() * 100 + date.getDay();
-
-	return (date1 > date2);
-}
-
-bool Date::isBefore(const Date &date)
-{
-	return !isAfter(date) && !isEqualTo(date);
 }
 
 Date Date::getNextMonth()
 {
-
-	cout << "data..aqui" << endl;
-	//Date date(realTime());
-	Date date("30/01/2016");
+	Date date(realTime());
+	//Date date("30/01/2016");
 
 	date.month = date.month+1;
 

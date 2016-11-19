@@ -44,17 +44,15 @@ private:
 
 public:
 	CentralTaxis(string name, string vouchersFile, string customersFile, string servicesFile, string routesFile);
-
+	~CentralTaxis();
 	void loadVouchers(map<int,Voucher*>&);
 
 	vector<Customer*> getCustomers() const;
 	vector<Service*> getServices() const;
 	vector<Route*> getRoutes() const;
 
-	string getVouchersFileName() const;
 	string getCustomersFileName() const;
 	string getServicesFileName() const;
-	string getRoutesFileName() const;
 
 	void editCustomerName();
 	void editCustomerAddress();
@@ -77,7 +75,7 @@ public:
 	string processTypeOfPayment(Customer*);
 	void processExtraRateService(double&, string);
 	bool useDiscount(Customer*, float);
-	void offerVoucher(CompanyCustomer*);
+	bool offerVoucher(CompanyCustomer*);
 	void saveServices();
 	void saveVouchers();
 
@@ -87,5 +85,6 @@ public:
 	bool readServicesFile();
 	bool readRoutesFile();
 
+	void printVoucherTable();
 	void showDiscounts();
 };

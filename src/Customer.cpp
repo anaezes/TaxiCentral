@@ -79,7 +79,7 @@ unsigned int readCustomerNif()
 
 	std::stringstream convertor(input);
 
-	if(is_number(input))
+	if(is_number(input) && input.size() == 9)
 	{
 		std::stringstream convertor(input);
 		convertor >> nif;
@@ -121,6 +121,11 @@ bool compareByName( Customer* name_a,Customer* name_b)
 }
 
 
+bool compareByNif( Customer* nif_a, Customer* nif_b)
+{
+	return nif_a->getNif() < nif_b->getNif();
+}
+
 void printCustomerTable()
 {
 	cout << setw(3) << "TYPE" << setw(14) << "NIF" << setw(25) << "Name" << setw(54) << "Address"
@@ -128,6 +133,18 @@ void printCustomerTable()
 	cout << " ----------------------------------------------------------------"
 			"-------------------------------------------------------------------------- " << endl;
 }
+
+void printCustomerTableType(char type)
+{
+	if(type == 'P')
+		cout << setw(14) << "NIF" << setw(25) << "Name" << setw(54) << "Address" << setw(20) << "Phone" << setw(20) << "Points" << endl;
+	else
+		cout << setw(14) << "NIF" << setw(25) << "Name" << setw(54) << "Address" << setw(20) << "Phone" << setw(20) << "Cost" << endl;
+
+	cout << " ----------------------------------------------------------------"
+			"-----------------------------------------------------------------" << endl;
+}
+
 /*
   Function used while sorting customers
   by name.
@@ -139,10 +156,37 @@ void showAllCustomersInfo(vector<Customer*> customers)
 	std::sort(customers.begin(), customers.end(), compareByName);
 
 	cout << endl << endl;
-	printCustomerTable();
-	for(size_t i = 0; i < customers.size() ; i++)
-		cout << customers[i]->getInformation();
+	if(customers.size() != 0)
+	{
+		printCustomerTable();
+		for(size_t i = 0; i < customers.size() ; i++)
+			cout << customers[i]->getInformation();
+	}
+	else
+		cout << "Customers not found!" ;
+	cout << endl << endl;
+}
 
+void showAllCustomersInfoByType(vector<Customer*> customers, char type)
+{
+	if(customers.size() != 0)
+	{
+		printCustomerTableType(type);
+		if(type == 'P')
+		{
+			for(size_t i = 0; i < customers.size() ; i++)
+				if(customers[i]->getCustomerType() == Customer::PrivateCustomer)
+					cout << customers[i]->getInformation();
+		}
+		else
+		{
+			for(size_t i = 0; i < customers.size() ; i++)
+				if(customers[i]->getCustomerType() == Customer::CompanyCustomer)
+					cout << customers[i]->getInformation();
+		}
+	}
+	else
+		cout << "Customers not found!" ;
 	cout << endl << endl;
 }
 
@@ -172,13 +216,35 @@ string Customer::toFileFormat()
 
 Customer* customerExists(unsigned int nif, vector<Customer*> customers)
 {
+
 	for(size_t i= 0 ; i < customers.size(); i++)
-	{
 		if(customers[i]->getNif() == nif)
 			return customers[i];
-	}
 
 	return NULL;
+}
+
+bool verifyNifAlreadyExist(unsigned int nif, vector<Customer*> customers)
+{
+	int a = 0;
+	int b = customers.size()-1;
+	int c = (a+b)/2;
+
+	bool found = false;
+
+	while(a < b && !found)
+	{
+		if(customers[c]->getNif() == nif)
+			found = true;
+		else if(customers[c]->getNif() > nif)
+			b = c-1;
+		else
+			a = c+1;
+
+		c = (a+b)/2;
+	}
+
+	return found;
 }
 
 void showCustomersInfoByNif(vector<Customer*> customers)

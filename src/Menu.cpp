@@ -9,7 +9,7 @@ using namespace std;
 
 unsigned short int customersMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 
 	/*Menu of customers, where the user can choose what the option that wants*/
 	cleanDisplay();
@@ -20,10 +20,11 @@ unsigned short int customersMenu(CentralTaxis &central)
 		cout << TAB_BIG << "CUSTOMER MENU MANAGEMENT" << endl;
 		cout << endl;
 		cout << TAB << "1- Show information about all customers" << endl;
-		cout << TAB << "2- Show information about one customer" << endl;
-		cout << TAB << "3- Edit customers" << endl;
-		cout << TAB << "4- Remove customers" << endl;
-		cout << TAB << "5- Insert new customer" << endl;
+		cout << TAB << "2- Show information about all customers by type" << endl;
+		cout << TAB << "3- Show information about one customer" << endl;
+		cout << TAB << "4- Edit customers" << endl;
+		cout << TAB << "5- Remove customers" << endl;
+		cout << TAB << "6- Insert new customer" << endl;
 		cout << TAB << "0- Back" << endl << endl;
 
 		cout << "What is the option that you want? ";
@@ -33,27 +34,31 @@ unsigned short int customersMenu(CentralTaxis &central)
 
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			showAllCustomersInfo(central.getCustomers());
 			break;
 
-		case 2:
+		case '2':
+			customerMenuType(central);
+			break;
+
+		case '3':
 			oneCustomerMenu(central);
 			break;
 
-		case 3:
+		case '4':
 			editCustomerMenu(central);
 			break;
 
-		case 4:
+		case '5':
 			central.removeCustomer();
 			break;
 
-		case 5:
+		case '6':
 			central.insertNewCustomer();
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -62,14 +67,59 @@ unsigned short int customersMenu(CentralTaxis &central)
 			cout << "Invalid option. Try again." << endl;
 			break;
 		}
-	} while (chosenOption != 0);
+	} while (chosenOption != '0');
 
-	return 0;
+	return 1;
+}
+
+unsigned short int customerMenuType(CentralTaxis &central)
+{
+	char chosenOption;
+
+	do
+	{
+		cout << endl << endl;
+		cout << TAB_BIG << "Show information by type:" << endl;
+		cout << endl;
+		cout << TAB << "1- Private Customers" << endl;
+		cout << TAB << "2- Company Customers" << endl;
+		cout << TAB << "0- Back" << endl << endl;
+
+		cout << "What is the option that you want? ";
+		cin >> chosenOption;
+
+		char type;
+		cleanDisplay();
+		switch (chosenOption)
+		{
+		case '1':
+			type = 'P';
+			showAllCustomersInfoByType(central.getCustomers(), type);
+			break;
+
+		case '2':
+			type = 'C';
+			showAllCustomersInfoByType(central.getCustomers(), type);
+			break;
+
+		case '0':
+		{
+			cleanDisplay();
+			return 0;
+		}
+
+		default:
+			cout << "Invalid option. Try again." << endl;
+			break;
+		}
+	} while (chosenOption != '0');
+
+	return 1;
 }
 
 unsigned short int oneCustomerMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 
 	do
 	{
@@ -86,15 +136,15 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 		cleanDisplay();
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			showCustomersInfoByNif(central.getCustomers());
 			break;
 
-		case 2:
+		case '2':
 			showCustomersInfoByName(central.getCustomers());
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -104,14 +154,14 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 			cout << "Invalid option. Try again." << endl;
 			break;
 		}
-	} while (chosenOption != 0);
+	} while (chosenOption != '0');
 
-	return 0;
+	return 1;
 }
 
 unsigned short int editCustomerMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 	do
 	{
 		cout << endl << endl;
@@ -129,19 +179,19 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 		cleanDisplay();
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			central.editCustomerName();
 			break;
 
-		case 2:
+		case '2':
 			central.editCustomerAddress();
 			break;
 
-		case 3:
+		case '3':
 			central.editCustomerPhoneNumber();
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -151,8 +201,9 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 			cout << "Invalid option. Try again." << endl;
 			break;
 		}
-	} while (chosenOption != 0);
-	return 0;
+	} while (chosenOption != '0');
+
+	return 1;
 }
 
 /******************************************
@@ -161,7 +212,7 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 
 unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 
 	do {
 		cout << endl << endl;
@@ -177,15 +228,15 @@ unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 		cleanDisplay();
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			showCustomerServicesByNif(central.getServices(), central.getCustomers());
 			break;
 
-		case 2:
+		case '2':
 			showCustomerServicesByName(central.getServices(), central.getCustomers());
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -195,13 +246,14 @@ unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 			cout << "Invalid option. Try again." << endl;
 			break;
 		}
-	} while (chosenOption != 0);
-	return 0;
+	} while (chosenOption != '0');
+
+	return 1;
 }
 
 unsigned short int servicesMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 
 	/*Menu of services, where the user can choose what the option that wants*/
 	cleanDisplay();
@@ -222,27 +274,27 @@ unsigned short int servicesMenu(CentralTaxis &central)
 		cleanDisplay();
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			showAllServicesInfo(central.getServices());
 			break;
 
-		case 2:
+		case '2':
 			showServicesDay(central.getServices());
 			break;
 
-		case 3:
+		case '3':
 			showServicesBetweenDays(central.getServices());
 			break;
 
-		case 4:
+		case '4':
 			oneCustomerServicesMenu(central);
 			break;
 
-		case 5:
+		case '5':
 			central.insertNewService();
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -253,9 +305,9 @@ unsigned short int servicesMenu(CentralTaxis &central)
 			break;
 		}
 
-	} while (chosenOption != 0);
+	} while (chosenOption != '0');
 
-	return 0;
+	return 1;
 }
 
 
@@ -265,7 +317,7 @@ unsigned short int servicesMenu(CentralTaxis &central)
 
 unsigned short int routesMenu(CentralTaxis &central)
 {
-	unsigned short int chosenOption;
+	char chosenOption;
 	cleanDisplay();
 
 	do
@@ -284,19 +336,19 @@ unsigned short int routesMenu(CentralTaxis &central)
 		cleanDisplay();
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			showAvailableRoutes(central.getRoutes());
 			break;
 
-		case 2:
+		case '2':
 			central.removeRoute();
 			break;
 
-		case 3:
+		case '3':
 			central.insertNewRoute();
 			break;
 
-		case 0:
+		case '0':
 		{
 			cleanDisplay();
 			return 0;
@@ -307,9 +359,9 @@ unsigned short int routesMenu(CentralTaxis &central)
 			break;
 		}
 
-	} while (chosenOption != 0);
+	} while (chosenOption != '0');
 
-	return 0;
+	return 1;
 }
 
 /******************************************
@@ -330,9 +382,7 @@ unsigned short int mainMenu(CentralTaxis &central)
 	cout << endl << "Welcome!" << endl << endl;
 	showLogo();
 
-	unsigned short int chosenOption;
-	ifstream fin;
-	string line;
+	char chosenOption;
 
 	do
 	{
@@ -351,21 +401,21 @@ unsigned short int mainMenu(CentralTaxis &central)
 
 		switch (chosenOption)
 		{
-		case 1:
+		case '1':
 			customersMenu(central);
 			break;
 
-		case 2:
+		case '2':
 			servicesMenu(central);
 			break;
 
-		case 3:
+		case '3':
 			routesMenu(central);
 			break;
-		case 4:
+		case '4':
 			central.showDiscounts();
 			break;
-		case 0:
+		case '0':
 			return 0;
 
 		default:
@@ -373,7 +423,7 @@ unsigned short int mainMenu(CentralTaxis &central)
 			break;
 		}
 
-	} while (chosenOption != 0);
+	} while (chosenOption != '0');
 
 	return 1;
 

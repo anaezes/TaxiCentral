@@ -31,6 +31,5 @@ int main()
 	else
 		mainMenu(central);
 
-
 	return 0;
 }

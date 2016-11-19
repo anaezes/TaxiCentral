@@ -22,6 +22,7 @@ public:
 	~CompanyCustomer();
 	int getCost();
 	float getDiscount();
+	void resetCost();
 	void accumulateService(Service* service);
 	CUSTOMER_TYPE getCustomerType();
 	string getInformation();
