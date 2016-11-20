@@ -140,13 +140,11 @@ void CentralTaxis::editCustomerName()
 		{
 			string newName;
 			cout << "New name: ";
-			cin.ignore();
 			getline(cin, newName);
 
 			bool valid = false;
 			while(!valid)
 			{
-				cin.ignore();
 				getline(cin, newName);
 				cout << endl;
 
@@ -467,7 +465,7 @@ void CentralTaxis::removeRoute()
 	valid = false;
 	while(!valid)
 	{
-		cin.ignore();
+		//cin.ignore();
 		getline(cin, arrival);
 		cout << endl;
 
@@ -541,7 +539,6 @@ void CentralTaxis::insertNewRoute()
 		valid = false;
 		while(!valid)
 		{
-			cin.ignore();
 			getline(cin, arrival);
 			cout << endl;
 
