@@ -365,15 +365,17 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 	cin.ignore();
 	getline(cin, name);
 	cout << endl << endl;
-	std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 
+	nameToUpperCase(name);
 	bool found = false;
 	bool first_time=false;
 
 	for(size_t i=0; i < services.size();i++){
+		//unregistered customer
+		if(services.at(i)->getCustomer() == NULL)
+			continue;
 
 		string nameCustomer = services.at(i)->getCustomer()->getName();
-		std::transform(nameCustomer.begin(), nameCustomer.end(), nameCustomer.begin(), ::tolower);
 
 		if( nameCustomer == name){
 			if(!first_time){
@@ -386,9 +388,10 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 				cout << services.at(i)->getInformation() << endl;
 		}
 
+
 	}
 
 	if(!found)
-		cout << "Customer Services not found!" << endl << endl;
+		cout << "Customer not found!" << endl << endl;
 
 }
