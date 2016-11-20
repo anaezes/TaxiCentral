@@ -37,7 +37,6 @@ private:
 	Date date;
 	int time;
 	PAYMENT_TYPE payment;
-	double computeCost();
 
 public:
 	static double rateForKm;

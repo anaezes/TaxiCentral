@@ -7,11 +7,14 @@ using namespace std;
 			Customer management
  ******************************************/
 
+/**
+ * Customers menu, where the user can choose what the option that wants
+ * @param central Central taxis
+ */
 unsigned short int customersMenu(CentralTaxis &central)
 {
 	char chosenOption;
 
-	/*Menu of customers, where the user can choose what the option that wants*/
 	cleanDisplay();
 
 	do
@@ -71,7 +74,10 @@ unsigned short int customersMenu(CentralTaxis &central)
 
 	return 1;
 }
-
+/**
+ * Customer type menu, where the user can search for private or company customers
+ * @param central Central taxis
+ */
 unsigned short int customerMenuType(CentralTaxis &central)
 {
 	char chosenOption;
@@ -117,6 +123,10 @@ unsigned short int customerMenuType(CentralTaxis &central)
 	return 1;
 }
 
+/**
+ * Shows a customer's menu, where the user can search through the customer nif or through the customer name.
+ * @param central Central taxis
+ */
 unsigned short int oneCustomerMenu(CentralTaxis &central)
 {
 	char chosenOption;
@@ -159,6 +169,10 @@ unsigned short int oneCustomerMenu(CentralTaxis &central)
 	return 1;
 }
 
+/**
+ * Shows a edit customer's menu
+ * @param central Central taxis
+ */
 unsigned short int editCustomerMenu(CentralTaxis &central)
 {
 	char chosenOption;
@@ -210,6 +224,10 @@ unsigned short int editCustomerMenu(CentralTaxis &central)
 			Service management
  ******************************************/
 
+/**
+ * Shows a customer service's menu, where the user can search through the customer nif or through the customer name.
+ * @param central Central taxis
+ */
 unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 {
 	char chosenOption;
@@ -251,6 +269,10 @@ unsigned short int oneCustomerServicesMenu(CentralTaxis &central)
 	return 1;
 }
 
+/**
+ * Shows the services menu
+ * @param central Central taxis
+ */
 unsigned short int servicesMenu(CentralTaxis &central)
 {
 	char chosenOption;
@@ -315,6 +337,10 @@ unsigned short int servicesMenu(CentralTaxis &central)
 				Routes Menu
  ******************************************/
 
+/**
+ * Shows the routes menu
+ * @param central Central taxis
+ */
 unsigned short int routesMenu(CentralTaxis &central)
 {
 	char chosenOption;
@@ -367,6 +393,9 @@ unsigned short int routesMenu(CentralTaxis &central)
 /******************************************
 				Main Menu
  ******************************************/
+/**
+ * Shows the Central Taxi logo
+ */
 void showLogo()
 {
 	cout << ".-----.            _    .--.              .-.             .-.  " << endl;
@@ -376,6 +405,10 @@ void showLogo()
 	cout << "  :_;`.__,_;:_,._;:_;  `.__.'`.__.':_;:_; :_; :_;  `.__,_;`.__;" << endl;
 }
 
+/**
+ * Shows the main menu
+ * @param central Central taxis
+ */
 unsigned short int mainMenu(CentralTaxis &central)
 {
 	cleanDisplay();

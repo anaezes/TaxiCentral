@@ -142,6 +142,20 @@ void CentralTaxis::editCustomerName()
 			cout << "New name: ";
 			cin.ignore();
 			getline(cin, newName);
+
+			bool valid = false;
+			while(!valid)
+			{
+				cin.ignore();
+				getline(cin, newName);
+				cout << endl;
+
+				if(isAlphaOrSpace(newName))
+					valid = true;
+				else
+					cout << "Error! Name not valid! Try again: " ;
+			}
+
 			nameToUpperCase(newName);
 
 			customer->setName(newName);
@@ -319,6 +333,21 @@ Customer* CentralTaxis::insertNewCustomer()
 		cin.ignore();
 		getline(cin, name);
 
+		bool valid = false;
+		while(!valid)
+		{
+			cin.ignore();
+			getline(cin, name);
+			cout << endl;
+
+			if(isAlphaOrSpace(name))
+				valid = true;
+			else
+				cout << "Error! Name not valid! Try again: " ;
+		}
+
+		nameToUpperCase(name);
+
 		string address;
 		cout << "Address: ";
 		getline(cin, address);
@@ -419,26 +448,48 @@ void CentralTaxis::removeRoute()
 {
 	cout << endl << endl;
 	string source;
-	cout << "Insert source: ";
-	cin.ignore();
-	getline(cin,source);
-	std::transform(source.begin(), source.end(), source.begin(), ::tolower);
+	cout << "Source: ";
+
+	bool valid = false;
+	while(!valid)
+	{
+		cin.ignore();
+		getline(cin, source);
+		cout << endl;
+
+		if(isAlphaOrSpace(source))
+			valid = true;
+		else
+			cout << "Error! Source not valid! Try again: " ;
+	}
 
 	string arrival;
-	cout << "Insert arrival: ";
-	getline(cin,arrival);
-	std::transform(arrival.begin(), arrival.end(), arrival.begin(), ::tolower);
+	cout << "Arrival: ";
+
+	valid = false;
+	while(!valid)
+	{
+		cin.ignore();
+		getline(cin, arrival);
+		cout << endl;
+
+		if(isAlphaOrSpace(arrival))
+			valid = true;
+		else
+			cout << "Error! Arrival not valid! Try again: " ;
+	}
+
+	nameToUpperCase(source);
+	nameToUpperCase(arrival);
 
 	size_t i = 0;
 	bool found = false;
-
 	while(!found && i < routes.size())
 	{
 		string currArrival = routes[i]->getArrival();
-		std::transform(currArrival.begin(), currArrival.end(), currArrival.begin(), ::tolower);
-
+		nameToUpperCase(currArrival);
 		string currSource = routes[i]->getSource();
-		std::transform(currSource.begin(), currSource.end(), currSource.begin(), ::tolower);
+		nameToUpperCase(currSource);
 
 		if(currArrival == arrival && currSource == source)
 		{
@@ -472,14 +523,35 @@ void CentralTaxis::insertNewRoute()
 		cout << endl << endl;
 		string source;
 		cout << "Source: ";
-		cin.ignore();
-		getline(cin, source);
-		cout << endl;
+
+		bool valid = false;
+		while(!valid)
+		{
+			cin.ignore();
+			getline(cin, source);
+			cout << endl;
+
+			if(isAlphaOrSpace(source))
+				valid = true;
+			else
+				cout << "Error! Source not valid! Try again: " ;
+		}
 
 		string arrival;
 		cout << "Arrival: ";
-		getline(cin, arrival);
-		cout << endl;
+
+		valid = false;
+		while(!valid)
+		{
+			cin.ignore();
+			getline(cin, arrival);
+			cout << endl;
+
+			if(isAlphaOrSpace(arrival))
+				valid = true;
+			else
+				cout << "Error! Arrival not valid! Try again: " ;
+		}
 
 		double distance = readDistance();
 
@@ -487,8 +559,8 @@ void CentralTaxis::insertNewRoute()
 
 		nameToUpperCase(source);
 		nameToUpperCase(arrival);
-		Route* newRoute = new Route(source,arrival,distance,expectedTime);
 
+		Route* newRoute = new Route(source,arrival,distance,expectedTime);
 		routes.push_back(newRoute);
 		saveRoutes();
 		cout << endl << "Success, new route's was added. " << endl << endl;
@@ -675,16 +747,13 @@ Customer* CentralTaxis::processCustomerNewService()
  */
 Route* CentralTaxis::findRoute(string source, string arrival)
 {
-	std::transform(source.begin(), source.end(), source.begin(), ::tolower);
-	std::transform(arrival.begin(), arrival.end(), arrival.begin(), ::tolower);
-
 	size_t i = 0;
 	while(i < routes.size())
 	{
 		string currArrival = routes[i]->getArrival();
-		std::transform(currArrival.begin(), currArrival.end(), currArrival.begin(), ::tolower);
+		nameToUpperCase(currArrival);
 		string currSource = routes[i]->getSource();
-		std::transform(currSource.begin(), currSource.end(), currSource.begin(), ::tolower);
+		nameToUpperCase(currSource);
 
 		if( currArrival== arrival && currSource == source)
 			return routes[i];
@@ -707,13 +776,37 @@ Route* CentralTaxis::processRouteNewService()
 	cout << endl << endl;
 	string source;
 	cout << "Source: ";
-	cin.ignore();
-	getline(cin, source);
-	nameToUpperCase(source);
+
+	bool valid = false;
+	while(!valid)
+	{
+		cin.ignore();
+		getline(cin, source);
+		cout << endl;
+
+		if(isAlphaOrSpace(source))
+			valid = true;
+		else
+			cout << "Error! Source not valid! Try again: ";
+	}
 
 	string arrival;
 	cout << "Arrival: ";
-	getline(cin, arrival);
+
+	valid = false;
+	while(!valid)
+	{
+		cin.ignore();
+		getline(cin, arrival);
+		cout << endl;
+
+		if(isAlphaOrSpace(arrival))
+			valid = true;
+		else
+			cout << "Error! Arrival not valid! Try again: ";
+	}
+
+	nameToUpperCase(source);
 	nameToUpperCase(arrival);
 
 	Route* route = findRoute(source, arrival);

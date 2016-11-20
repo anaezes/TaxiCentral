@@ -4,7 +4,13 @@
 /*             CUSTOMER CLASS FUNCTIONS               */
 /******************************************************/
 
-
+/**
+ * The constructor of the Customer class, where the elements are initialized.
+ * @param nif customer nif
+ * @param name customer name
+ * @param address customer address
+ * @param phoneNumber customer phone number
+ */
 Customer::Customer(unsigned int nif, string name, string address, int phoneNumber)
 {
 	this->nif = nif;
@@ -13,43 +19,73 @@ Customer::Customer(unsigned int nif, string name, string address, int phoneNumbe
 	this->phoneNumber = phoneNumber;
 }
 
+/**
+ * The destructor.
+ */
 Customer::~Customer()
 {
 
 }
 
+/**
+ * Name is a private string of the Customer class, we use "get" to be able to access this element in other classes.
+ * @return customer name
+ */
 string Customer::getName()
 {
 	return name;
 }
 
+/**
+ * Address is a private string of the Customer class, we use "get" to be able to access this element in other classes.
+ * @return customer address
+ */
 string Customer::getAddress()
 {
 	return address;
 }
 
-
+/**
+ * PhoneNumber is a private integer of the Customer class, we use "get" to be able to access this element in other classes.
+ * @return customer phone number
+*/
 int Customer::getPhoneNumber()
 {
 
 	return phoneNumber;
 }
 
+/**
+ * Nif is a private unsigned integer of the Customer class, we use "get" to be able to access this element in other classes.
+ * @return customer nif
+ */
 unsigned int Customer::getNif() const
 {
 	return nif;
 }
 
+/**
+ * Set the customer name.
+ * @param customer name
+ */
 void Customer::setName(string name)
 {
 	this->name= name;
 }
 
+/**
+ * Set the customer address.
+ * @param customer address
+ */
 void Customer::setAddress(string address)
 {
 	this->address= address;
 }
 
+/**
+ * Set the customer phone number.
+ * @param customer phone number
+ */
 void Customer::setPhoneNumber(int phoneNumber)
 {
 	this->phoneNumber=phoneNumber;
@@ -67,6 +103,11 @@ void Customer::setPhoneNumber(int phoneNumber)
 
 /*
    Validates all id inputs customers
+ */
+/**
+ * Read the customer NIF.
+ * @return customer nif
+ * @throw InvalidNifException
  */
 unsigned int readCustomerNif()
 {
@@ -90,6 +131,11 @@ unsigned int readCustomerNif()
 
 }
 
+/**
+ * Read the customer phone number.
+ * @return customer phone number
+ * @throw InvalidPhoneNumberException
+ */
 unsigned int readCustomerPhoneNumber()
 {
 	string input;
@@ -111,21 +157,31 @@ unsigned int readCustomerPhoneNumber()
 
 }
 
-/*
-  Function used while sorting customers
-  by name.
+/**
+ * Function used while sorting customers by name.
+ * @param name_a first customer to compare
+ * @param name_b second customer to compare
+ * @return if the name_a is less than name_b
  */
 bool compareByName( Customer* name_a,Customer* name_b)
 {
 	return name_a->getName() < name_b->getName();
 }
 
-
+/**
+ * Function used while sorting customers by nif.
+ * @param nif_a first customer to compare
+ * @param nif_b second customer to compare
+ * @return if the nif_a is less than nif_b
+ */
 bool compareByNif( Customer* nif_a, Customer* nif_b)
 {
 	return nif_a->getNif() < nif_b->getNif();
 }
 
+/**
+ * Print the customer table.
+ */
 void printCustomerTable()
 {
 	cout << setw(3) << "TYPE" << setw(14) << "NIF" << setw(25) << "Name" << setw(54) << "Address"
@@ -134,6 +190,10 @@ void printCustomerTable()
 			"-------------------------------------------------------------------------- " << endl;
 }
 
+/**
+ * Print the customer table type.
+ * @param type customer type
+ */
 void printCustomerTableType(char type)
 {
 	if(type == 'P')
@@ -145,11 +205,11 @@ void printCustomerTableType(char type)
 			"-----------------------------------------------------------------" << endl;
 }
 
-/*
-  Function used while sorting customers
-  by name.
- */
 
+/**
+ * Show all the customer information in line with the customer table.
+ * @param customers vector of customers
+ */
 void showAllCustomersInfo(vector<Customer*> customers)
 {
 
@@ -167,6 +227,11 @@ void showAllCustomersInfo(vector<Customer*> customers)
 	cout << endl << endl;
 }
 
+/**
+ * Show all the customer information by customer type in line with the customer table.
+ * @param customers vector of customers
+ * @param type customer type
+ */
 void showAllCustomersInfoByType(vector<Customer*> customers, char type)
 {
 	if(customers.size() != 0)
@@ -190,6 +255,10 @@ void showAllCustomersInfoByType(vector<Customer*> customers, char type)
 	cout << endl << endl;
 }
 
+/**
+ * Get a customer information in line with the customer table.
+ * @return a string with the customer information
+ */
 string Customer::getInformation()
 {
 	stringstream information;
@@ -201,9 +270,9 @@ string Customer::getInformation()
 }
 
 
-/*
- * returns a string with all information
- * of the customer in the format needed
+/**
+ * Returns a string with all information of the customer in the format needed.
+ * @return a string with the customer information in the format needed
  */
 string Customer::toFileFormat()
 {
@@ -214,6 +283,12 @@ string Customer::toFileFormat()
 	return information.str();
 }
 
+/**
+ * Verify if the customer exists, if not return a null customer.
+ * @param nif customer nif to look for
+ * @param customers customers vector
+ * @return the customer with the nif receive
+ */
 Customer* customerExists(unsigned int nif, vector<Customer*> customers)
 {
 
@@ -224,6 +299,9 @@ Customer* customerExists(unsigned int nif, vector<Customer*> customers)
 	return NULL;
 }
 
+/**
+ * Verify if the customer nif already exists
+ */
 bool verifyNifAlreadyExist(unsigned int nif, vector<Customer*> customers)
 {
 	int a = 0;
@@ -247,6 +325,10 @@ bool verifyNifAlreadyExist(unsigned int nif, vector<Customer*> customers)
 	return found;
 }
 
+/**
+ * Shows the information of one customer, who is searched by the NIF.
+ * @param customers customers vector
+ */
 void showCustomersInfoByNif(vector<Customer*> customers)
 {
 	try {
@@ -268,6 +350,10 @@ void showCustomersInfoByNif(vector<Customer*> customers)
 	}
 }
 
+/**
+ * Shows the information of one customer, who is searched by the name.
+ * @param customers customers vector
+ */
 void showCustomersInfoByName(vector<Customer*> customers)
 {
 	cout << endl << endl;
