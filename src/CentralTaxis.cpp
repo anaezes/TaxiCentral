@@ -791,7 +791,6 @@ Route* CentralTaxis::processRouteNewService()
 	valid = false;
 	while(!valid)
 	{
-		cin.ignore();
 		getline(cin, arrival);
 		cout << endl;
 
