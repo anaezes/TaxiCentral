@@ -132,7 +132,7 @@ string Service::getInformation()
 	if(this->getCustomer() == NULL)
 		information << setw(12) << "N.R.  ";
 	else
-	information <<setw(12) << this->getCustomer()->getNif();
+		information <<setw(12) << this->getCustomer()->getNif();
 
 
 	information << setw(20) << this->getRoute()->getSource();
@@ -338,6 +338,10 @@ void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> cust
 			printServicesTable();
 
 			for(size_t i=0; i < services.size();i++){
+				//unregistered customer
+				if(services.at(i)->getCustomer() == NULL)
+					continue;
+
 				if(services.at(i)->getCustomer()->getNif() == nif)
 					cout << services.at(i)->getInformation() << endl;
 			}
@@ -392,6 +396,6 @@ void showCustomerServicesByName(vector<Service*> services, vector<Customer*> cus
 	}
 
 	if(!found)
-		cout << "Customer not found!" << endl << endl;
+		cout << "Services not found!" << endl << endl;
 
 }
