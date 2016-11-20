@@ -330,8 +330,6 @@ Customer* CentralTaxis::insertNewCustomer()
 
 		string name;
 		cout << "Name: ";
-		cin.ignore();
-		getline(cin, name);
 
 		bool valid = false;
 		while(!valid)
