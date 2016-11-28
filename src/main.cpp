@@ -9,15 +9,11 @@ using namespace std;
 int main()
 {
 	string nameCentralTaxis = "Taxis XPTO";
-//	string vouchersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/vouchers.txt";
-//	string customersFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/customers.txt";
-//	string servicesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/services.txt";
-//	string routesFile = "/home/anasantos/Dropbox/faculdade/2ano/1semestre/AEDA/trabalhos/trabalho1/routes.txt";
-
-		string vouchersFile = "../vouchers.txt";
-		string customersFile = "../customers.txt";
-		string servicesFile = "../services.txt";
-		string routesFile = "../routes.txt";
+  
+  string vouchersFile = "../db/vouchers.txt";
+  string customersFile = "../db/customers.txt";
+  string servicesFile = "../db/services.txt";
+  string routesFile = "../db/routes.txt";
 
 	map<int, Voucher*> mapVouchers;
 
@@ -29,10 +25,10 @@ int main()
 	central.loadVouchers(mapVouchers);
 
 	if(!(vouchersSuccess && customersSuccess && servicesSuccess && routesSuccess))
-	{
-		cout << "Error while reading a file" << endl;
-		return -1;
-	}
+    {
+      cout << "Error while reading a file" << endl;
+      return -1;
+    }
 	else
 		mainMenu(central);
 

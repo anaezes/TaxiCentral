@@ -332,22 +332,34 @@ void showCustomerServicesByNif(vector<Service*> services, vector<Customer*> cust
 		cout << endl << endl;
 		unsigned int nif = readCustomerNif();
 		Customer* customer = customerExists(nif, customers);
+		bool first_time=false;
+		bool found = false;
 
 		if(customer !=  NULL)
 		{
-			printServicesTable();
-
 			for(size_t i=0; i < services.size();i++){
 				//unregistered customer
 				if(services.at(i)->getCustomer() == NULL)
 					continue;
 
 				if(services.at(i)->getCustomer()->getNif() == nif)
+				{
+
+					if(!first_time){
+						printServicesTable();
+						first_time = true;
+						found=true;
+					}
+
 					cout << services.at(i)->getInformation() << endl;
+				}
 			}
 
 		}
-		else cout << "Customer Services not found!" << endl << endl;
+
+
+		if(!found)
+			cout << "Services not found!" << endl << endl;
 	}
 	catch(InvalidNifException &e)
 	{

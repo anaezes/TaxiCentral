@@ -1,8 +1,7 @@
-42
+43
 Braga;Porto;57.1;37
 Porto;Braga;57;37
 Lisboa;Porto;313;190
-Porto;Lisboa;313;190
 Aveiro;Porto;77;65
 Porto;Aveiro;77;65
 Porto;Viseu;130;107
@@ -41,3 +40,5 @@ Faro;Santarem;306;212
 Santarem;Faro;306;212
 Porto;Braganca;205;170
 Porto;Portimao;541;394
+Porto;Lisboa;313;190
+Porto;Chaves;200;75
